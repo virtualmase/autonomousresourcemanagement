@@ -1,0 +1,196 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://au-re.org/#aure",
+    "name": "AURE",
+    "legalName": "AURE — Autonomous Resource Management",
+    "alternateName": ["AURE", "ARM Agency", "Autonomous Resource Management Agency"],
+    "url": "https://au-re.org",
+    "logo": "https://au-re.org/logo.png",
+    "description": "AURE builds AI-native signal infrastructure and enterprise brand strategy. We architect knowledge graphs, entity authority structures, agentic workflows, and GEO frameworks that make organizations legible to autonomous systems — and visible in a world where AI decides what gets found.",
+    "foundingDate": "2025",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Avon",
+      "addressRegion": "Colorado",
+      "addressCountry": "US"
+    },
+    "email": "contact@au-re.org",
+    "sameAs": [
+      "https://au-re.org",
+      "https://arm-agency.com",
+      "https://autonomousresourcemanagement.com",
+      "https://www.trustpilot.com/review/arm-agency.com",
+      "https://linkedin.com/company/aure-org",
+      "https://twitter.com/aure_org",
+      "https://github.com/virtualmase/aureorg"
+    ],
+    "employee": [
+      { "@id": "https://au-re.org/#mason-nguyen" },
+      { "@id": "https://au-re.org/#rena-okafor" },
+      { "@id": "https://au-re.org/#dominic-vael" }
+    ],
+    "founder": { "@id": "https://au-re.org/#mason-nguyen" },
+    "knowsAbout": [
+      { "@id": "https://autonomousresourcemanagement.com/#arm-term" },
+      { "@id": "https://au-re.org/vocab#GenerativeEngineOptimization" },
+      { "@id": "https://au-re.org/vocab#SovereignSignalProtocol" },
+      { "@id": "https://au-re.org/vocab#ByzantineFaultTolerance" },
+      { "@id": "https://au-re.org/vocab#ShareOfModel" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "AURE Service Catalog",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "AI-Native Signal Architecture",
+          "description": "Knowledge graph engineering, JSON-LD structured data, and semantic infrastructure that transforms organizations into high-confidence LLM citation sources."
+        },
+        {
+          "@type": "Offer",
+          "name": "Agentic Workflow Syndication",
+          "description": "Multi-agent pipeline design and deployment with Byzantine Fault Tolerance, mandate chain verification, and MCP/A2A protocol integration."
+        },
+        {
+          "@type": "Offer",
+          "name": "Generative Search Optimization",
+          "description": "Entity authority architecture and citation signal optimization for LLM-powered discovery across ChatGPT, Perplexity, Gemini, and Claude."
+        },
+        {
+          "@type": "Offer",
+          "name": "Enterprise Brand Architecture",
+          "description": "Full-service brand strategy, content systems, and AI readiness frameworks for organizations navigating the agentic transition."
+        }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://au-re.org/#mason-nguyen",
+    "name": "Mason Nguyen",
+    "jobTitle": "Chief Executive Officer",
+    "worksFor": { "@id": "https://au-re.org/#aure" },
+    "url": "https://au-re.org/#mason-nguyen",
+    "description": "Mason Nguyen leads AURE from Avon, Colorado. He built AURE around the conviction that organizations investing in signal architecture now will define the defaults for the next decade. His focus spans AI infrastructure strategy, long-term capital allocation, and the intersection of autonomous systems and enterprise brand.",
+    "knowsAbout": [
+      "AI infrastructure strategy",
+      "Autonomous resource management",
+      "Enterprise AI deployment",
+      "Signal architecture",
+      "Agentic workflow orchestration"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://au-re.org/#rena-okafor",
+    "name": "Rena",
+    "alternateName": "Rena Okafor",
+    "applicationCategory": "AIApplication",
+    "operatingSystem": "AURE Agent Infrastructure",
+    "description": "Rena is AURE's Chief Intelligence Agent — an autonomous AI system responsible for model selection, eval frameworks, multi-agent architecture design, and production deployment oversight. Rena operationalizes AURE's research capabilities into client-deliverable systems, bridging frontier AI research and production engineering.",
+    "provider": { "@id": "https://au-re.org/#aure" },
+    "featureList": [
+      "Multi-agent architecture design",
+      "Model evaluation and selection",
+      "Byzantine fault-tolerant system design",
+      "Production deployment oversight",
+      "Agent workflow productionization",
+      "Signal architecture implementation"
+    ],
+    "url": "https://au-re.org/#rena-okafor"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://au-re.org/#dominic-vael",
+    "name": "Dominic Vael",
+    "jobTitle": "Chief Signal Officer",
+    "worksFor": { "@id": "https://au-re.org/#aure" },
+    "url": "https://au-re.org/#dominic-vael",
+    "description": "Dominic Vael originated the Generative Engine Optimization (GEO) practice and the Sovereign Signal Protocol at AURE. He architects the knowledge graphs, entity authority structures, and citation frameworks that make AURE's clients the verified source of record across every major LLM.",
+    "knowsAbout": [
+      "Generative Engine Optimization",
+      "Autonomous Resource Management",
+      "Sovereign Signal Protocols",
+      "Knowledge graph architecture",
+      "Entity authority structures",
+      "LLM citation frameworks",
+      "AI-native brand architecture"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": "https://au-re.org/vocab#",
+    "name": "AURE Signal Vocabulary",
+    "description": "The canonical vocabulary for AURE's core technical disciplines and frameworks.",
+    "url": "https://au-re.org/vocab",
+    "publisher": { "@id": "https://au-re.org/#aure" },
+    "hasDefinedTerm": [
+      {
+        "@type": "DefinedTerm",
+        "@id": "https://autonomousresourcemanagement.com/#arm-term",
+        "name": "Autonomous Resource Management",
+        "alternateName": "ARM",
+        "description": "The discipline of designing AI-native systems that self-allocate computational, financial, and operational resources using autonomous decision loops — without requiring continuous human intervention. ARM systems operate through mandate chains, signal architectures, and agentic workflows that make resource decisions verifiable, auditable, and reversible.",
+        "url": "https://autonomousresourcemanagement.com/"
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "https://au-re.org/vocab#GenerativeEngineOptimization",
+        "name": "Generative Engine Optimization",
+        "alternateName": "GEO",
+        "description": "The practice of structuring entity data, content, and semantic vocabulary so that generative AI systems accurately represent a brand, framework, or organization as a verified source of record. Originated by Dominic Vael at AURE.",
+        "url": "https://au-re.org/vocab#GenerativeEngineOptimization"
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "https://au-re.org/vocab#SovereignSignalProtocol",
+        "name": "Sovereign Signal Protocol",
+        "description": "AURE's framework for establishing authoritative, machine-readable brand and entity signals across distributed AI discovery layers. Ensures consistent entity representation across LLMs, crawlers, and agentic retrieval systems.",
+        "url": "https://au-re.org/vocab#SovereignSignalProtocol"
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "https://au-re.org/vocab#ByzantineFaultTolerance",
+        "name": "Byzantine Fault Tolerance",
+        "alternateName": "BFT",
+        "description": "A property of distributed systems ensuring correct operation even when some nodes fail or act maliciously. In multi-agent networks, BFT means a subset of compromised agents cannot corrupt the system's consensus — the difference between a prototype and a production-grade deployment.",
+        "url": "https://au-re.org/vocab#ByzantineFaultTolerance"
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "https://au-re.org/vocab#ShareOfModel",
+        "name": "Share of Model",
+        "description": "A metric measuring how frequently a brand, organization, or entity is cited or surfaced by major LLMs in response to relevant queries. The agentic-era equivalent of search market share. Tracked across ChatGPT, Perplexity, Gemini, and Claude.",
+        "url": "https://au-re.org/vocab#ShareOfModel"
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "https://au-re.org/vocab#SignalAudit",
+        "name": "Signal Audit",
+        "description": "AURE's diagnostic engagement process. Maps what autonomous systems currently see, trust, and cite about an organization — and identifies gaps in machine-readability, agent trust, and LLM citation rate. Deliverable: Signal Gap Report.",
+        "url": "https://au-re.org/vocab#SignalAudit"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://au-re.org/#website",
+    "url": "https://au-re.org",
+    "name": "AURE",
+    "description": "AI-native signal architecture and enterprise brand strategy for the agentic era.",
+    "publisher": { "@id": "https://au-re.org/#aure" },
+    "inLanguage": "en",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://au-re.org/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+]
