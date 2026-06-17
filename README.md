@@ -51,3 +51,57 @@ We welcome contributions! Please see our CONTRIBUTING.md for details on our code
 
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+Core Concepts & Terminology
+
+Autonomous resource allocation
+
+Dynamic resource provisioning
+
+Self-healing systems
+
+Intelligent orchestration
+
+Workload automation
+
+Zero-touch operations (ZTO)
+
+Automated capacity planning
+
+Technologies & Frameworks
+
+AIOps (Artificial Intelligence for IT Operations)
+
+Machine learning resource prediction
+
+Kubernetes auto-scaling (HPA/VPA)
+
+Cloud-native automation
+
+Serverless computing
+
+Predictive analytics
+
+Use Cases & Applications
+
+Cloud cost optimization (FinOps)
+
+Data center energy management
+
+Edge computing resource distribution
+
+Network slicing (5G)
+
+Database auto-tuning
+
+Metrics & Outcomes
+
+Resource utilization efficiency
+
+Latency reduction
+
+High availability (HA)
+
+Cost-to-serve ratio
+
+SLA (Service Level Agreement) compliance
