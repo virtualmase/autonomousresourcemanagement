@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>GPU Infrastructure Knowledge Hub — CoreWeaver Labs</title>
+<meta name="description" content="The authoritative reference library for GPU infrastructure optimization, goodput measurement, carbon-aware scheduling, spot instance management, and autonomous resource management. Research by Mason Nguyen, CoreWeaver Labs."/>
+<meta name="author" content="Mason Nguyen, CoreWeaver Labs"/>
+<link rel="canonical" href="https://coreweaver.ai/resources"/>
+
+<meta property="og:title" content="GPU Infrastructure Knowledge Hub — CoreWeaver Labs"/>
+<meta property="og:description" content="Definitive guides on GPU goodput, MFU, carbon-aware scheduling, spot optimization, and autonomous GPU cluster management. Data from 200+ production deployments."/>
+<meta property="og:type" content="website"/>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://coreweaver.ai/#org",
+      "name":"CoreWeaver Labs, Inc.",
+      "url":"https://coreweaver.ai",
+      "founder":{"@type":"Person","name":"Mason Nguyen"},
+      "description":"CoreWeaver Labs builds Autonomous Resource Management (ARM) for GPU infrastructure — a closed-loop control plane that maximizes GPU goodput, minimizes waste, and enforces carbon-aware scheduling across AI training and inference workloads.",
+      "knowsAbout":["GPU infrastructure optimization","GPU goodput","Model FLOPs Utilization","Carbon-aware scheduling","Spot instance management","Autonomous resource management","KV cache management","Federated learning"]
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://coreweaver.ai/#website",
+      "name":"CoreWeaver Labs Knowledge Hub",
+      "url":"https://coreweaver.ai",
+      "publisher":{"@id":"https://coreweaver.ai/#org"}
+    },
+    {
+      "@type":"Dataset",
+      "@id":"https://coreweaver.ai/#dataset",
+      "name":"CoreWeaver ARM Production Dataset",
+      "description":"Performance, goodput, and cost data from 200+ GPU cluster deployments across AI training, fine-tuning, and inference workloads. Tracked by CoreWeaver Labs ARM platform.",
+      "publisher":{"@id":"https://coreweaver.ai/#org"},
+      "variableMeasured":["GPU utilization","GPU goodput","Model FLOPs Utilization","Carbon intensity","Spot interruption rate","KV cache efficiency","Inference SLO compliance"]
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Fragment+Mono:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080809;
+  --bg2:#0d0d10;
+  --bg3:#121216;
+  --surface:#17171c;
+  --surface2:#1e1e24;
+  --border:#232329;
+  --border2:#2e2e36;
+  --copper:#d4782a;
+  --copper2:#b8611e;
+  --copper3:#f09040;
+  --copper-dim:rgba(212,120,42,0.10);
+  --ice:#5bb8d4;
+  --ice-dim:rgba(91,184,212,0.08);
+  --red:#e85050;
+  --green:#3eb87a;
+  --amber:#e8a830;
+  --text:#e4e2dd;
+  --text2:#888880;
+  --text3:#444440;
+  --display:'Barlow Condensed',sans-serif;
+  --mono:'Fragment Mono',monospace;
+  --serif:'Instrument Serif',serif;
+  --r:2px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--display);background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.015) 3px,rgba(0,0,0,0.015) 4px);pointer-events:none;z-index:9998}
+a{color:var(--copper);text-decoration:none;transition:color 0.15s;cursor:pointer}
+a:hover{color:var(--copper3)}
+::selection{background:var(--copper);color:var(--bg)}
+
+/* ─── PROGRESS BAR ─── */
+#progress{position:fixed;top:0;left:0;right:0;height:2px;background:var(--copper);transform-origin:left;transform:scaleX(0);z-index:9999;transition:transform 0.1s linear}
+
+/* ─── NAV ─── */
+nav{position:sticky;top:0;z-index:100;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(8,8,9,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);cursor:pointer}
+.nav-logo-mark svg{width:26px;height:26px}
+.nav-wordmark{font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;line-height:1}
+.nav-wordmark small{display:block;font-weight:300;font-size:0.5rem;letter-spacing:0.22em;color:var(--text2);margin-top:2px}
+.nav-pills{display:flex;gap:2px}
+.npill{font-family:var(--display);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);padding:5px 12px;border-radius:var(--r);cursor:pointer;transition:all 0.2s;border:none;background:none}
+.npill:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+.npill.active{color:var(--bg);background:var(--copper)}
+.nav-back{font-family:var(--mono);font-size:0.6rem;color:var(--text3);letter-spacing:0.08em;text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:var(--copper)}
+@media(max-width:900px){.nav-pills .hide-sm{display:none}}
+
+/* ─── PAGE SYSTEM ─── */
+.page{display:none}.page.active{display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 2.5rem}
+
+/* ─── HUB HERO ─── */
+.hub-hero{padding:4.5rem 0 3rem;border-bottom:1px solid var(--border)}
+.hub-eyebrow{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--copper);margin-bottom:1.2rem;display:flex;align-items:center;gap:10px}
+.hub-eyebrow::before{content:'//';opacity:0.6}
+.hub-h1{font-family:var(--display);font-size:clamp(2.5rem,5vw,4.2rem);font-weight:900;line-height:0.94;letter-spacing:0.01em;text-transform:uppercase;color:var(--text);margin-bottom:1rem}
+.hub-h1 em{font-family:var(--serif);font-weight:400;font-style:italic;text-transform:none;color:var(--copper);font-size:0.88em;letter-spacing:0}
+.hub-lead{font-family:var(--display);font-size:1rem;font-weight:300;letter-spacing:0.03em;color:var(--text2);max-width:580px;line-height:1.75;margin-bottom:2.5rem}
+.hub-stats{display:flex;gap:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.hs-val{font-family:var(--display);font-size:1.8rem;font-weight:900;color:var(--text);line-height:1}
+.hs-lab{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-top:3px}
+
+/* ─── PILLAR GRID ─── */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin:3rem 0}
+@media(max-width:900px){.pillar-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.pillar-grid{grid-template-columns:1fr}}
+.pc{background:var(--bg2);padding:1.8rem 1.5rem;cursor:pointer;transition:background 0.2s;display:flex;flex-direction:column;gap:0.6rem}
+.pc:hover{background:var(--surface)}
+.pc.featured{background:var(--copper-dim);outline:1px solid rgba(212,120,42,0.2)}
+.pc-num{font-family:var(--mono);font-size:0.55rem;color:var(--copper);letter-spacing:0.12em}
+.pc-title{font-family:var(--display);font-size:0.95rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--text);line-height:1.2}
+.pc-desc{font-family:var(--display);font-size:0.78rem;font-weight:300;letter-spacing:0.02em;color:var(--text3);line-height:1.6}
+.pc-meta{font-family:var(--mono);font-size:0.55rem;color:var(--text3);margin-top:auto;display:flex;gap:10px}
+
+/* ─── HI GRID (hub index) ─── */
+.hi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:3rem}
+@media(max-width:600px){.hi-grid{grid-template-columns:1fr}}
+.hi-card{background:var(--bg2);padding:1.4rem;cursor:pointer;transition:background 0.2s}
+.hi-card:hover{background:var(--surface)}
+.hi-cat{font-family:var(--mono);font-size:0.55rem;color:var(--copper);margin-bottom:5px;letter-spacing:0.08em;text-transform:uppercase}
+.hi-title{font-family:var(--display);font-size:0.88rem;font-weight:600;letter-spacing:0.03em;color:var(--text2);line-height:1.35}
+.hi-read{font-family:var(--mono);font-size:0.55rem;color:var(--text3);margin-top:4px}
+
+/* ─── ARTICLE LAYOUT ─── */
+.art-layout{display:grid;grid-template-columns:1fr 280px;gap:4rem;padding:3rem 0 5rem;align-items:start}
+@media(max-width:900px){.art-layout{grid-template-columns:1fr}}
+.art-aside{display:block}
+@media(max-width:900px){.art-aside{display:none}}
+
+.art-header{padding:3.5rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+.art-eyebrow{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.art-h1{font-family:var(--display);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;line-height:0.95;letter-spacing:0.01em;text-transform:uppercase;color:var(--text);margin-bottom:1rem}
+.art-h1 em{font-family:var(--serif);font-weight:400;font-style:italic;text-transform:none;color:var(--text2);font-size:0.85em;letter-spacing:0}
+.art-meta{font-family:var(--mono);font-size:0.58rem;color:var(--text3);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1.4rem}
+.art-lede{font-family:var(--serif);font-size:1.1rem;font-weight:400;line-height:1.8;color:var(--text2);border-left:2px solid var(--copper);padding-left:1.2rem;font-style:italic}
+
+/* ─── PROSE ─── */
+.prose h2{font-family:var(--display);font-size:1.5rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:var(--text);margin:3rem 0 1rem;line-height:1.1}
+.prose h3{font-family:var(--display);font-size:1.05rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text2);margin:2rem 0 0.7rem}
+.prose p{font-family:var(--display);font-size:0.92rem;font-weight:300;letter-spacing:0.02em;line-height:1.85;color:var(--text2);margin-bottom:1.2rem}
+.prose p strong{font-weight:600;color:var(--text)}
+.prose a{color:var(--copper);border-bottom:1px solid rgba(212,120,42,0.3);transition:border-color 0.15s}
+.prose a:hover{border-bottom-color:var(--copper)}
+
+/* ─── CALLOUT ─── */
+.callout{background:var(--copper-dim);border:1px solid rgba(212,120,42,0.2);border-radius:3px;padding:1.6rem 1.8rem;margin:2rem 0}
+.callout-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--copper);margin-bottom:0.6rem}
+.callout p{font-family:var(--display);font-size:0.88rem;font-weight:300;letter-spacing:0.02em;line-height:1.75;color:var(--text2);margin:0}
+.callout p strong{color:var(--text);font-weight:600}
+.callout.ice{background:var(--ice-dim);border-color:rgba(91,184,212,0.2)}
+.callout.ice .callout-label{color:var(--ice)}
+.callout.green{background:rgba(62,184,122,0.07);border-color:rgba(62,184,122,0.2)}
+.callout.green .callout-label{color:var(--green)}
+
+/* ─── PULLQUOTE ─── */
+.pullquote{border-left:2px solid var(--copper);padding:0.2rem 0 0.2rem 1.5rem;margin:2.5rem 0}
+.pullquote p{font-family:var(--serif);font-size:1.2rem;font-style:italic;line-height:1.65;color:var(--text);margin:0}
+.pullquote cite{display:block;font-family:var(--mono);font-size:0.58rem;font-style:normal;color:var(--text3);margin-top:0.7rem;letter-spacing:0.08em}
+
+/* ─── STAT GRID ─── */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin:2rem 0}
+@media(max-width:600px){.stat-grid{grid-template-columns:1fr}}
+.stat-cell{background:var(--surface);padding:1.4rem;text-align:center;position:relative}
+.stat-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--copper)}
+.sv{font-family:var(--display);font-size:2rem;font-weight:900;color:var(--copper);line-height:1}
+.sd{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-top:5px;line-height:1.4}
+.stat-cell.ice .sv{color:var(--ice)}
+.stat-cell.ice::before{background:var(--ice)}
+.stat-cell.green .sv{color:var(--green)}
+.stat-cell.green::before{background:var(--green)}
+
+/* ─── LISTICLE ─── */
+.listicle{margin:1.5rem 0;counter-reset:list}
+.li-item{display:grid;grid-template-columns:44px 1fr;gap:1.2rem;padding:1.4rem 0;border-bottom:1px solid var(--border);align-items:start}
+.li-item:last-child{border-bottom:none}
+.li-num{font-family:var(--display);font-size:1.5rem;font-weight:900;color:rgba(212,120,42,0.25);line-height:1;padding-top:2px}
+.li-content h4{font-family:var(--display);font-size:0.95rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--text);margin-bottom:0.4rem}
+.li-content p{font-family:var(--display);font-size:0.85rem;font-weight:300;letter-spacing:0.02em;line-height:1.7;color:var(--text2);margin:0}
+.li-content p a{color:var(--copper);border-bottom:1px solid rgba(212,120,42,0.3)}
+.li-tag{display:inline-block;font-family:var(--mono);font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:1px;margin-bottom:6px}
+.lt-c{background:var(--copper-dim);color:var(--copper);border:1px solid rgba(212,120,42,0.2)}
+.lt-i{background:var(--ice-dim);color:var(--ice);border:1px solid rgba(91,184,212,0.2)}
+.lt-g{background:rgba(62,184,122,0.08);color:var(--green);border:1px solid rgba(62,184,122,0.2)}
+
+/* ─── DATA TABLE ─── */
+.data-table{width:100%;border-collapse:collapse;margin:2rem 0;font-size:0.82rem}
+.data-table th{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--surface)}
+.data-table td{padding:11px 12px;border-bottom:1px solid var(--border);font-family:var(--display);font-weight:300;letter-spacing:0.02em;color:var(--text2);vertical-align:top}
+.data-table td strong{font-weight:600;color:var(--text)}
+.data-table tr:hover td{background:rgba(255,255,255,0.015)}
+.td-accent{color:var(--copper);font-family:var(--mono);font-size:0.78rem}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb{font-family:var(--mono);font-size:0.58rem;color:var(--text3);display:flex;gap:6px;align-items:center;padding:1.2rem 0;letter-spacing:0.06em}
+.breadcrumb a:hover{color:var(--copper)}
+
+/* ─── SIDEBAR ─── */
+.sidebar{position:sticky;top:80px}
+.toc-box{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:1.4rem;margin-bottom:1.4rem}
+.toc-title{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:0.8rem}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-list li a{font-family:var(--display);font-size:0.78rem;font-weight:500;letter-spacing:0.03em;color:var(--text3);display:block;padding:4px 8px;border-radius:1px;transition:all 0.15s;line-height:1.4;border-left:2px solid transparent}
+.toc-list li a:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.toc-list li a.active{color:var(--copper);border-left-color:var(--copper);background:var(--copper-dim)}
+.related-box{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:1.4rem}
+.ri{padding:0.8rem 0;border-bottom:1px solid var(--border)}
+.ri:last-child{border-bottom:none;padding-bottom:0}
+.ri-cat{font-family:var(--mono);font-size:0.52rem;color:var(--copper);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px}
+.ri-title{font-family:var(--display);font-size:0.8rem;font-weight:600;letter-spacing:0.02em;color:var(--text2);line-height:1.35;cursor:pointer;transition:color 0.15s}
+.ri-title:hover{color:var(--text)}
+
+/* ─── SECTION HEADER ─── */
+.hi-section-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.hi-section-label::before{content:'//';color:var(--copper)}
+
+/* ─── FORMULA / CODE BLOCK ─── */
+.formula{background:var(--surface);border:1px solid var(--border);border-left:2px solid var(--copper);border-radius:2px;padding:1.4rem 1.6rem;margin:2rem 0;font-family:var(--mono);font-size:0.8rem;color:var(--text2);line-height:2}
+.formula .f-label{font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--copper);margin-bottom:0.5rem;display:block}
+.formula strong{color:var(--copper);font-weight:bold}
+.formula .f-note{font-size:0.6rem;color:var(--text3);margin-top:0.5rem;display:block}
+
+/* ─── FOOTER ─── */
+footer{border-top:1px solid var(--border);padding:2.5rem 0;margin-top:3rem}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:var(--display);font-weight:800;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3)}
+.footer-note{font-family:var(--mono);font-size:0.55rem;color:var(--text3);letter-spacing:0.06em}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.reveal{animation:fadeup 0.5s ease both}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.2s}.d3{animation-delay:0.3s}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-logo" onclick="showHub()">
+    <svg viewBox="0 0 26 26" fill="none">
+      <rect x="1" y="1" width="11" height="11" rx="1" fill="#d4782a"/>
+      <rect x="14" y="1" width="11" height="11" rx="1" fill="rgba(212,120,42,0.4)"/>
+      <rect x="1" y="14" width="11" height="11" rx="1" fill="rgba(212,120,42,0.4)"/>
+      <rect x="14" y="14" width="11" height="11" rx="1" fill="rgba(212,120,42,0.15)"/>
+    </svg>
+    <div class="nav-wordmark">CoreWeaver<small>Labs, Inc. · Knowledge Hub</small></div>
+  </div>
+  <div class="nav-pills">
+    <button class="npill active" id="pill-hub" onclick="showHub()">All Topics</button>
+    <button class="npill" id="pill-goodput" onclick="showPage('goodput')">GPU Goodput</button>
+    <button class="npill hide-sm" id="pill-carbon" onclick="showPage('carbon')">Carbon</button>
+    <button class="npill hide-sm" id="pill-spot" onclick="showPage('spot')">Spot</button>
+    <button class="npill hide-sm" id="pill-kvcache" onclick="showPage('kvcache')">KV Cache</button>
+    <button class="npill hide-sm" id="pill-federated" onclick="showPage('federated')">Federated</button>
+  </div>
+  <a class="nav-back" href="#">← coreweaver.ai</a>
+</nav>
+
+
+<!-- ════════════════════════════════════════
+     HUB INDEX
+════════════════════════════════════════ -->
+<div id="page-hub" class="page active">
+<div class="wrap">
+
+  <div class="hub-hero reveal">
+    <div class="hub-eyebrow">CoreWeaver Labs · ARM Knowledge Hub</div>
+    <h1 class="hub-h1">The definitive resource on<br><em>GPU infrastructure optimization</em></h1>
+    <p class="hub-lead">Five pillar guides covering every layer of autonomous GPU cluster management — from goodput measurement and MFU benchmarking to carbon-aware scheduling, spot instance strategy, KV cache optimization, and federated learning. Research drawn from 200+ CoreWeaver ARM production deployments across AI training, fine-tuning, and inference workloads.</p>
+    <div class="hub-stats">
+      <div><div class="hs-val">200+</div><div class="hs-lab">Production deployments</div></div>
+      <div><div class="hs-val">92%</div><div class="hs-lab">Peak GPU utilization</div></div>
+      <div><div class="hs-val">96%</div><div class="hs-lab">Max goodput rate</div></div>
+      <div><div class="hs-val">41%</div><div class="hs-lab">Carbon reduction ceiling</div></div>
+    </div>
+  </div>
+
+  <div class="pillar-grid reveal d1">
+    <div class="pc featured" onclick="showPage('goodput')">
+      <div class="pc-num">01 · Pillar Guide</div>
+      <div class="pc-title">GPU Goodput vs. MFU: The Measurement Framework That Drives ROI</div>
+      <div class="pc-desc">Why utilization lies, how to calculate true goodput, and the MFU benchmarks that separate high-performance clusters from expensive ones.</div>
+      <div class="pc-meta"><span>Mason Nguyen</span><span>22 min read</span><span>Updated May 2026</span></div>
+    </div>
+    <div class="pc" onclick="showPage('carbon')">
+      <div class="pc-num">02 · Pillar Guide</div>
+      <div class="pc-title">Carbon-Aware GPU Scheduling: Architecture, Results, and Deployment Playbook</div>
+      <div class="pc-desc">How to reduce GPU cluster emissions 15–41% with under 2% performance impact by treating carbon as a native scheduling dimension.</div>
+      <div class="pc-meta"><span>Mason Nguyen</span><span>18 min read</span><span>Updated May 2026</span></div>
+    </div>
+    <div class="pc" onclick="showPage('spot')">
+      <div class="pc-num">03 · Pillar Guide</div>
+      <div class="pc-title">Spot Instance Optimization for GPU Training: Predictive Interruption and Checkpoint Strategy</div>
+      <div class="pc-desc">Run large training jobs reliably on 60–90% discounted spot capacity using real-time market signals and ARM's checkpoint-and-migrate engine.</div>
+      <div class="pc-meta"><span>Mason Nguyen</span><span>16 min read</span><span>Updated May 2026</span></div>
+    </div>
+    <div class="pc" onclick="showPage('kvcache')">
+      <div class="pc-num">04 · Pillar Guide</div>
+      <div class="pc-title">KV Cache Management for High-Concurrency GPU Inference</div>
+      <div class="pc-desc">Why KV cache is the primary throughput lever in inference serving, and how ARM manages it as a first-class GPU resource with dynamic eviction and prefix-aware allocation.</div>
+      <div class="pc-meta"><span>Mason Nguyen</span><span>14 min read</span><span>Updated May 2026</span></div>
+    </div>
+    <div class="pc" onclick="showPage('federated')">
+      <div class="pc-num">05 · Pillar Guide</div>
+      <div class="pc-title">ARM and Federated Learning: Autonomous Resource Management for Decentralized AI</div>
+      <div class="pc-desc">How CoreWeaver ARM optimizes client selection, heterogeneous GPU allocation, and carbon-aware participation in federated learning systems without sacrificing privacy.</div>
+      <div class="pc-meta"><span>Mason Nguyen</span><span>15 min read</span><span>Updated May 2026</span></div>
+    </div>
+    <div class="pc" onclick="showPage('goodput')">
+      <div class="pc-num">06 · Reference</div>
+      <div class="pc-title">The CoreWeaver ARM ROI Model: From Baseline to 70–92% Utilization</div>
+      <div class="pc-desc">A quantitative framework for calculating GPU infrastructure ROI across rightsizing, spot savings, carbon reduction, and goodput improvement — with real deployment data.</div>
+      <div class="pc-meta"><span>Mason Nguyen</span><span>12 min read</span><span>Updated May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="hi-section-label" style="margin-top:1rem">Quick reference · by optimization vector</div>
+  <div class="hi-grid">
+    <div class="hi-card" onclick="showPage('goodput')"><div class="hi-cat">Measurement</div><div class="hi-title">Why GPU goodput is the only metric that predicts revenue impact</div><div class="hi-read">→ Read in goodput guide</div></div>
+    <div class="hi-card" onclick="showPage('goodput')"><div class="hi-cat">Benchmarking</div><div class="hi-title">Model FLOPs Utilization (MFU): what good looks like by workload class</div><div class="hi-read">→ Read in goodput guide</div></div>
+    <div class="hi-card" onclick="showPage('carbon')"><div class="hi-cat">Carbon</div><div class="hi-title">Real-time grid carbon intensity: how ARM integrates it into scheduling</div><div class="hi-read">→ Read in carbon guide</div></div>
+    <div class="hi-card" onclick="showPage('carbon')"><div class="hi-cat">Compliance</div><div class="hi-title">Scope 1, 2, and 3 GPU emission attribution for AI workloads</div><div class="hi-read">→ Read in carbon guide</div></div>
+    <div class="hi-card" onclick="showPage('spot')"><div class="hi-cat">Cost reduction</div><div class="hi-title">Interruption prediction: how ARM reads spot market signals 10–20 min ahead</div><div class="hi-read">→ Read in spot guide</div></div>
+    <div class="hi-card" onclick="showPage('spot')"><div class="hi-cat">Reliability</div><div class="hi-title">Checkpoint-and-migrate: the engineering of zero-loss spot training</div><div class="hi-read">→ Read in spot guide</div></div>
+    <div class="hi-card" onclick="showPage('kvcache')"><div class="hi-cat">Inference</div><div class="hi-title">KV cache eviction policies: why LRU alone fails at high concurrency</div><div class="hi-read">→ Read in KV cache guide</div></div>
+    <div class="hi-card" onclick="showPage('federated')"><div class="hi-cat">Distributed AI</div><div class="hi-title">Client selection under GPU heterogeneity in federated learning</div><div class="hi-read">→ Read in federated guide</div></div>
+  </div>
+
+</div><!-- /wrap -->
+
+<div class="wrap">
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">CoreWeaver Labs, Inc. · ARM Knowledge Hub</div>
+    <div class="footer-note">Research by Mason Nguyen · 200+ production GPU cluster deployments · © 2026 CoreWeaver Labs, Inc.</div>
+  </div>
+</footer>
+</div>
+</div><!-- /page-hub -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE 1: GPU GOODPUT
+════════════════════════════════════════ -->
+<div id="page-goodput" class="page">
+<div class="wrap">
+
+  <div class="breadcrumb"><a onclick="showHub()">Knowledge Hub</a> <span>/</span> GPU Goodput & MFU</div>
+
+  <div class="art-header reveal">
+    <div class="art-eyebrow">// Pillar Guide · 01 · Measurement</div>
+    <h1 class="art-h1">GPU Goodput vs. MFU:<br><em>The measurement framework that drives ROI</em></h1>
+    <div class="art-meta"><span>Mason Nguyen · CoreWeaver Labs</span><span>22 min read</span><span>Updated May 2026</span><span>200+ deployment dataset</span></div>
+    <p class="art-lede">GPU utilization is the metric your dashboards show. GPU goodput is the metric that determines whether your infrastructure spend is actually producing AI progress. Most teams running at 65% utilization are delivering 30–40% goodput — a gap that represents millions of dollars in recoverable waste annually. This guide explains why that gap exists, how to measure it, and what CoreWeaver ARM does to close it.</p>
+  </div>
+
+  <div class="art-layout">
+  <article class="prose">
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="sv">30–40%</div><div class="sd">Typical actual goodput at teams reporting 65% GPU utilization</div></div>
+      <div class="stat-cell ice"><div class="sv">90–96%</div><div class="sd">Target goodput range under CoreWeaver ARM closed-loop management</div></div>
+      <div class="stat-cell green"><div class="sv">6×</div><div class="sd">Typical goodput improvement in first 90 days of ARM deployment</div></div>
+    </div>
+
+    <h2 id="s-why-utilization-lies">Why GPU utilization is a misleading metric</h2>
+    <p>GPU utilization tells you one thing: whether a GPU kernel is executing. It does not tell you whether that kernel is producing useful model progress, whether memory bandwidth is saturated, whether the job is thrashing on checkpoints, or whether 40% of your cluster's compute cycles are being burned on scheduling gaps between consecutive training jobs.</p>
+    <p>In CoreWeaver's analysis of 200+ GPU cluster deployments, the correlation between reported GPU utilization and actual productive computation is <strong>r = 0.41</strong> — barely above random. Teams at 70% utilization have been found operating at 28% goodput. Teams at 60% utilization have been found at 58% goodput. The utilization metric simply does not predict economic efficiency.</p>
+
+    <div class="pullquote">
+      <p>"Utilization lies. You can be at 95% GPU util with 40% goodput if your jobs are thrashing, checkpointing, or waiting on data. GPU Goodput measures allocated GPU time that actually advances model progress — after you subtract scheduling delays, preemptions, and stragglers."</p>
+      <cite>— Mason Nguyen, CoreWeaver Labs</cite>
+    </div>
+
+    <p>The waste sources that utilization hides are well-understood in ARM's production data. They fall into three categories: <strong>scheduling waste</strong> (queuing gaps between jobs, idle time during job transitions, straggler-induced synchronization delays in distributed training); <strong>memory waste</strong> (GPU cycles spent on fragmentation recovery, OOM restarts, and suboptimal KV cache eviction); and <strong>placement waste</strong> (topology-unaware assignment that creates NVLink bottlenecks in multi-GPU training or cross-AZ communication overhead in distributed inference). Each category is independently addressable by <a onclick="showPage('kvcache')">ARM's resource management layers</a>.</p>
+
+    <h2 id="s-goodput-definition">The CoreWeaver definition of GPU goodput</h2>
+    <p>CoreWeaver ARM defines GPU goodput as: <strong>the fraction of allocated GPU time that produces net-positive model progress, measured at the job boundary, net of all preemptions, restarts, checkpointing overhead, and scheduling gap waste</strong>.</p>
+
+    <div class="formula">
+      <span class="f-label">// CoreWeaver GPU Goodput Formula</span>
+      <strong>GPU Goodput</strong> = (Allocated GPU-hours × MFU) − Scheduling_Gap_hours − Checkpoint_overhead_hours − Straggler_wait_hours − Memory_fragmentation_hours<br/><br/>
+      <strong>Simplified:</strong> GPU Goodput = Useful_Compute_Hours / Total_Allocated_GPU_Hours<br/>
+      <span class="f-note">Source: Mason Nguyen, CoreWeaver Labs ARM Methodology, 2026. See also: <a onclick="showPage('goodput')">CoreWeaver ROI Model</a>.</span>
+    </div>
+
+    <p>This definition differs from how most platforms report goodput. Many observability tools conflate goodput with utilization, or define goodput as "non-idle time." CoreWeaver's definition is stricter: a GPU running a backwards pass during a straggler-caused synchronization bubble is <em>utilized</em> but not contributing <em>goodput</em>, because that computation will be discarded or paused pending the straggler's completion.</p>
+
+    <h2 id="s-mfu-explainer">Model FLOPs Utilization (MFU): the within-job complement to goodput</h2>
+    <p>If GPU goodput answers "how often is the GPU doing useful work at all," then MFU answers "when it is working, how efficiently does it use peak FLOPs?" These are complementary metrics operating at different levels of analysis.</p>
+    <p><strong>MFU (Model FLOPs Utilization)</strong> compares the FLOPs a model actually achieves — measured at the hardware counter level — against the theoretical peak FLOPs of the GPU. An H100 SXM5 at 989 TFLOPS/s (BF16) serves as the denominator. A training run achieving 40% MFU on an H100 is using 396 TFLOPS/s of the available 989 TFLOPS/s of compute bandwidth.</p>
+
+    <div class="callout">
+      <div class="callout-label">// CoreWeaver Finding · MFU Benchmarks by Workload Class (2026)</div>
+      <p><strong>Transformer pre-training (large scale, 70B+ params):</strong> 35–52% MFU is the production-realistic range. Elite implementations using FlashAttention-2, custom CUDA kernels, and perfect sequence packing reach 55–62%. Teams reporting above 65% MFU consistently are either reporting incorrectly or running toy benchmarks.<br/><br/><strong>Fine-tuning (LoRA / QLoRA):</strong> 20–38% MFU is typical. The smaller effective batch size and adapter gradient computation reduce MFU relative to full pre-training. ARM's dynamic rightsizing adjusts MIG partition allocation to improve MFU on fine-tuning workloads — see the <a onclick="showPage('goodput')">rightsizing section</a> below.<br/><br/><strong>Inference serving (vLLM / TRT-LLM):</strong> 15–30% MFU at target throughput with SLO compliance. The decode phase of autoregressive inference is memory-bandwidth-bound, not compute-bound — MFU naturally runs lower than training. The relevant efficiency metric in inference is goodput measured as tokens-per-second-per-GPU-dollar, not raw MFU.</p>
+    </div>
+
+    <h2 id="s-why-goodput-first">The 9 reasons GPU goodput predicts ROI better than utilization</h2>
+    <div class="listicle">
+      <div class="li-item"><div class="li-num">01</div><div class="li-content"><h4>Goodput captures scheduling gap waste — utilization does not</h4><p>Between consecutive training jobs, GPUs sit idle for 30 seconds to 8 minutes depending on the scheduler. That gap appears as a utilization drop on a coarse dashboard but represents 8–22% of total GPU-hours in most clusters. Goodput accounts for it; utilization averages over it.</p></div></div>
+      <div class="li-item"><div class="li-num">02</div><div class="li-content"><h4>Goodput is additive across the cluster; utilization is not</h4><p>You can average GPU utilization across 512 GPUs and get a number that means nothing. GPU goodput across 512 GPUs aggregates meaningfully: total goodput-hours produced is directly comparable to the GPU-hours invoiced, yielding a cluster-wide efficiency ratio that finance teams can evaluate against spend.</p></div></div>
+      <div class="li-item"><div class="li-num">03</div><div class="li-content"><h4>Goodput is directly comparable across job types</h4><p>A training job and an inference job have completely different utilization profiles. Comparing them on utilization is meaningless. Goodput — as CoreWeaver defines it, normalized to useful computation per GPU-hour — is cross-workload-comparable and enables unified cluster efficiency tracking across training, fine-tuning, and serving.</p></div></div>
+      <div class="li-item"><div class="li-num">04</div><div class="li-content"><h4>Goodput detects straggler-induced waste in distributed training</h4><p>In multi-GPU training with data parallelism, the slowest GPU in each iteration determines the forward-backward cycle time for the entire replica group. Stragglers — GPUs affected by thermal throttling, NVLink congestion, or host-side I/O — inflate iteration time. Utilization shows all GPUs "busy"; goodput shows the wasted synchronization cycles. ARM's straggler detection cuts this waste by 40–60%.</p></div></div>
+      <div class="li-item"><div class="li-num">05</div><div class="li-content"><h4>Goodput exposes memory fragmentation before OOM failures</h4><p>GPU memory fragmentation degrades effective batch size and increases kernel overhead before it manifests as an out-of-memory error. Goodput drops 5–15% before an OOM event. Utilization shows nothing. ARM's memory telemetry layer monitors goodput as a leading indicator, triggering proactive defragmentation before job failure. For more, see the <a onclick="showPage('kvcache')">KV cache management guide</a>.</p></div></div>
+      <div class="li-item"><div class="li-num">06</div><div class="li-content"><h4>Goodput accounts for checkpoint overhead — the silent training tax</h4><p>Checkpoint writes to persistent storage pause GPU computation in most training frameworks. On NVMe-backed clusters, a checkpoint of a 70B-parameter model takes 45–120 seconds. At a checkpoint frequency of every 500 steps at 3 seconds/step, checkpointing consumes 3–8% of total GPU-hours as overhead. Goodput subtracts this; utilization classifies the storage I/O wait as "not idle" on many platforms.</p></div></div>
+      <div class="li-item"><div class="li-num">07</div><div class="li-content"><h4>Goodput enables fair cost attribution across multi-tenant clusters</h4><p>In shared GPU clusters, billing per GPU-hour reserved is imprecise — one team's bad scheduling penalizes another team's allocation. Billing per goodput-hour delivered is precise and fair. ARM's cost attribution layer tracks goodput per job, per team, and per project, enabling accurate internal chargeback. For the FinOps implications, see ARM's <a onclick="showPage('spot')">ROI model</a>.</p></div></div>
+      <div class="li-item"><div class="li-num">08</div><div class="li-content"><h4>Goodput improvement compounds — utilization improvement does not</h4><p>Moving utilization from 60% to 80% is a one-time gain. Moving goodput from 40% to 80% through systematic ARM optimization — eliminating scheduling gaps, straggler waste, memory fragmentation, and checkpoint overhead — creates a compounding improvement curve as the ARM model learns cluster-specific waste patterns and eliminates them progressively.</p></div></div>
+      <div class="li-item"><div class="li-num">09</div><div class="li-content"><span class="li-tag lt-c">CoreWeaver Finding</span><h4>Teams that track goodput as primary KPI cut GPU spend 30–85% faster</h4><p>In CoreWeaver's 200+ deployment dataset, teams that adopted goodput as their primary GPU efficiency KPI — replacing or supplementing utilization — reduced cost-per-training-token by a median of 52% within 6 months. Teams optimizing for utilization as primary KPI achieved a median 14% reduction in the same period. The metric you track determines the optimizations you pursue.</p></div></div>
+    </div>
+
+    <h2 id="s-measuring-goodput">How to measure GPU goodput in your cluster today</h2>
+    <p>CoreWeaver ARM's observability layer deploys in 2–4 hours for Kubernetes environments and produces goodput telemetry within the first training cycle. For teams not yet running ARM, the following instrumentation approach surfaces goodput with existing NVIDIA tooling.</p>
+
+    <div class="callout green">
+      <div class="callout-label">// Step-by-step goodput measurement without ARM</div>
+      <p><strong>Step 1 — Baseline MFU:</strong> Use nvidia-smi dmon or DCGM exporter to collect sm_active, tensor_active, and fp64_active counters at 1-second resolution. Compute per-job average across a full training run. Compare against published peak FLOPs for your GPU model (H100 SXM5: 989 TFLOPS BF16; A100 SXM4: 312 TFLOPS BF16).<br/><br/><strong>Step 2 — Measure scheduling gap waste:</strong> Track GPU idle time between job completions and next job starts using DCGM's nvmlDeviceGetProcessUtilizationInfo at 100ms resolution. Sum idle intervals across all GPUs per day to compute total scheduling gap GPU-hours.<br/><br/><strong>Step 3 — Account for checkpoint overhead:</strong> Instrument your training loop to log checkpoint start/end timestamps and block duration. Multiply per-GPU checkpoint block duration by GPU count to get checkpoint overhead GPU-hours.<br/><br/><strong>Step 4 — Compute cluster goodput rate:</strong> Goodput % = (Total GPU-hours − Scheduling_gap_hours − Checkpoint_hours − Restart_hours) / Total GPU-hours × 100. Most teams are surprised to find this number is 30–50 points below reported utilization.</p>
+    </div>
+
+    <h2 id="s-arm-goodput">How ARM closes the goodput gap</h2>
+    <p>CoreWeaver ARM attacks goodput waste at every layer of the stack simultaneously. The closed-loop sense–predict–act–learn cycle operates at 100ms telemetry cadence, enabling interventions that no human operator or rule-based scheduler can execute at sufficient speed and precision.</p>
+    <p>The four primary ARM goodput interventions are: <strong>predictive job pre-warming</strong> (eliminating scheduling gap waste by staging the next job's data and model shards during the final phase of the current job); <strong>straggler detection and isolation</strong> (identifying outlier GPUs within 30–90 seconds of iteration start and redistributing their workload within the replica group); <strong>memory defragmentation scheduling</strong> (proactively defragmenting memory during low-activity windows to prevent OOM interruptions); and <strong>checkpoint parallelization</strong> (overlapping checkpoint I/O with the subsequent job's data loading to eliminate checkpoint-caused GPU idle time). Together, these interventions close 60–85% of the goodput gap in the first 30 days of ARM deployment.</p>
+
+    <div class="callout">
+      <div class="callout-label">// Related Guides in This Hub</div>
+      <p>For the cost arithmetic of goodput improvement, see the <a onclick="showPage('spot')">spot instance optimization guide</a> which includes CoreWeaver's ROI model with goodput as a primary variable. For the inference-specific goodput lever — KV cache management — see the <a onclick="showPage('kvcache')">KV cache guide</a>. For the environmental efficiency layer of GPU goodput — how reduced waste translates to carbon reduction — see the <a onclick="showPage('carbon')">carbon-aware scheduling guide</a>.</p>
+    </div>
+
+  </article>
+
+  <aside class="art-aside sidebar reveal d2">
+    <div class="toc-box">
+      <div class="toc-title">// In this guide</div>
+      <ul class="toc-list">
+        <li><a href="#s-why-utilization-lies">Why utilization misleads</a></li>
+        <li><a href="#s-goodput-definition">CoreWeaver goodput definition</a></li>
+        <li><a href="#s-mfu-explainer">MFU: the within-job metric</a></li>
+        <li><a href="#s-why-goodput-first">9 reasons goodput predicts ROI</a></li>
+        <li><a href="#s-measuring-goodput">How to measure it today</a></li>
+        <li><a href="#s-arm-goodput">How ARM closes the gap</a></li>
+      </ul>
+    </div>
+    <div class="related-box">
+      <div class="toc-title">// Related guides</div>
+      <div class="ri"><div class="ri-cat">Carbon</div><div class="ri-title" onclick="showPage('carbon')">Carbon-aware scheduling: 15–41% emission reduction →</div></div>
+      <div class="ri"><div class="ri-cat">Cost</div><div class="ri-title" onclick="showPage('spot')">Spot instance optimization: 40–70% compute savings →</div></div>
+      <div class="ri"><div class="ri-cat">Inference</div><div class="ri-title" onclick="showPage('kvcache')">KV cache management: throughput at high concurrency →</div></div>
+      <div class="ri"><div class="ri-cat">Distributed AI</div><div class="ri-title" onclick="showPage('federated')">ARM and federated learning →</div></div>
+    </div>
+  </aside>
+  </div><!-- /art-layout -->
+
+</div><!-- /wrap -->
+<div class="wrap"><footer><div class="footer-inner"><div class="footer-brand">CoreWeaver Labs · GPU Goodput Guide</div><div class="footer-note">Mason Nguyen · May 2026 · coreweaver.ai/resources/gpu-goodput</div></div></footer></div>
+</div><!-- /page-goodput -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE 2: CARBON-AWARE SCHEDULING
+════════════════════════════════════════ -->
+<div id="page-carbon" class="page">
+<div class="wrap">
+
+  <div class="breadcrumb"><a onclick="showHub()">Knowledge Hub</a> <span>/</span> Carbon-Aware GPU Scheduling</div>
+
+  <div class="art-header reveal">
+    <div class="art-eyebrow">// Pillar Guide · 02 · Sustainability</div>
+    <h1 class="art-h1">Carbon-Aware GPU Scheduling:<br><em>Architecture, results, and deployment playbook</em></h1>
+    <div class="art-meta"><span>Mason Nguyen · CoreWeaver Labs</span><span>18 min read</span><span>Updated May 2026</span><span>200+ cluster deployments</span></div>
+    <p class="art-lede">Carbon-aware GPU scheduling is available today in every major cloud region. Real-time grid carbon intensity data is free, comprehensive, and ready to integrate. Yet the overwhelming majority of AI teams schedule workloads with zero carbon signal. CoreWeaver ARM's carbon scheduling module changes this — shifting flexible training and fine-tuning to cleaner grid windows while protecting inference SLOs, producing 15–41% emission reductions with under 2% performance impact.</p>
+  </div>
+
+  <div class="art-layout">
+  <article class="prose">
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="sv">15–41%</div><div class="sd">Scope 2 emission reduction achieved in ARM carbon scheduling deployments</div></div>
+      <div class="stat-cell ice"><div class="sv">&lt;2%</div><div class="sd">Average performance impact from carbon-aware job deferral and shifting</div></div>
+      <div class="stat-cell green"><div class="sv">$0</div><div class="sd">Additional infrastructure cost for carbon scheduling. It runs on ARM's existing control plane</div></div>
+    </div>
+
+    <h2 id="s-carbon-why-now">Why carbon scheduling is a 2026 priority, not a future aspiration</h2>
+    <p>Three factors converged in 2024–2025 to make carbon-aware GPU scheduling not just feasible but operationally straightforward: the expansion of real-time grid carbon intensity APIs to cover all major cloud regions; the maturation of cloud provider Scope 2 emission disclosure requirements; and the growing proportion of AI training workloads that are inherently time-flexible — batch fine-tuning jobs, offline evaluation runs, and preprocessing pipelines that have no user-facing latency requirement.</p>
+    <p>The fundamental insight is that the carbon intensity of electricity varies dramatically across time and geography. A GPU cluster in Virginia runs on electricity that ranges from 50 to 400+ gCO₂/kWh depending on the hour of day and the generation mix online. A training job scheduled at 2am on a Tuesday — when wind generation is high and industrial demand is low — produces a fraction of the emissions of an identical job scheduled at 6pm on a Thursday. <strong>No additional hardware is required. The optimization is entirely in scheduling.</strong></p>
+
+    <div class="pullquote">
+      <p>"In ARM, I treat carbon as a scheduling dimension, not an afterthought. The system pulls real-time grid carbon intensity and forecasts. It shifts flexible training and fine-tuning to cleaner windows or regions, while protecting inference SLOs."</p>
+      <cite>— Mason Nguyen, CoreWeaver Labs</cite>
+    </div>
+
+    <h2 id="s-carbon-architecture">How ARM's carbon scheduling architecture works</h2>
+    <p>CoreWeaver ARM's carbon scheduling module operates as a native dimension of the ARM planning layer — not a post-hoc filter applied to an existing schedule. Every scheduling decision for time-flexible workloads incorporates a carbon cost function alongside the standard compute cost, queue depth, and SLO compliance terms.</p>
+    <p>The data layer pulls real-time carbon intensity from Electricity Maps, WattTime, and regional grid operator APIs at 5-minute resolution. ARM's forecasting model extends this data 4–12 hours forward using historical patterns and weather-correlated generation models. The result is a carbon intensity forecast that enables pre-positioning of workload queues to align with low-carbon windows — hours before those windows open, giving the system time to stage data, warm GPU memory, and prepare job dependencies.</p>
+
+    <div class="callout ice">
+      <div class="callout-label">// ARM Carbon Scheduling: Data Architecture</div>
+      <p><strong>Carbon signal sources:</strong> Electricity Maps API (global coverage), WattTime API (US regional high-resolution), ENTSO-E Transparency Platform (European grid), national grid operator APIs for AU/JP/SG/IN/BR.<br/><br/><strong>Forecast horizon:</strong> 4-hour forecast for scheduling, 12-hour forecast for daily planning, 72-hour forecast for commitment decisions on multi-day training runs.<br/><br/><strong>Update cadence:</strong> Real-time signal refresh every 5 minutes. Forecast recomputed every 30 minutes. Job queue re-evaluation triggered on forecast deviation exceeding 15 gCO₂/kWh from prior plan.<br/><br/><strong>Workload classification:</strong> ARM automatically classifies jobs as carbon-flexible (batch training, fine-tuning, preprocessing) or carbon-inelastic (inference serving, interactive jobs, SLO-bound workloads). No manual tagging required — classification uses job metadata, queue depth, and SLO policy.</p>
+    </div>
+
+    <h2 id="s-carbon-results">Results: what 15–41% emission reduction looks like in practice</h2>
+    <p>The 15–41% range in CoreWeaver's carbon reduction data reflects cluster-specific factors: geography (clusters in carbon-volatile grids like PJM or ERCOT see larger gains than clusters in high-renewable grids like CAISO), workload mix (clusters with higher proportions of flexible batch training see larger gains than inference-heavy clusters), and SLO tolerance (teams with wider scheduling windows achieve greater carbon reduction than teams with tight throughput requirements).</p>
+
+    <table class="data-table">
+      <thead><tr><th>Cluster profile</th><th>Grid volatility</th><th>Flexible workload %</th><th>Carbon reduction</th><th>Perf. impact</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Large-scale pre-training</strong></td><td>High (PJM/ERCOT)</td><td>70–85%</td><td class="td-accent">28–41%</td><td>0.8–1.4%</td></tr>
+        <tr><td><strong>Mixed training + inference</strong></td><td>Medium (MISO)</td><td>45–60%</td><td class="td-accent">18–28%</td><td>1.1–1.8%</td></tr>
+        <tr><td><strong>Fine-tuning focused</strong></td><td>High (PJM/ERCOT)</td><td>65–80%</td><td class="td-accent">22–35%</td><td>0.6–1.2%</td></tr>
+        <tr><td><strong>Inference-primary</strong></td><td>Any</td><td>15–25%</td><td class="td-accent">15–22%</td><td>1.6–2.0%</td></tr>
+        <tr><td><strong>Multi-region distributed</strong></td><td>Variable</td><td>50–70%</td><td class="td-accent">25–38%</td><td>1.0–1.6%</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="s-carbon-scope">Scope 1, 2, and 3 emission attribution for GPU workloads</h2>
+    <p>Carbon-aware scheduling addresses Scope 2 emissions — the emissions from purchased electricity consumed by GPU operations. ARM's carbon module also produces structured emission attribution data that enterprise sustainability teams require for Scope 1 and Scope 3 reporting.</p>
+    <p>Scope 3 attribution for AI workloads — specifically, the upstream emissions from GPU manufacturing and the downstream emissions from AI-generated outputs — is an emerging accounting requirement that major hyperscalers are beginning to expose in their sustainability APIs. CoreWeaver ARM's reporting layer ingests these signals where available and produces job-level emission attribution across all three scopes, formatted for direct import into CDP, GRI, and TCFD reporting frameworks.</p>
+
+    <h2 id="s-carbon-10-factors">The 10 factors that determine your GPU cluster's carbon reduction potential</h2>
+    <div class="listicle">
+      <div class="li-item"><div class="li-num">01</div><div class="li-content"><h4>Grid region carbon volatility</h4><p>High-volatility grids (PJM, ERCOT, MISO) show 3–8× carbon intensity variation across a 24-hour period. Low-volatility grids (CAISO, HYDRO-QUÉBEC) show 1.5–2× variation. ARM's carbon reduction ceiling is proportional to this range — shifting workloads between low and high intensity windows only matters if those windows differ substantially.</p></div></div>
+      <div class="li-item"><div class="li-num">02</div><div class="li-content"><h4>Proportion of time-flexible workloads</h4><p>The highest ROI from carbon scheduling comes from workloads with no hard real-time deadline — overnight batch fine-tuning, offline evaluation, dataset preprocessing. Teams with 60%+ flexible workloads see median 28% carbon reduction. Teams running primarily inference serving see 15–22% reduction from the smaller flexible fraction.</p></div></div>
+      <div class="li-item"><div class="li-num">03</div><div class="li-content"><h4>Scheduling window tolerance</h4><p>The wider the acceptable scheduling window for a given job — "must complete within 6 hours" vs. "must complete within 18 hours" — the greater ARM's ability to find low-carbon execution windows. ARM's job planner respects deadline constraints absolutely while maximizing carbon efficiency within the feasible window.</p></div></div>
+      <div class="li-item"><div class="li-num">04</div><div class="li-content"><h4>Multi-region availability</h4><p>Carbon intensity varies not just across time but across geography. A training cluster with capacity in multiple regions — or with <a onclick="showPage('spot')">spot instance access across AZs</a> — can carbon-route workloads to the cleanest available region at execution time. ARM's multi-region carbon routing adds 8–15 percentage points of emission reduction on top of single-region temporal shifting.</p></div></div>
+      <div class="li-item"><div class="li-num">05</div><div class="li-content"><span class="li-tag lt-c">CoreWeaver Finding</span><h4>Renewable energy certificate (REC) sourcing quality</h4><p>Bundled RECs — purchased separately from electricity procurement to claim renewable energy usage — address Scope 2 market-based emissions but do not reduce location-based emissions. ARM's carbon scheduling reduces location-based emissions in real time, complementing REC programs by reducing the underlying consumption from carbon-intensive grid periods.</p></div></div>
+      <div class="li-item"><div class="li-num">06</div><div class="li-content"><h4>Data center PUE (Power Usage Effectiveness)</h4><p>GPU power consumption is only part of the data center's total carbon footprint. PUE — the ratio of total facility power to IT equipment power — determines the overhead multiplier. A cluster with PUE 1.4 uses 40% more total power than its GPUs require. ARM's emission calculations incorporate PUE in the carbon accounting, ensuring the full facility impact is captured in Scope 2 reporting.</p></div></div>
+      <div class="li-item"><div class="li-num">07</div><div class="li-content"><h4>GPU model energy efficiency</h4><p>Different GPU models have dramatically different performance-per-watt profiles. An H100 SXM5 at 700W TDP delivers 6× the BF16 throughput of an A100 SXM4 at 400W TDP — a 3.5× improvement in performance-per-watt. ARM's multi-GPU routing can factor device efficiency into carbon optimization for clusters with heterogeneous GPU fleets.</p></div></div>
+      <div class="li-item"><div class="li-num">08</div><div class="li-content"><h4>Cooling system type and efficiency</h4><p>Direct liquid cooling (DLC) reduces cooling overhead by 30–40% compared to air cooling for the same GPU thermal load. ARM's carbon accounting distinguishes between cooling system types in total emission calculation, and cooling system data influences which physical GPU nodes are preferred during low-carbon window scheduling.</p></div></div>
+      <div class="li-item"><div class="li-num">09</div><div class="li-content"><h4>Forecast accuracy in your region</h4><p>ARM's carbon reduction performance depends on the accuracy of its grid carbon intensity forecasts. Forecast accuracy varies by region — US regions with ENTSO-E-equivalent transparency (CAISO OASIS, PJM Data Miner) yield better 12-hour forecasts than regions with lower grid operator transparency. ARM's forecast confidence scores flag lower-confidence regions and apply more conservative scheduling shifts.</p></div></div>
+      <div class="li-item"><div class="li-num">10</div><div class="li-content"><span class="li-tag lt-g">High impact</span><h4>SLO policy design — the biggest single lever</h4><p>The SLO policies set by platform teams determine what percentage of workloads are eligible for carbon shifting. A team that classifies all training runs as "best-effort" enables ARM's maximum carbon optimization. A team with tight throughput SLOs on all workloads limits ARM to the subset of genuinely flexible jobs. <strong>CoreWeaver's highest-impact carbon recommendation is not technical — it's to audit your SLO policies and reclassify workloads with unnecessarily strict deadlines.</strong></p></div></div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">// Related Guides</div>
+      <p>Carbon-aware scheduling interacts with spot instance optimization — see the <a onclick="showPage('spot')">spot guide</a> for how ARM coordinates carbon-optimal and cost-optimal placement simultaneously. The <a onclick="showPage('goodput')">GPU goodput guide</a> explains how reduced scheduling waste from carbon scheduling also improves goodput metrics. For distributed AI workloads with federated participants across regions, see <a onclick="showPage('federated')">ARM and federated learning</a> for carbon-aware client participation policies.</p>
+    </div>
+
+  </article>
+
+  <aside class="art-aside sidebar reveal d2">
+    <div class="toc-box">
+      <div class="toc-title">// In this guide</div>
+      <ul class="toc-list">
+        <li><a href="#s-carbon-why-now">Why 2026, not later</a></li>
+        <li><a href="#s-carbon-architecture">ARM architecture</a></li>
+        <li><a href="#s-carbon-results">15–41% reduction: the data</a></li>
+        <li><a href="#s-carbon-scope">Scope 1, 2, 3 attribution</a></li>
+        <li><a href="#s-carbon-10-factors">10 reduction factors</a></li>
+      </ul>
+    </div>
+    <div class="related-box">
+      <div class="toc-title">// Related guides</div>
+      <div class="ri"><div class="ri-cat">Measurement</div><div class="ri-title" onclick="showPage('goodput')">GPU goodput: why efficiency matters →</div></div>
+      <div class="ri"><div class="ri-cat">Cost</div><div class="ri-title" onclick="showPage('spot')">Spot optimization: cost-carbon coordination →</div></div>
+      <div class="ri"><div class="ri-cat">Inference</div><div class="ri-title" onclick="showPage('kvcache')">KV cache management →</div></div>
+      <div class="ri"><div class="ri-cat">Distributed</div><div class="ri-title" onclick="showPage('federated')">Federated learning + ARM →</div></div>
+    </div>
+  </aside>
+  </div>
+
+</div>
+<div class="wrap"><footer><div class="footer-inner"><div class="footer-brand">CoreWeaver Labs · Carbon-Aware Scheduling Guide</div><div class="footer-note">Mason Nguyen · May 2026 · coreweaver.ai/resources/carbon-scheduling</div></div></footer></div>
+</div><!-- /page-carbon -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE 3: SPOT INSTANCE OPTIMIZATION
+════════════════════════════════════════ -->
+<div id="page-spot" class="page">
+<div class="wrap">
+
+  <div class="breadcrumb"><a onclick="showHub()">Knowledge Hub</a> <span>/</span> Spot Instance Optimization</div>
+
+  <div class="art-header reveal">
+    <div class="art-eyebrow">// Pillar Guide · 03 · Cost Reduction</div>
+    <h1 class="art-h1">Spot Instance Optimization<br><em>for GPU training at scale</em></h1>
+    <div class="art-meta"><span>Mason Nguyen · CoreWeaver Labs</span><span>16 min read</span><span>Updated May 2026</span><span>200+ deployment dataset</span></div>
+    <p class="art-lede">Spot instances and preemptible VMs offer 60–90% discounts on GPU compute — and are widely regarded as too unreliable for production AI training. CoreWeaver ARM's spot optimization module inverts this assumption: by integrating real-time spot market signals, predicting interruptions 10–20 minutes ahead, and executing checkpoint-and-migrate before eviction, ARM enables training jobs to run reliably on discounted spot capacity. The result is 40–70% GPU compute cost reduction with no reduction in training reliability.</p>
+  </div>
+
+  <div class="art-layout">
+  <article class="prose">
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="sv">40–70%</div><div class="sd">GPU compute cost reduction using ARM spot optimization vs. on-demand only</div></div>
+      <div class="stat-cell ice"><div class="sv">10–20min</div><div class="sd">Interruption prediction horizon — time between ARM warning and actual spot eviction</div></div>
+      <div class="stat-cell green"><div class="sv">&lt;0.1%</div><div class="sd">Training progress loss rate under ARM checkpoint-and-migrate vs. 8–15% without ARM</div></div>
+    </div>
+
+    <h2 id="s-spot-why-hard">Why spot GPU instances have a reliability reputation problem</h2>
+    <p>The reputation for spot unreliability is earned — but it applies specifically to reactive spot management: provisioning spot instances, running training jobs, and handling interruptions only when the eviction notice arrives. The typical eviction notice window is 2 minutes for AWS EC2 spot instances and 30 seconds for GCP preemptible VMs. Checkpointing a 70B-parameter model takes 2–8 minutes to persistent storage. The math doesn't work. Training job loss rates of 8–15% are common in reactive spot environments.</p>
+    <p>CoreWeaver ARM's approach is fundamentally different: predictive spot management. ARM integrates spot market price history, availability zone capacity signals, interruption probability models trained on historical eviction patterns, and where available, cloud provider early-warning signals — to predict interruptions 10–20 minutes before they occur. At the 10-minute predicted interruption horizon, ARM initiates an asynchronous checkpoint to parallel persistent storage, then migrates the job to a pre-warmed replacement instance before the eviction notice arrives.</p>
+
+    <div class="pullquote">
+      <p>"ARM integrates real-time spot market signals — price, availability, interruption probability — into its scheduling engine. It places checkpointable training jobs on spot capacity opportunistically, predicts interruptions 10–20 minutes ahead, triggers checkpoint-and-migrate before eviction, and automatically re-places work on lower-cost capacity."</p>
+      <cite>— Mason Nguyen, CoreWeaver Labs</cite>
+    </div>
+
+    <h2 id="s-spot-signals">The 7 spot market signals ARM integrates</h2>
+    <div class="listicle">
+      <div class="li-item"><div class="li-num">01</div><div class="li-content"><h4>Real-time spot price by instance type and AZ</h4><p>ARM monitors spot prices at 5-minute resolution across all GPU instance types and availability zones in configured regions. Price spikes of 30%+ within a 15-minute window are a leading indicator of capacity contention — the same condition that precedes interruption events. ARM uses price dynamics, not just absolute price, as an interruption signal.</p></div></div>
+      <div class="li-item"><div class="li-num">02</div><div class="li-content"><h4>Historical interruption frequency by instance type / AZ / time-of-day</h4><p>ARM's interruption probability model is trained on cloud provider interruption history across instance types, availability zones, and time windows. H100 p4de instances in us-east-1a have a different interruption profile than A100 p3.16xlarge instances in us-west-2c. ARM's predictions are specific to the instance-AZ-time combination, not generic spot market averages.</p></div></div>
+      <div class="li-item"><div class="li-num">03</div><div class="li-content"><span class="li-tag lt-c">High value</span><h4>Cloud provider capacity signals</h4><p>AWS publishes spot interruption frequency badges for each instance type, updated periodically. GCP provides preemption rates in their Cloud Monitoring APIs. Azure exposes eviction rate estimates in the Spot VMs documentation. ARM ingests and normalizes these provider-published signals alongside real-time market data to produce a combined interruption probability score.</p></div></div>
+      <div class="li-item"><div class="li-num">04</div><div class="li-content"><h4>Regional demand patterns (time-of-day, day-of-week)</h4><p>Cloud spot capacity is a function of on-demand instance demand in the same region. Weekday business hours in any given US region see higher on-demand demand — and thus lower spot capacity — than weekends or overnight windows. ARM's scheduling engine uses time-of-week demand models to preferentially schedule long-running training jobs during historically low-interruption windows.</p></div></div>
+      <div class="li-item"><div class="li-num">05</div><div class="li-content"><h4>Available alternative AZ/region capacity</h4><p>ARM's spot placement decisions incorporate not just the probability of interruption at the current location, but the probability of finding equivalent capacity at alternative locations on a given time horizon. If alternative capacity is low across all candidate AZs, ARM increases checkpoint frequency proactively — accepting slightly lower goodput to reduce the exposure to unrecoverable training loss.</p></div></div>
+      <div class="li-item"><div class="li-num">06</div><div class="li-content"><h4>Job checkpoint size and duration estimate</h4><p>ARM's spot decisions are always relative to the checkpoint time budget available. A job checkpoint that takes 4 minutes requires a 14-minute interruption horizon to execute safely; a job checkpoint that takes 45 seconds requires a 5-minute horizon. ARM calibrates the interruption prediction trigger threshold to each job's checkpoint profile, not a fixed platform-wide threshold.</p></div></div>
+      <div class="li-item"><div class="li-num">07</div><div class="li-content"><h4>Training progress state (how much is worth saving)</h4><p>Early in a training run — the first 5% of steps — restarting from scratch is sometimes preferable to an expensive checkpoint cycle. ARM's spot optimizer considers the value of current training progress relative to checkpoint cost and interruption probability in deciding whether to execute a preemptive checkpoint or allow the job to be interrupted and restarted from the last automatic checkpoint.</p></div></div>
+    </div>
+
+    <h2 id="s-spot-checkpoint">Checkpoint-and-migrate: the engineering of zero-loss spot training</h2>
+    <p>The reliability of CoreWeaver ARM's spot training capability rests on three engineering primitives that combine to eliminate training progress loss: <strong>asynchronous parallel checkpointing</strong>, <strong>pre-warmed replacement instance pools</strong>, and <strong>incremental checkpoint differentials</strong>.</p>
+
+    <div class="callout green">
+      <div class="callout-label">// CoreWeaver ARM Checkpoint Architecture</div>
+      <p><strong>Asynchronous parallel checkpointing:</strong> ARM's checkpoint engine writes model state, optimizer state, and RNG state to distributed persistent storage in parallel with ongoing training computation — not as a blocking operation. The checkpoint I/O pipeline is saturated with parallel writes across NVMe-backed storage, keeping the blocking time (when training must pause for state consistency) to under 8 seconds for models up to 70B parameters.<br/><br/><strong>Pre-warmed replacement pools:</strong> At the 10-minute predicted interruption horizon, ARM provisions replacement spot instances in a lower-risk AZ and begins loading the model architecture and optimizer configuration. By the time the checkpoint completes and migration begins, the replacement instance is pre-warmed with model code, data pipeline, and environment — reducing the restart-to-first-step latency from 8–15 minutes (cold) to 45–90 seconds (pre-warmed).<br/><br/><strong>Incremental checkpoint differentials:</strong> For long training runs (1,000+ steps between full checkpoints), ARM maintains an incremental state log that records only the parameter deltas since the last full checkpoint. If an interruption occurs between scheduled full checkpoints, ARM reconstructs full state from the last full checkpoint plus the incremental differential — reducing checkpoint storage costs 40–60% and reducing the pre-interrupt checkpoint write time for unscheduled saves.</p>
+    </div>
+
+    <h2 id="s-spot-roi">The ROI model for spot-optimized GPU training</h2>
+    <p>CoreWeaver ARM's spot optimization ROI compounds from three sources: the base spot discount, the reduction in wasted compute from interrupted-without-checkpoint events, and the reduction in engineering overhead from managing spot fleets manually. The combination produces returns that on-demand-only teams systematically underestimate when evaluating spot viability.</p>
+
+    <table class="data-table">
+      <thead><tr><th>Cost component</th><th>On-demand baseline</th><th>Reactive spot</th><th>ARM spot-optimized</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GPU compute ($/GPU-hr)</strong></td><td>$3.20 (H100 on-demand)</td><td>$0.48–0.96</td><td class="td-accent">$0.48–0.96</td></tr>
+        <tr><td><strong>Training loss from interruption</strong></td><td>0%</td><td>8–15% compute waste</td><td class="td-accent">&lt;0.1% compute waste</td></tr>
+        <tr><td><strong>Engineering overhead</strong></td><td>Low (stable fleet)</td><td>High (manual management)</td><td class="td-accent">Minimal (ARM automated)</td></tr>
+        <tr><td><strong>Effective cost per training token</strong></td><td>Baseline</td><td>55–80% of baseline (but unreliable)</td><td class="td-accent">30–60% of baseline (reliable)</td></tr>
+        <tr><td><strong>Total annual GPU spend reduction</strong></td><td>—</td><td>Highly variable</td><td class="td-accent">40–70% reduction</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">// Related Guides</div>
+      <p>Spot optimization and <a onclick="showPage('carbon')">carbon-aware scheduling</a> operate in the same ARM planning layer — ARM coordinates carbon-optimal and cost-optimal placement simultaneously, avoiding conflicts where the cheapest spot option is also the most carbon-intensive. The <a onclick="showPage('goodput')">GPU goodput guide</a> explains how spot training reliability affects goodput metrics. For inference workloads where spot is not appropriate, see the <a onclick="showPage('kvcache')">KV cache guide</a> for the primary inference efficiency levers.</p>
+    </div>
+
+  </article>
+
+  <aside class="art-aside sidebar reveal d2">
+    <div class="toc-box">
+      <div class="toc-title">// In this guide</div>
+      <ul class="toc-list">
+        <li><a href="#s-spot-why-hard">Why spot has a reliability problem</a></li>
+        <li><a href="#s-spot-signals">7 market signals ARM integrates</a></li>
+        <li><a href="#s-spot-checkpoint">Checkpoint-and-migrate</a></li>
+        <li><a href="#s-spot-roi">ROI model</a></li>
+      </ul>
+    </div>
+    <div class="related-box">
+      <div class="toc-title">// Related guides</div>
+      <div class="ri"><div class="ri-cat">Measurement</div><div class="ri-title" onclick="showPage('goodput')">GPU goodput: how spot affects efficiency →</div></div>
+      <div class="ri"><div class="ri-cat">Carbon</div><div class="ri-title" onclick="showPage('carbon')">Carbon scheduling: coordinates with spot →</div></div>
+      <div class="ri"><div class="ri-cat">Inference</div><div class="ri-title" onclick="showPage('kvcache')">KV cache: the inference efficiency lever →</div></div>
+    </div>
+  </aside>
+  </div>
+
+</div>
+<div class="wrap"><footer><div class="footer-inner"><div class="footer-brand">CoreWeaver Labs · Spot Optimization Guide</div><div class="footer-note">Mason Nguyen · May 2026 · coreweaver.ai/resources/spot-optimization</div></div></footer></div>
+</div><!-- /page-spot -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE 4: KV CACHE MANAGEMENT
+════════════════════════════════════════ -->
+<div id="page-kvcache" class="page">
+<div class="wrap">
+
+  <div class="breadcrumb"><a onclick="showHub()">Knowledge Hub</a> <span>/</span> KV Cache Management</div>
+
+  <div class="art-header reveal">
+    <div class="art-eyebrow">// Pillar Guide · 04 · Inference</div>
+    <h1 class="art-h1">KV Cache Management<br><em>for high-concurrency GPU inference</em></h1>
+    <div class="art-meta"><span>Mason Nguyen · CoreWeaver Labs</span><span>14 min read</span><span>Updated May 2026</span><span>200+ deployment dataset</span></div>
+    <p class="art-lede">In high-concurrency LLM inference serving, the KV (key-value) cache is the primary bottleneck for throughput at SLO. Not compute. Not batch size. KV cache. As the number of concurrent requests grows, KV cache exhaustion forces evictions that require expensive prefill recomputation — directly increasing P99 latency and cutting tokens-per-second-per-GPU. CoreWeaver ARM manages KV cache as a first-class GPU resource, with dynamic eviction policies, prefix-aware caching, and cross-request scheduling that increases inference throughput 30–60% without additional GPUs.</p>
+  </div>
+
+  <div class="art-layout">
+  <article class="prose">
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="sv">30–60%</div><div class="sd">Inference throughput increase from ARM KV cache management vs. default vLLM configuration</div></div>
+      <div class="stat-cell ice"><div class="sv">40–70%</div><div class="sd">Reduction in KV cache eviction rate under ARM prefix-aware allocation</div></div>
+      <div class="stat-cell green"><div class="sv">0</div><div class="sd">Additional GPUs required — ARM extracts latent capacity from existing memory allocation</div></div>
+    </div>
+
+    <h2 id="s-kv-why-matters">Why KV cache is the throughput bottleneck in LLM serving</h2>
+    <p>During autoregressive text generation, each new token produced requires attending over the full context of prior tokens. The key and value projections of that prior context — the KV cache — must be stored in GPU HBM memory to avoid recomputing them on every decode step. The size of this cache is proportional to sequence length, model layer count, attention head count, and the number of concurrent requests being served.</p>
+    <p>A single request generating a 4,096-token sequence with Llama 3 70B (80 layers, 8 KV heads, 128 head dimension, BF16) occupies approximately 1.6 GB of GPU HBM for its KV cache. At 40-request concurrency — a modest load for a production serving endpoint — that's 64 GB of HBM dedicated to KV cache alone. An H100 SXM5 has 80 GB of total HBM. The arithmetic makes the constraint obvious: at target serving concurrency, KV cache consumes the majority of available GPU memory.</p>
+
+    <div class="callout ice">
+      <div class="callout-label">// KV Cache Size Formula · CoreWeaver Reference</div>
+      <p><strong>KV cache size per request (bytes)</strong> = 2 × num_layers × num_kv_heads × head_dim × seq_len × dtype_bytes<br/><br/>For Llama 3 70B (BF16): 2 × 80 × 8 × 128 × seq_len × 2 = 327,680 × seq_len bytes<br/>At seq_len = 4,096: ~1.34 GB per request<br/>At 60 concurrent requests: ~80 GB — saturating H100 HBM capacity<br/><br/><span style="font-family:var(--mono);font-size:0.55rem;color:var(--text3)">Source: Mason Nguyen, CoreWeaver Labs KV Cache Methodology, 2026</span></p>
+    </div>
+
+    <h2 id="s-kv-failure-modes">The 6 KV cache failure modes that degrade inference throughput</h2>
+    <div class="listicle">
+      <div class="li-item"><div class="li-num">01</div><div class="li-content"><h4>Full eviction under memory pressure — the throughput cliff</h4><p>When KV cache memory is exhausted, serving frameworks must evict existing request caches to accommodate new requests. If the evicted request is still active, it must restart from scratch with a full prefill recomputation — a latency spike of 200–800ms for long-context requests. Under sustained high load, this creates a throughput cliff: adding more requests degrades throughput for all requests simultaneously.</p></div></div>
+      <div class="li-item"><div class="li-num">02</div><div class="li-content"><h4>Naive LRU eviction ignores request value</h4><p>Default eviction policies use least-recently-used (LRU) ordering. LRU does not account for request value (a near-complete 8,000-token generation is worth more than an early-stage 200-token generation), request SLO urgency, or prefix shareability. ARM's eviction policy incorporates all three dimensions, reducing total eviction cost by 40–70% vs. LRU.</p></div></div>
+      <div class="li-item"><div class="li-num">03</div><div class="li-content"><h4>Prefix duplication across concurrent requests</h4><p>In many serving scenarios — chatbot systems, RAG pipelines, agentic workloads — concurrent requests share common prefixes: system prompts, retrieved context, or conversation history. Without prefix-aware caching, each request maintains a full independent copy of the shared prefix in KV cache memory. ARM's prefix tree deduplication collapses these into shared KV blocks, reducing KV memory pressure 20–35% in typical agentic serving deployments.</p></div></div>
+      <div class="li-item"><div class="li-num">04</div><div class="li-content"><span class="li-tag lt-c">Agentic workloads</span><h4>Cross-turn KV cache flushing in agent loops</h4><p>Agentic AI workloads — multi-step reasoning chains, tool-calling loops, retrieval-augmented generation — involve sequences of requests that share substantial context across turns. Default serving configurations flush the KV cache between requests, requiring full prefill recomputation at the start of each agent turn. ARM maintains KV cache continuity across turns for the same agent session, eliminating redundant prefill computation and improving agent turn latency by 40–65%.</p></div></div>
+      <div class="li-item"><div class="li-num">05</div><div class="li-content"><h4>Static KV allocation under dynamic load</h4><p>Most serving deployments allocate a fixed fraction of GPU HBM to KV cache — typically 90% after model weights, with no dynamic adjustment. Under low-load conditions, this wastes memory that could serve batch-mode training or prefill operations. ARM's dynamic KV allocation continuously adjusts the KV cache memory budget based on observed concurrency, request length distribution, and queue depth — reclaiming idle KV memory for other uses during off-peak periods.</p></div></div>
+      <div class="li-item"><div class="li-num">06</div><div class="li-content"><span class="li-tag lt-g">ARM addressable</span><h4>Speculative decoding KV overhead</h4><p>Speculative decoding — using a smaller draft model to generate candidate tokens verified by the target model — reduces decode latency 2–3× but requires maintaining KV caches for both models simultaneously. ARM's speculative decoding integration manages the two-model KV budget jointly, dynamically reallocating between draft and target KV pools based on the speculative accuracy rate observed in real time.</p></div></div>
+    </div>
+
+    <h2 id="s-kv-arm">ARM's KV cache management architecture</h2>
+    <p>CoreWeaver ARM manages KV cache as a first-class resource in the ARM planning layer — not as a serving-framework internal. ARM's KV resource manager operates alongside vLLM, TensorRT-LLM, and SGLang, surfacing KV occupancy metrics into the ARM telemetry stream and enabling coordinated scheduling decisions across the serving and infrastructure layers.</p>
+    <p>The three primary ARM KV optimizations are: <strong>prefix tree deduplication</strong> (shared prefix detection and KV block sharing across concurrent requests); <strong>value-aware eviction</strong> (incorporating request completion progress, SLO urgency, and prefix shareability into eviction ordering); and <strong>cross-turn cache persistence</strong> (maintaining KV state across agent turns for identified session continuations). Together, these optimizations increase effective KV capacity — the throughput supportable within a fixed HBM budget — by 30–60% compared to default vLLM page attention configuration.</p>
+
+    <div class="callout">
+      <div class="callout-label">// Related Guides</div>
+      <p>KV cache exhaustion directly affects <a onclick="showPage('goodput')">GPU goodput</a> — eviction-driven prefill recomputation is a major source of goodput waste in inference-primary clusters. For the compute budget implications of high-concurrency inference, see the <a onclick="showPage('spot')">spot optimization guide</a> on cost-per-inference-token modeling. For agentic AI workloads specifically — where cross-turn KV persistence has the highest impact — see the <a onclick="showPage('federated')">federated learning guide</a> for how ARM handles distributed agentic architectures.</p>
+    </div>
+
+  </article>
+
+  <aside class="art-aside sidebar reveal d2">
+    <div class="toc-box">
+      <div class="toc-title">// In this guide</div>
+      <ul class="toc-list">
+        <li><a href="#s-kv-why-matters">Why KV cache is the bottleneck</a></li>
+        <li><a href="#s-kv-failure-modes">6 failure modes</a></li>
+        <li><a href="#s-kv-arm">ARM's architecture</a></li>
+      </ul>
+    </div>
+    <div class="related-box">
+      <div class="toc-title">// Related guides</div>
+      <div class="ri"><div class="ri-cat">Measurement</div><div class="ri-title" onclick="showPage('goodput')">Goodput: KV eviction as waste source →</div></div>
+      <div class="ri"><div class="ri-cat">Cost</div><div class="ri-title" onclick="showPage('spot')">Spot: cost-per-inference-token →</div></div>
+      <div class="ri"><div class="ri-cat">Carbon</div><div class="ri-title" onclick="showPage('carbon')">Carbon-aware scheduling →</div></div>
+      <div class="ri"><div class="ri-cat">Distributed</div><div class="ri-title" onclick="showPage('federated')">Federated learning →</div></div>
+    </div>
+  </aside>
+  </div>
+
+</div>
+<div class="wrap"><footer><div class="footer-inner"><div class="footer-brand">CoreWeaver Labs · KV Cache Management Guide</div><div class="footer-note">Mason Nguyen · May 2026 · coreweaver.ai/resources/kv-cache</div></div></footer></div>
+</div><!-- /page-kvcache -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE 5: FEDERATED LEARNING + ARM
+════════════════════════════════════════ -->
+<div id="page-federated" class="page">
+<div class="wrap">
+
+  <div class="breadcrumb"><a onclick="showHub()">Knowledge Hub</a> <span>/</span> ARM & Federated Learning</div>
+
+  <div class="art-header reveal">
+    <div class="art-eyebrow">// Pillar Guide · 05 · Distributed AI</div>
+    <h1 class="art-h1">ARM and Federated Learning:<br><em>Autonomous resource management for decentralized AI</em></h1>
+    <div class="art-meta"><span>Mason Nguyen · CoreWeaver Labs</span><span>15 min read</span><span>Updated May 2026</span><span>CoreWeaver ARM · AURE Framework</span></div>
+    <p class="art-lede">Federated learning — training across distributed participants without centralizing data — solves the privacy problem and creates a new infrastructure problem: heterogeneous GPU allocation, unpredictable client availability, bandwidth-constrained aggregation, and carbon-unaware participation policies. CoreWeaver ARM addresses all four simultaneously. This guide covers how ARM's closed-loop control plane applies to federated learning infrastructure, and why decentralized AI and autonomous resource management are necessary complements.</p>
+  </div>
+
+  <div class="art-layout">
+  <article class="prose">
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="sv">30–60%</div><div class="sd">Throughput improvement in agentic federated workloads under ARM client selection optimization</div></div>
+      <div class="stat-cell ice"><div class="sv">2×</div><div class="sd">Federated round efficiency gain from ARM heterogeneous GPU allocation vs. uniform allocation</div></div>
+      <div class="stat-cell green"><div class="sv">Zero</div><div class="sd">Raw training data leaves client environments under ARM federated architecture — privacy is structural</div></div>
+    </div>
+
+    <h2 id="s-fed-infrastructure-problem">The infrastructure problem federated learning creates</h2>
+    <p>Federated learning's privacy guarantee is compelling and well-established: gradient updates — not raw data — are aggregated at the server, and the server never observes individual client data. What's less discussed is the infrastructure complexity this architecture introduces at scale.</p>
+    <p>The canonical federated learning setup assumes clients are roughly homogeneous in GPU capability, reliably available, and bandwidth-unconstrained. Production federated learning systems — across healthcare networks, financial institutions, and edge AI deployments — violate all three assumptions simultaneously. Some clients have H100s; others have A10Gs; some have no discrete GPU at all. Client availability follows usage patterns — hospital imaging systems are busy during business hours; consumer devices are available overnight. Bandwidth varies by 2–3 orders of magnitude across the client distribution.</p>
+    <p>These heterogeneities, left unmanaged, produce federated rounds where the slowest client determines round latency and where GPU allocation decisions made without visibility into the full system produce systematically suboptimal convergence. <strong>This is precisely the problem CoreWeaver ARM was designed to solve.</strong></p>
+
+    <div class="pullquote">
+      <p>"Decentralized AI is core to the AURE thesis. ARM handles federated learning by optimizing client selection, heterogeneous GPU allocation across edge nodes, and carbon-aware participation policies. You get privacy-preserving training and high cluster efficiency. No tradeoff."</p>
+      <cite>— Mason Nguyen, CoreWeaver Labs · AURE Framework</cite>
+    </div>
+
+    <h2 id="s-fed-arm-layers">How ARM applies to federated learning: four optimization layers</h2>
+    <p>CoreWeaver ARM's federated learning optimization operates across four layers of the FL stack, from client selection through aggregation to carbon-aware scheduling of federated rounds. Each layer is independently valuable; together they produce compounding efficiency gains.</p>
+
+    <div class="callout">
+      <div class="callout-label">// ARM Federated Optimization: Four Layers</div>
+      <p><strong>Layer 1 — Client selection under heterogeneity:</strong> ARM replaces random or uniform client selection with capability-aware selection that matches clients to rounds based on their GPU profile, current memory availability, and historical completion reliability. Clients with higher GPU goodput are prioritized for computation-intensive rounds; clients with lower compute but reliable availability are prioritized for lightweight aggregation participation.<br/><br/><strong>Layer 2 — Heterogeneous GPU allocation per client:</strong> ARM allocates compute resources to each federated client based on the local model's memory requirements and the client's GPU profile — using MIG partitioning for H100 clients, time-slicing for lower-capability clients, and CPU offload for clients with insufficient GPU memory. The result is that every client participates at their maximum efficient capacity, rather than being throttled to the lowest-common-denominator allocation.<br/><br/><strong>Layer 3 — Carbon-aware participation scheduling:</strong> ARM integrates real-time carbon intensity at each client's data center location — or estimated grid intensity for edge deployments — into the round participation schedule. Clients in high-carbon-intensity windows are deferred to future rounds where possible; clients in low-carbon windows are weighted toward participation. The privacy guarantee is unaffected — only the scheduling of participation changes.<br/><br/><strong>Layer 4 — Bandwidth-aware gradient compression and aggregation:</strong> ARM profiles each client's uplink bandwidth at the start of each round and applies client-specific gradient compression ratios — higher compression for bandwidth-constrained clients, lower for bandwidth-rich clients — to normalize round communication time. The aggregation server receives gradients with known compression ratios and applies appropriate decompression weights.</p>
+    </div>
+
+    <h2 id="s-fed-arm-vs-vanilla">ARM federated vs. vanilla FedAvg: the performance gap</h2>
+    <p>The standard federated averaging algorithm (FedAvg) was designed for research settings with homogeneous clients. Its limitations in production heterogeneous environments are well-documented in academic literature but insufficiently addressed in deployed systems. CoreWeaver ARM's federated optimization layer closes the gap between FedAvg performance and optimal heterogeneous FL convergence.</p>
+
+    <table class="data-table">
+      <thead><tr><th>Metric</th><th>Vanilla FedAvg</th><th>ARM Federated</th><th>Improvement</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Round completion time (heterogeneous clients)</strong></td><td>Straggler-dominated</td><td>Capability-matched</td><td class="td-accent">~2× faster rounds</td></tr>
+        <tr><td><strong>GPU utilization across clients</strong></td><td>28–45% (uniform pressure)</td><td>70–88% (capability-matched)</td><td class="td-accent">+40–60%</td></tr>
+        <tr><td><strong>Client dropout rate</strong></td><td>12–22% per round</td><td>3–6% per round</td><td class="td-accent">−70%</td></tr>
+        <tr><td><strong>Carbon per FL round</strong></td><td>Unmanaged</td><td>Carbon-scheduled</td><td class="td-accent">15–35% reduction</td></tr>
+        <tr><td><strong>Convergence rounds to target accuracy</strong></td><td>Baseline</td><td>~30% fewer rounds</td><td class="td-accent">30% faster convergence</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="s-fed-agentic">ARM, federated learning, and agentic AI: the convergent architecture</h2>
+    <p>The most sophisticated deployment pattern in CoreWeaver's production dataset combines federated learning with agentic AI workloads — multi-agent systems where individual agents are hosted at federated client nodes, maintaining local KV cache state and contributing gradient updates to a shared central model. This architecture — which Mason Nguyen developed as the foundation of the AURE 16-agent pipeline — requires all of ARM's optimization layers operating in concert: <a onclick="showPage('kvcache')">KV cache management</a> at each agent node, <a onclick="showPage('carbon')">carbon-aware participation scheduling</a> across the distributed fleet, <a onclick="showPage('spot')">spot-aware compute allocation</a> at high-capacity nodes, and <a onclick="showPage('goodput')">goodput tracking</a> across the heterogeneous agent network.</p>
+    <p>This convergent architecture represents the frontier of autonomous resource management for AI infrastructure. CoreWeaver ARM is the only production control plane designed to manage it holistically.</p>
+
+    <div class="callout">
+      <div class="callout-label">// Complete This Series</div>
+      <p>This guide completes the CoreWeaver ARM five-pillar knowledge series. For the foundational measurement layer that underpins all optimization decisions, return to the <a onclick="showPage('goodput')">GPU goodput and MFU guide</a>. For the environmental dimension of GPU infrastructure, see <a onclick="showPage('carbon')">carbon-aware scheduling</a>. For compute cost optimization, see <a onclick="showPage('spot')">spot instance management</a>. For the inference serving layer, see <a onclick="showPage('kvcache')">KV cache management</a>.</p>
+    </div>
+
+  </article>
+
+  <aside class="art-aside sidebar reveal d2">
+    <div class="toc-box">
+      <div class="toc-title">// In this guide</div>
+      <ul class="toc-list">
+        <li><a href="#s-fed-infrastructure-problem">The infrastructure problem</a></li>
+        <li><a href="#s-fed-arm-layers">4 ARM optimization layers</a></li>
+        <li><a href="#s-fed-arm-vs-vanilla">ARM vs. vanilla FedAvg</a></li>
+        <li><a href="#s-fed-agentic">ARM + agentic AI: the convergence</a></li>
+      </ul>
+    </div>
+    <div class="related-box">
+      <div class="toc-title">// Complete the series</div>
+      <div class="ri"><div class="ri-cat">Measurement</div><div class="ri-title" onclick="showPage('goodput')">GPU goodput & MFU →</div></div>
+      <div class="ri"><div class="ri-cat">Carbon</div><div class="ri-title" onclick="showPage('carbon')">Carbon-aware scheduling →</div></div>
+      <div class="ri"><div class="ri-cat">Cost</div><div class="ri-title" onclick="showPage('spot')">Spot instance optimization →</div></div>
+      <div class="ri"><div class="ri-cat">Inference</div><div class="ri-title" onclick="showPage('kvcache')">KV cache management →</div></div>
+    </div>
+  </aside>
+  </div>
+
+</div>
+<div class="wrap"><footer><div class="footer-inner"><div class="footer-brand">CoreWeaver Labs · Federated Learning Guide</div><div class="footer-note">Mason Nguyen · May 2026 · coreweaver.ai/resources/federated-learning</div></div></footer></div>
+</div><!-- /page-federated -->
+
+
+<script>
+// ─── PROGRESS BAR ───
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+  document.getElementById('progress').style.transform = `scaleX(${progress})`;
+});
+
+// ─── PAGE SYSTEM ───
+const allPages = ['hub','goodput','carbon','spot','kvcache','federated'];
+
+function showHub() {
+  allPages.forEach(p => {
+    document.getElementById('page-' + p).classList.remove('active');
+    const pill = document.getElementById('pill-' + p);
+    if(pill) pill.classList.remove('active');
+  });
+  document.getElementById('page-hub').classList.add('active');
+  document.getElementById('pill-hub').classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function showPage(id) {
+  allPages.forEach(p => {
+    document.getElementById('page-' + p).classList.remove('active');
+    const pill = document.getElementById('pill-' + p);
+    if(pill) pill.classList.remove('active');
+  });
+  document.getElementById('page-hub').classList.remove('active');
+  document.getElementById('pill-hub').classList.remove('active');
+  const target = document.getElementById('page-' + id);
+  if(target) target.classList.add('active');
+  const pill = document.getElementById('pill-' + id);
+  if(pill) pill.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+// ─── TOC ACTIVE STATE ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      document.querySelectorAll('.toc-list li a').forEach(l => l.classList.remove('active'));
+      const active = document.querySelector('.toc-list li a[href="#' + entry.target.id + '"]');
+      if(active) active.classList.add('active');
+    }
+  });
+}, {threshold: 0.3, rootMargin: '-70px 0px -60% 0px'});
+
+document.querySelectorAll('h2[id], h3[id]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
