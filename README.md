@@ -27,3 +27,27 @@
    ```bash
    helm repo add aura [https://charts.aura-arm.io](https://charts.aura-arm.io)
    helm repo update
+
+Install the Aura operator:
+
+Bash
+helm install aura-operator aura/aura-core --namespace aura-system --create-namespace
+
+Usage
+To enable autonomous management on a specific deployment, simply add the Aura annotation to your Kubernetes manifest:
+
+YAML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service
+  annotations:
+    aura.io/managed: "true"
+    aura.io/optimization-strategy: "cost-balanced"
+Once annotated, Aura will begin profiling the workload and automatically adjusting CPU/Memory requests and limits within 24 hours.
+
+Contributing
+We welcome contributions! Please see our CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
