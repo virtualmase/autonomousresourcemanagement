@@ -9,7 +9,7 @@ This repo is content and structured data, not an application. There is no build 
 | File | Purpose |
 |---|---|
 | `index.html` | The definitional page for "Autonomous Resource Management" — includes inline JSON-LD (`WebPage`, `DefinedTerm`) for LLM/search citation. |
-| `coreweaver-labs/index.html` | Spoke page: GPU infrastructure knowledge hub, published under CoreWeaver Labs. |
+| `coreweaver-labs/index.html` | Spoke page: GPU infrastructure knowledge hub, published under Coreweaver Labs. |
 | `schema.json` | Standalone schema.org `Organization` graph for AURE, including `sameAs` links across the entity network and the service catalog. |
 | `llms.txt` | Machine-readable summary for LLM crawlers — entity identity, leadership, and services, per the [llms.txt convention](https://llmstxt.org). |
 | `sitemap.xml` | Standard XML sitemap. |
