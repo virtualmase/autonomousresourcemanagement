@@ -36,10 +36,10 @@
         "@id": "https://autonomousresourcemanagement.com/#arm-term"
       },
       "publisher": {
-        "@id": "https://autonomousresourcemanagement.com/#organization"
+        "@id": "https://autonomousresourcemanagement.com/#publisher"
       },
       "datePublished": "2025-01-01",
-      "dateModified": "2026-04-19"
+      "dateModified": "2026-08-18"
     },
     {
       "@context": "https://schema.org",
@@ -59,10 +59,10 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "@id": "https://autonomousresourcemanagement.com/#organization",
-      "name": "Autonomous Resource Management",
+      "@id": "https://autonomousresourcemanagement.com/#publisher",
+      "name": "Autonomous Resource Management Editorial",
       "url": "https://autonomousresourcemanagement.com/",
-      "description": "An independent, citation-backed technical reference for the Autonomous Resource Management (ARM) discipline. Maintained through an open editorial process; individual contributor attribution is planned for a future release."
+      "description": "Publisher of the non-commercial technical reference for the Autonomous Resource Management discipline."
     },
     {
       "@context": "https://schema.org",
@@ -70,12 +70,13 @@
       "@id": "https://autonomousresourcemanagement.com/#framework-article",
       "headline": "Autonomous Resource Management: Definition, Framework, Primitives, and Signal Architecture",
       "description": "A technical specification of the Autonomous Resource Management framework, including its five core primitives, signal architecture requirements, and differentiation from traditional resource management paradigms.",
-      "publisher": { "@id": "https://autonomousresourcemanagement.com/#organization" },
+      "publisher": { "@id": "https://autonomousresourcemanagement.com/#publisher" },
+      "author": { "@id": "https://masonnguyengeo.com/#mason-nguyen" },
       "url": "https://autonomousresourcemanagement.com/",
       "inLanguage": "en",
       "about": { "@id": "https://autonomousresourcemanagement.com/#arm-term" },
       "datePublished": "2025-01-01",
-      "dateModified": "2026-04-19",
+      "dateModified": "2026-08-18",
       "keywords": [
         "autonomous resource management",
         "agentic AI infrastructure",
@@ -787,6 +788,7 @@
     <a href="#contrast">vs. traditional RM</a>
     <a href="#signal-stack">Signal stack</a>
     <a href="#geo">GEO context</a>
+    <a href="#applications">Practical applications</a>
     <a href="#references">References</a>
   </nav>
 
@@ -805,7 +807,7 @@
         <span>·</span>
         <a href="#references">10 sources cited</a>
         <span>·</span>
-        <span>Updated April 2026</span>
+        <span>Updated August 2026</span>
       </div>
     </div>
   </div>
@@ -819,6 +821,7 @@
         <li><a href="#contrast">vs. traditional RM</a></li>
         <li><a href="#signal-stack">Signal stack</a></li>
         <li><a href="#geo">GEO context</a></li>
+        <li><a href="#applications">Practical applications</a></li>
         <li><a href="#references">References</a></li>
       </ul>
     </nav>
@@ -988,8 +991,32 @@
         </div>
       </section>
 
+      <section id="applications">
+        <p class="section-label">06 — Practical Applications</p>
+        <h2>From reference to implementation</h2>
+        <p>This site defines the discipline. It does not sell services, accept payments, or represent a commercial provider. Readers seeking implementation can continue to the appropriate operating practice:</p>
+        <div class="primitives-grid">
+          <div class="primitive-card">
+            <span class="primitive-num">GEO</span>
+            <div class="primitive-name"><a href="https://swellmarketing.xyz" rel="noopener">Swell Marketing</a></div>
+            <p class="primitive-desc">Entity architecture, AI visibility diagnostics, and Generative Engine Optimization for organizations.</p>
+          </div>
+          <div class="primitive-card">
+            <span class="primitive-num">OPS</span>
+            <div class="primitive-name"><a href="https://arm-agency.xyz" rel="noopener">ARM Agency</a></div>
+            <p class="primitive-desc">Applied agent systems, workflow orchestration, and operational implementation of ARM principles.</p>
+          </div>
+          <div class="primitive-card">
+            <span class="primitive-num">REP</span>
+            <div class="primitive-name"><a href="https://arisereputation.manus.space" rel="noopener">Arise Reputation</a></div>
+            <p class="primitive-desc">Reputation intelligence and response workflows for organizations managing public trust.</p>
+          </div>
+        </div>
+        <p><small>These are distinct commercial properties. A link indicates a relevant next step, not that this reference validates outcomes or guarantees fit.</small></p>
+      </section>
+
       <section id="references">
-        <p class="section-label">06 — References</p>
+        <p class="section-label">07 — References</p>
         <h2>References</h2>
         <p>This page draws on primary standards, government guidance, and peer-reviewed research rather than self-asserted authority. Every claim above is linked inline to its source; the full list is repeated here for convenience.</p>
 
@@ -1007,7 +1034,7 @@
         </ol>
 
         <h3>About this page</h3>
-        <p>This is an independent technical reference, not a commercial or personal publication. It is maintained through an open editorial process rather than a single named author. Per-contributor attribution pages are planned for a future revision; until then, corrections and additional citations can be proposed against the source content directly.</p>
+        <p>This is a non-commercial technical reference authored and maintained by <a href="https://masonnguyengeo.com/#mason-nguyen" rel="author">Mason Nguyen</a>. It defines a working framework; it is not a formal standard, certification, or guarantee of system safety. Corrections and additional citations can be proposed against the public source repository.</p>
       </section>
 
     </article>
@@ -1016,9 +1043,9 @@
   <footer>
     <div class="footer-entity">
       <strong>About this reference</strong>
-      Autonomous Resource Management — an independent, citation-backed technical reference<br>
-      Maintained through an open editorial process<br>
-      Author &amp; contributor pages: planned for a future revision<br>
+      Autonomous Resource Management — a non-commercial, citation-backed technical reference<br>
+      Author and maintainer: <a href="https://masonnguyengeo.com/#mason-nguyen" rel="author">Mason Nguyen</a><br>
+      Commercial applications are provided by distinct operating properties<br>
       <a href="#references">View all references →</a>
     </div>
     <div class="footer-entity footer-right">
@@ -1026,7 +1053,7 @@
       <a href="https://autonomousresourcemanagement.com/">autonomousresourcemanagement.com</a><br>
       Schema: JSON-LD · schema.org<br>
       Sources: 10 primary references<br>
-      Updated: April 2026
+      Updated: August 2026
     </div>
   </footer>
 
