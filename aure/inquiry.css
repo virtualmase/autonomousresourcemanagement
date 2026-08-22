@@ -1,0 +1,133 @@
+.request {
+  background: var(--panel);
+}
+.request-grid {
+  display: grid;
+  grid-template-columns: .82fr 1.18fr;
+  gap: 70px;
+  align-items: start;
+}
+.request-lede,
+.request-list {
+  color: var(--muted);
+}
+.request-list {
+  padding-left: 20px;
+}
+.request-list li {
+  margin: 10px 0;
+}
+.review-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 28px;
+  border: 1px solid rgba(75, 93, 255, .55);
+  background: var(--ink);
+}
+.field {
+  display: grid;
+  gap: 7px;
+}
+.field.full,
+.full {
+  grid-column: 1 / -1;
+}
+.field label {
+  color: rgba(255, 255, 255, .72);
+  font: 600 10px/1.4 var(--mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.field label span {
+  color: rgba(255, 255, 255, .35);
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  background: var(--panel);
+  color: var(--paper);
+  font: inherit;
+}
+.field textarea {
+  resize: vertical;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: 2px solid var(--blue2);
+  outline-offset: 1px;
+}
+.field small,
+.review-form > small {
+  min-height: 16px;
+  color: var(--risk);
+  font-size: 11px;
+}
+.consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, .6);
+  font-size: 13px;
+}
+.consent input {
+  margin-top: 4px;
+}
+.submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.submit p {
+  margin: 0;
+  color: rgba(255, 255, 255, .4);
+  font-size: 11px;
+}
+.submit button {
+  background: transparent;
+  cursor: pointer;
+}
+.submit button:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+.form-status {
+  min-height: 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.form-status[data-state="success"] {
+  color: var(--blue);
+}
+.form-status[data-state="error"] {
+  color: var(--risk);
+}
+.form-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+@media (max-width: 800px) {
+  .request-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+@media (max-width: 600px) {
+  .review-form {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .submit {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
