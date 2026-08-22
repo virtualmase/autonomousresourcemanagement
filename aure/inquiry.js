@@ -11,14 +11,15 @@
   script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
   script.async = true;
   script.defer = true;
-  script.onload = () => window.turnstile?.ready(() => {
+  script.onload = () => {
+    if (!window.turnstile) return;
     window.turnstile.render('#aure-turnstile', {
       sitekey: siteKey,
       callback: token => { form.elements.turnstileToken.value = token; },
       'expired-callback': () => { form.elements.turnstileToken.value = ''; },
       'error-callback': () => { form.elements.turnstileToken.value = ''; }
     });
-  });
+  };
   document.head.appendChild(script);
 
   form.addEventListener('submit', async event => {
