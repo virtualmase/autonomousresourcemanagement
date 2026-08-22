@@ -3,7 +3,7 @@
   if (!form) return;
 
   const status = document.querySelector('#aure-form-status');
-  const endpoint = 'https://swellmarketing.xyz/api/leads';
+  const endpoint = 'https://swellmarketing.xyz/api/leads/';
   const siteKey = '0x4AAAAAAEV9MAzjfRLjvQj5';
   form.elements.formStartedAt.value = String(Date.now());
 
