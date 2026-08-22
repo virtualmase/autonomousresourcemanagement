@@ -366,7 +366,7 @@
             <p class="lead">The operator may assemble evidence, check ready-state conditions, maintain an append-only record, and execute only explicitly authorized, reversible actions. It must stop when a source is missing, credentials fail, a workstream is paused, an action is duplicated, or a claim cannot be verified.</p>
             <div class="boundary-card">
               <div class="boundary-copy">
-                <p class="policy-id">Policy core / AURE-OP-0.1</p>
+                <p class="policy-id">Policy core / AURE-AOP-0.2</p>
                 <h3>Authority follows the evidence chain.</h3>
                 <p>Site deployment, content release, connector use, and portfolio maintenance are separate authority domains. A passing health check is never implied permission to publish, message, spend, alter a third party, or make a public performance claim.</p>
               </div>
@@ -399,13 +399,13 @@
                 <div><h3 class="workstream-name">AURE autonomous operator</h3><p class="workstream-scope">Flagship deployment surface and policy-control record.</p></div>
                 <div><span class="state is-executing"><span class="state-dot" aria-hidden="true"></span>Executing</span></div>
                 <div><span class="workstream-label">Current condition</span><p class="workstream-note">The isolated Hostinger subdomain resolves with TLS and serves the published evidence-first operator control record. The public page remains intentionally non-mutating.</p></div>
-                <div><span class="workstream-label">Next proof required</span><p class="workstream-unblock"><strong>Git-backed deploy evidence</strong> for the isolated AURE path, followed by verification that a source-controlled update does not alter the flagship root.</p></div>
+                <div><span class="workstream-label">Current verification</span><p class="workstream-unblock"><strong>Git-backed isolated release verified.</strong> The `aure/` path is source controlled and Hostinger serves it without replacing the flagship root reference.</p></div>
               </article>
               <article class="workstream" role="listitem">
                 <div><h3 class="workstream-name">AURE audit application</h3><p class="workstream-scope">Evidence-first assessment, AUR-AM, VaaS, and execution-ledger product.</p></div>
-                <div><span class="state is-held"><span class="state-dot" aria-hidden="true"></span>Held</span></div>
-                <div><span class="workstream-label">Current condition</span><p class="workstream-note">The existing product is the planned durable execution and monitoring layer. Its previously recorded baseline is TypeScript-clean with test coverage; this static surface does not claim to replace it.</p></div>
-                <div><span class="workstream-label">Next proof required</span><p class="workstream-unblock"><strong>Validate recurring-job guards</strong>, including idempotency, pause preservation, and a verified notification destination.</p></div>
+                <div><span class="state is-executing"><span class="state-dot" aria-hidden="true"></span>Executing</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">The authenticated AURE control layer now persists hard stops, workstream pauses, scoped authorities, idempotent readiness records, and immutable events. One bounded first-party readiness observation has been recorded; notifications and external execution remain disabled.</p></div>
+                <div><span class="workstream-label">Next proof required</span><p class="workstream-unblock"><strong>Observed daily Heartbeat callback</strong> for the registered read-only schedule, plus a verified notification destination before any delivery capability is enabled.</p></div>
               </article>
               <article class="workstream" role="listitem">
                 <div><h3 class="workstream-name">Mason Nguyen GEO</h3><p class="workstream-scope">Evidence-bound research editorial property.</p></div>
@@ -453,6 +453,8 @@
                 <thead><tr><th>Recorded</th><th>Event</th><th>Result</th><th>Evidence boundary</th></tr></thead>
                 <tbody>
                   <tr><td><span class="ledger-time">2026-08-22 / verified</span></td><td><span class="ledger-event">AURE Hostinger publication check</span></td><td><span class="state is-executing"><span class="state-dot" aria-hidden="true"></span>Route active</span></td><td>Authoritative Hostinger ALIAS resolves over HTTPS and serves the published operator control record. The public surface remains intentionally non-mutating.</td></tr>
+                  <tr><td><span class="ledger-time">2026-08-22 / verified</span></td><td><span class="ledger-event">AURE operator control deployment</span></td><td><span class="state is-executing"><span class="state-dot" aria-hidden="true"></span>Authenticated control active</span></td><td>The AURE application exposes a protected hard stop, workstream pause register, registered daily readiness schedule, scoped authority records, and immutable event trail. No external executor or notification destination is enabled.</td></tr>
+                  <tr><td><span class="ledger-time">2026-08-22 / recorded</span></td><td><span class="ledger-event">Bounded readiness observation</span></td><td><span class="state is-executing"><span class="state-dot" aria-hidden="true"></span>Completed</span></td><td>One first-party-only readiness record passed the AURE-AOP-0.2 allowlist and wrote an immutable event. A same-minute repeat retained the existing record. This is not a portfolio or commercial outcome claim.</td></tr>
                   <tr><td><span class="ledger-time">2026-08-22 / recorded</span></td><td><span class="ledger-event">Core-Nu-Ten host discovery</span></td><td><span class="state is-blocked"><span class="state-dot" aria-hidden="true"></span>Blocked</span></td><td>A read-only inventory request returned an unauthenticated result. No asset-host target or migration was inferred.</td></tr>
                   <tr><td><span class="ledger-time">2026-08-22 / recorded</span></td><td><span class="ledger-event">Mason GEO writing-image catalog</span></td><td><span class="state is-held"><span class="state-dot" aria-hidden="true"></span>Verified release record</span></td><td>Five eligible writing routes received source-safe visual treatment with route-specific validation; no performance outcome is claimed.</td></tr>
                   <tr><td><span class="ledger-time">2026-08-21 / directive</span></td><td><span class="ledger-event">FIELD and Arctura pause</span></td><td><span class="state is-paused"><span class="state-dot" aria-hidden="true"></span>Hard stop</span></td><td>Owner pause remains in force. No external execution, submission, or publication is permitted for either workstream.</td></tr>
@@ -468,7 +470,7 @@
           <p class="section-label"><span class="numeral">04</span>Fail-safe controls</p>
           <div>
             <h2 id="controls-title">Fail closed when authority is uncertain.</h2>
-            <p class="lead">A working control is not a button graphic. The authoritative pause control belongs to the authenticated AURE execution layer and must be durable, logged, and checked before every action. This static publication surface intentionally cannot mutate any workstream.</p>
+                <p class="lead">A working control is not a button graphic. The authoritative pause control is deployed in the authenticated AURE execution layer and is durable, logged, and checked before every action. This static publication surface intentionally cannot mutate any workstream.</p>
             <div class="kill-panel">
               <div class="kill-copy">
                 <p class="policy-id">Global hard-stop / required invariant</p>
@@ -476,7 +478,7 @@
                 <p>External calls are disallowed whenever a workstream is paused, authorization is absent, source evidence is incomplete, credentials are invalid, the action is irreversible, a duplicate key is present, or a stated claim lacks verification. Resume must be recorded by the authenticated policy owner.</p>
               </div>
               <div class="kill-state">
-                <div><strong>PUBLIC CONTROL STATUS: DISPLAY-ONLY</strong><small>No policy mutation endpoint is exposed by this static Hostinger page. The visible boundary is intentionally non-operational until the authenticated execution layer is deployed and validated.</small></div>
+                <div><strong>PUBLIC CONTROL STATUS: DISPLAY-ONLY</strong><small>No policy mutation endpoint is exposed by this static Hostinger page. The authenticated AURE control layer owns the durable hard stop, schedule identity, and immutable event records; this page is a bounded disclosure, not a control endpoint.</small></div>
                 <button class="static-control" type="button" disabled aria-disabled="true">Pause command unavailable on public surface</button>
               </div>
             </div>
@@ -492,13 +494,14 @@
             <p class="lead">The operator inherits the flagship’s distinction between technical reference material and active execution evidence. Links below identify the public surfaces that anchor this deployment record; they do not certify third-party systems or establish operational performance.</p>
             <div class="proof-grid">
               <article class="proof-card"><p class="card-kicker">Reference</p><h3>ARM flagship</h3><p>The root domain remains a non-commercial technical reference. This control surface is isolated under the AURE subdomain and does not replace the reference.</p></article>
-              <article class="proof-card"><p class="card-kicker">Application</p><h3>AURE audit</h3><p>The evidence-first audit application remains the planned durable location for authenticated policy, state, action, and verification persistence.</p></article>
+              <article class="proof-card"><p class="card-kicker">Application</p><h3>AURE audit</h3><p>The evidence-first audit application is the authenticated durable location for policy, pause state, schedule identity, bounded readiness records, and verification persistence. It does not expose an external executor in this release.</p></article>
               <article class="proof-card"><p class="card-kicker">Disclosure</p><h3>No performance claim</h3><p>This record reports deployment and evidence conditions only. It does not claim certification, rankings, revenue, traffic, model capability, or business outcome.</p></article>
             </div>
             <div class="source-list">
               <div class="source-row"><span>ARM reference</span><a href="https://autonomousresourcemanagement.com/">autonomousresourcemanagement.com</a></div>
               <div class="source-row"><span>AURE audit surface</span><a href="https://aureaudit-76sftcco.manus.space/">aureaudit-76sftcco.manus.space</a></div>
-              <div class="source-row"><span>Policy note</span><p>Public interface states are constrained to recorded deployment conditions, explicit blockers, and owner pause directives. They are not a substitute for the authenticated action ledger.</p></div>
+              <div class="source-row"><span>Protected operator</span><a href="https://aureaudit-76sftcco.manus.space/operator">aureaudit-76sftcco.manus.space/operator</a></div>
+              <div class="source-row"><span>Policy note</span><p>Public interface states are constrained to recorded deployment conditions, explicit blockers, and owner pause directives. They are not a substitute for the authenticated action ledger or a claim of an external outcome.</p></div>
             </div>
           </div>
         </div>
@@ -506,7 +509,7 @@
     </main>
 
     <footer class="site-footer">
-      <div class="footer-inner"><p>AURE Portfolio Operator / Evidence Control Record / v0.1</p><a href="https://autonomousresourcemanagement.com/">Return to ARM technical reference</a></div>
+      <div class="footer-inner"><p>AURE Portfolio Operator / Evidence Control Record / v0.2</p><a href="https://autonomousresourcemanagement.com/">Return to ARM technical reference</a></div>
     </footer>
     <script>
       (() => {
