@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="base:app_id" content="6a1834c7660a3f727dea7030" />
+    <meta name="base:app_id" content="6a0ada777abfff0aca7b16f5" />
+    <meta name="theme-color" content="#12100e" />
+    <meta
+      name="description"
+      content="AURE Portfolio Operator is an evidence-first control record for authorized portfolio work. It exposes policy boundaries, current workstream state, verification records, and pause conditions without representing unverified outcomes as fact."
+    />
+    <link rel="canonical" href="https://aure.autonomousresourcemanagement.com/" />
+    <title>AURE Portfolio Operator — Evidence Control Record</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #12100e;
+        --ink-soft: #47423a;
+        --ink-muted: #766f64;
+        --paper: #f4f1ea;
+        --paper-raised: #fbfaf7;
+        --paper-deep: #e9e4da;
+        --rule: rgba(18, 16, 14, 0.14);
+        --rule-strong: rgba(18, 16, 14, 0.28);
+        --evidence: #1e42a8;
+        --evidence-soft: #e6ebff;
+        --brass: #896219;
+        --brass-soft: #f4ecd8;
+        --risk: #aa332c;
+        --risk-soft: #fbe8e3;
+        --paused: #615a52;
+        --serif: "DM Serif Display", Georgia, serif;
+        --sans: "DM Sans", system-ui, sans-serif;
+        --mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        --focus: #1658d4;
+        --ease: cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      a { color: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+
+      .skip-link {
+        position: fixed;
+        z-index: 1000;
+        top: 0.75rem;
+        left: 0.75rem;
+        transform: translateY(-160%);
+        padding: 0.65rem 0.8rem;
+        background: var(--ink);
+        color: var(--paper);
+        font: 500 0.72rem/1 var(--mono);
+        letter-spacing: 0.06em;
+        text-decoration: none;
+        transition: transform 160ms var(--ease);
+      }
+      .skip-link:focus { transform: translateY(0); }
+
+      .site-header {
+        position: sticky;
+        z-index: 20;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 58px;
+        padding: 0 4.8vw;
+        border-bottom: 1px solid var(--rule);
+        background: color-mix(in srgb, var(--paper) 94%, transparent);
+        backdrop-filter: blur(12px);
+      }
+      .wordmark, .meta-link {
+        font: 500 0.67rem/1.2 var(--mono);
+        letter-spacing: 0.095em;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+      .wordmark { color: var(--ink); }
+      .wordmark span { color: var(--evidence); }
+      .desktop-nav { display: flex; gap: 1.35rem; align-items: center; }
+      .meta-link { color: var(--ink-muted); border-bottom: 1px solid transparent; }
+      .meta-link:hover { color: var(--ink); border-color: var(--ink-soft); }
+      .nav-toggle {
+        display: none;
+        width: 38px;
+        height: 34px;
+        padding: 7px;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+      .nav-toggle span { display: block; height: 1px; background: var(--ink); margin: 5px 0; }
+      .mobile-nav { display: none; }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(4.1rem, 8vw, 7.5rem) 4.8vw clamp(3.3rem, 6vw, 5.5rem);
+        color: #fbfaf7;
+        background:
+          linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px),
+          radial-gradient(circle at 85% 4%, #263e9d 0, #1b2d76 22%, #15191f 50%, #12100e 76%);
+        background-size: 32px 32px, 32px 32px, auto;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        right: max(4.8vw, 2rem);
+        bottom: -22rem;
+        width: min(60vw, 720px);
+        height: min(60vw, 720px);
+        border: 1px solid rgba(255,255,255,.13);
+        border-radius: 50%;
+        box-shadow: 0 0 0 42px rgba(255,255,255,.035), 0 0 0 84px rgba(255,255,255,.025);
+        pointer-events: none;
+      }
+      .hero-inner { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; }
+      .eyebrow, .section-label, .card-kicker, .ledger-time, .state, .policy-id {
+        font-family: var(--mono);
+        letter-spacing: 0.085em;
+        text-transform: uppercase;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin: 0 0 1.25rem;
+        color: #d8e0ff;
+        font-size: 0.72rem;
+      }
+      .live-mark { width: 7px; height: 7px; border-radius: 50%; background: #aebdff; box-shadow: 0 0 0 4px rgba(174,189,255,.12); }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        max-width: 850px;
+        margin-bottom: 1.3rem;
+        font-family: var(--serif);
+        font-size: clamp(3.3rem, 8.1vw, 7.3rem);
+        font-weight: 400;
+        line-height: 0.89;
+        letter-spacing: -0.044em;
+        text-wrap: balance;
+      }
+      .hero-copy { max-width: 650px; margin: 0; color: #e4e2dd; font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.65; }
+      .hero-facts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 980px;
+        margin-top: clamp(3rem, 6vw, 5.5rem);
+        border-top: 1px solid rgba(255,255,255,.18);
+      }
+      .fact { min-height: 106px; padding: 1rem 1.35rem 0 0; border-right: 1px solid rgba(255,255,255,.18); }
+      .fact + .fact { padding-left: 1.35rem; }
+      .fact:last-child { border-right: 0; }
+      .fact-label { margin: 0 0 0.5rem; color: #aaa69d; font: 0.63rem/1.3 var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+      .fact-value { margin: 0; color: #fff; font-size: 0.92rem; line-height: 1.45; }
+
+      main { max-width: 1440px; margin: 0 auto; }
+      .band { padding: clamp(3.2rem, 6vw, 6rem) 4.8vw; border-bottom: 1px solid var(--rule); }
+      .band-grid { display: grid; grid-template-columns: minmax(180px, .65fr) minmax(0, 2.35fr); gap: clamp(2rem, 5vw, 7rem); }
+      .section-label { margin: 0; color: var(--ink-muted); font-size: .68rem; line-height: 1.3; }
+      .section-label .numeral { display: block; margin-bottom: .55rem; color: var(--evidence); }
+      h2 { margin-bottom: 1rem; font-family: var(--serif); font-size: clamp(2rem, 4vw, 4.2rem); font-weight: 400; line-height: .96; letter-spacing: -.035em; text-wrap: balance; }
+      .lead { max-width: 720px; margin-bottom: 0; color: var(--ink-soft); font-size: clamp(1rem, 1.35vw, 1.16rem); line-height: 1.65; }
+
+      .boundary-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(260px, .85fr);
+        margin-top: 2.2rem;
+        border: 1px solid var(--rule-strong);
+        background: var(--paper-raised);
+      }
+      .boundary-copy { padding: clamp(1.4rem, 3vw, 2.4rem); }
+      .boundary-copy h3 { margin: .28rem 0 .75rem; font-family: var(--serif); font-size: 1.65rem; font-weight: 400; letter-spacing: -.02em; }
+      .boundary-copy p { max-width: 600px; margin: 0; color: var(--ink-soft); }
+      .boundary-terms { padding: clamp(1.4rem, 3vw, 2.4rem); border-left: 1px solid var(--rule); background: var(--paper-deep); }
+      .boundary-terms ul { display: grid; gap: .85rem; margin: 0; padding: 0; list-style: none; }
+      .boundary-terms li { display: grid; grid-template-columns: 17px 1fr; gap: .65rem; color: var(--ink-soft); font-size: .86rem; line-height: 1.4; }
+      .term-mark { width: 10px; height: 10px; margin-top: .18rem; border: 1px solid currentColor; }
+      .boundary-terms li:nth-child(1) { color: var(--evidence); }
+      .boundary-terms li:nth-child(2) { color: var(--brass); }
+      .boundary-terms li:nth-child(3) { color: var(--risk); }
+      .boundary-terms li span:last-child { color: var(--ink-soft); }
+
+      .legend { display: flex; flex-wrap: wrap; gap: .65rem; margin: 2rem 0 1.15rem; }
+      .legend-item, .state {
+        display: inline-flex;
+        align-items: center;
+        gap: .48rem;
+        padding: .38rem .55rem;
+        border: 1px solid var(--rule);
+        background: var(--paper-raised);
+        color: var(--ink-soft);
+        font-size: .62rem;
+        line-height: 1;
+      }
+      .legend-dot, .state-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+      .is-executing { border-color: #afbcfa; background: var(--evidence-soft); color: var(--evidence); }
+      .is-blocked { border-color: #d1a555; background: var(--brass-soft); color: var(--brass); }
+      .is-paused { border-color: #d6c8c3; background: var(--risk-soft); color: var(--risk); }
+      .is-held { border-color: #c8c2b9; background: #efede8; color: var(--paused); }
+
+      .workstream-list { border-top: 1px solid var(--rule-strong); }
+      .workstream { display: grid; grid-template-columns: 1.1fr .7fr 1.75fr 1.1fr; gap: 1.1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--rule); align-items: start; }
+      .workstream-name { margin: 0; font-size: 1rem; font-weight: 500; line-height: 1.35; }
+      .workstream-scope, .workstream-note, .workstream-unblock { margin: .35rem 0 0; color: var(--ink-muted); font-size: .84rem; line-height: 1.48; }
+      .workstream-label { display: block; margin-bottom: .3rem; color: var(--ink-muted); font: .62rem/1.2 var(--mono); letter-spacing: .075em; text-transform: uppercase; }
+      .workstream-unblock { color: var(--ink-soft); }
+      .workstream-unblock strong { color: var(--ink); font-weight: 500; }
+
+      .ledger-wrap { overflow-x: auto; margin-top: 2rem; border: 1px solid var(--rule-strong); background: var(--paper-raised); }
+      table { width: 100%; border-collapse: collapse; text-align: left; }
+      th { padding: .85rem 1rem; border-bottom: 1px solid var(--rule-strong); color: var(--ink-muted); font: .62rem/1.2 var(--mono); letter-spacing: .075em; text-transform: uppercase; white-space: nowrap; }
+      td { padding: 1rem; border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-size: .86rem; line-height: 1.45; vertical-align: top; }
+      tr:last-child td { border-bottom: 0; }
+      .ledger-time { color: var(--ink-muted); font-size: .63rem; white-space: nowrap; }
+      .ledger-event { color: var(--ink); font-weight: 500; }
+      .evidence-link { color: var(--evidence); text-decoration-color: rgba(30,66,168,.35); text-underline-offset: .16em; }
+      .evidence-link:hover { text-decoration-color: var(--evidence); }
+
+      .kill-panel {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+        margin-top: 2.15rem;
+        overflow: hidden;
+        border: 1px solid #cb9d96;
+        background: var(--risk-soft);
+      }
+      .kill-panel::before { content: "PAUSE"; position: absolute; right: -1rem; bottom: -1.25rem; color: rgba(170,51,44,.08); font: 400 clamp(5rem, 14vw, 11rem)/1 var(--serif); letter-spacing: -.07em; pointer-events: none; }
+      .kill-copy, .kill-state { position: relative; z-index: 1; padding: clamp(1.4rem, 3vw, 2.4rem); }
+      .kill-copy h3 { margin: .3rem 0 .7rem; color: #65231f; font-family: var(--serif); font-size: 1.75rem; font-weight: 400; letter-spacing: -.025em; }
+      .kill-copy p { max-width: 620px; margin: 0; color: #663530; }
+      .kill-state { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; border-left: 1px solid #dbb8b1; background: rgba(255,255,255,.25); }
+      .kill-state strong { display: block; color: #65231f; font: 500 .78rem/1.45 var(--mono); letter-spacing: .03em; }
+      .kill-state small { display: block; margin-top: .5rem; color: #784b45; font-size: .76rem; line-height: 1.45; }
+      .static-control {
+        width: 100%;
+        padding: .72rem .85rem;
+        border: 1px solid #aa5b53;
+        border-radius: 0;
+        background: transparent;
+        color: #7f2e28;
+        font: 500 .66rem/1.2 var(--mono);
+        letter-spacing: .065em;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      .static-control[disabled] { cursor: not-allowed; opacity: 1; }
+
+      .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 2rem; border: 1px solid var(--rule-strong); background: var(--rule-strong); }
+      .proof-card { min-height: 220px; padding: 1.35rem; background: var(--paper-raised); }
+      .card-kicker { margin: 0 0 1.1rem; color: var(--evidence); font-size: .62rem; }
+      .proof-card h3 { margin-bottom: .7rem; font-family: var(--serif); font-size: 1.45rem; font-weight: 400; letter-spacing: -.025em; line-height: 1; }
+      .proof-card p { margin-bottom: 0; color: var(--ink-soft); font-size: .86rem; line-height: 1.5; }
+      .source-list { display: grid; gap: .85rem; margin-top: 2rem; }
+      .source-row { display: grid; grid-template-columns: 170px 1fr; gap: 1.25rem; padding-top: .85rem; border-top: 1px solid var(--rule); }
+      .source-row span { color: var(--ink-muted); font: .62rem/1.4 var(--mono); letter-spacing: .075em; text-transform: uppercase; }
+      .source-row a, .source-row p { margin: 0; color: var(--ink-soft); font-size: .86rem; }
+      .source-row a { color: var(--evidence); text-decoration-color: rgba(30,66,168,.32); text-underline-offset: .16em; }
+
+      .site-footer { padding: 1.5rem 4.8vw; background: var(--ink); color: #d9d5cd; }
+      .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; max-width: 1340px; margin: 0 auto; }
+      .footer-inner p, .footer-inner a { margin: 0; color: #aaa59b; font: .63rem/1.5 var(--mono); letter-spacing: .05em; text-decoration: none; }
+      .footer-inner a:hover { color: #fff; }
+
+      @media (max-width: 840px) {
+        .site-header { padding: 0 1.25rem; }
+        .desktop-nav { display: none; }
+        .nav-toggle { display: block; }
+        .mobile-nav { display: none; position: fixed; inset: 58px 0 auto; z-index: 19; padding: 1rem 1.25rem 1.2rem; border-bottom: 1px solid var(--rule); background: var(--paper); box-shadow: 0 10px 20px rgba(18,16,14,.08); }
+        .mobile-nav[data-open="true"] { display: grid; gap: .35rem; }
+        .mobile-nav a { padding: .7rem 0; border-bottom: 1px solid var(--rule); color: var(--ink-muted); font: .67rem/1.2 var(--mono); letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+        .hero, .band { padding-left: 1.25rem; padding-right: 1.25rem; }
+        .hero-facts { grid-template-columns: 1fr; margin-top: 2.8rem; }
+        .fact, .fact + .fact { min-height: auto; padding: .9rem 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+        .fact:last-child { border-bottom: 0; }
+        .band-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+        .boundary-card, .kill-panel { grid-template-columns: 1fr; }
+        .boundary-terms, .kill-state { border-top: 1px solid var(--rule); border-left: 0; }
+        .workstream { grid-template-columns: 1fr 1fr; gap: .95rem .8rem; }
+        .workstream-scope { grid-column: 1 / -1; }
+        .proof-grid { grid-template-columns: 1fr; }
+        .source-row { grid-template-columns: 1fr; gap: .25rem; }
+      }
+      @media (max-width: 480px) {
+        h1 { font-size: clamp(3rem, 16vw, 4.8rem); }
+        .workstream { grid-template-columns: 1fr; gap: .85rem; }
+        .workstream-scope { grid-column: auto; }
+        td, th { padding: .8rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#operator-record">Skip to operator record</a>
+    <header class="site-header">
+      <a class="wordmark" href="/">AURE <span>/</span> ARM</a>
+      <nav class="desktop-nav" aria-label="Operator sections">
+        <a class="meta-link" href="#workstreams">Workstreams</a>
+        <a class="meta-link" href="#ledger">Ledger</a>
+        <a class="meta-link" href="#controls">Controls</a>
+        <a class="meta-link" href="#sources">Sources</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open section navigation" aria-controls="mobile-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+    <nav id="mobile-nav" class="mobile-nav" data-open="false" aria-label="Operator sections">
+      <a href="#workstreams">Workstreams</a>
+      <a href="#ledger">Ledger</a>
+      <a href="#controls">Controls</a>
+      <a href="#sources">Sources</a>
+    </nav>
+
+    <main id="operator-record">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-inner">
+          <p class="eyebrow"><span class="live-mark" aria-hidden="true"></span> AURE Portfolio Operator / Control Record</p>
+          <h1 id="page-title">Autonomy without theater.</h1>
+          <p class="hero-copy">A public record for policy-bound portfolio work. This surface distinguishes what has been observed, what is authorized, what is blocked, and what remains paused. It does not turn a completed observation into an unverified outcome claim.</p>
+          <div class="hero-facts" aria-label="Current operator facts">
+            <div class="fact">
+              <p class="fact-label">Production surface</p>
+              <p class="fact-value">Flagship subdomain on Hostinger; public routing, TLS, and the published operator control record have been verified.</p>
+            </div>
+            <div class="fact">
+              <p class="fact-label">Execution posture</p>
+              <p class="fact-value">Policy-bound. No irreversible, financial, legal, deceptive, or unverified-claim actions are authorized here.</p>
+            </div>
+            <div class="fact">
+              <p class="fact-label">Evidence discipline</p>
+              <p class="fact-value">Every state needs a source, an authorization boundary, and a recorded verification or explicit blocker.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" aria-labelledby="boundary-title">
+        <div class="band-grid">
+          <p class="section-label"><span class="numeral">01</span>Operating boundary</p>
+          <div>
+            <h2 id="boundary-title">A constrained operator, not an outcome generator.</h2>
+            <p class="lead">The operator may assemble evidence, check ready-state conditions, maintain an append-only record, and execute only explicitly authorized, reversible actions. It must stop when a source is missing, credentials fail, a workstream is paused, an action is duplicated, or a claim cannot be verified.</p>
+            <div class="boundary-card">
+              <div class="boundary-copy">
+                <p class="policy-id">Policy core / AURE-OP-0.1</p>
+                <h3>Authority follows the evidence chain.</h3>
+                <p>Site deployment, content release, connector use, and portfolio maintenance are separate authority domains. A passing health check is never implied permission to publish, message, spend, alter a third party, or make a public performance claim.</p>
+              </div>
+              <div class="boundary-terms">
+                <ul>
+                  <li><span class="term-mark" aria-hidden="true"></span><span><strong>Blue / observed:</strong> source or validation record exists; no outcome is inferred.</span></li>
+                  <li><span class="term-mark" aria-hidden="true"></span><span><strong>Brass / blocked:</strong> a specific external precondition prevents further action.</span></li>
+                  <li><span class="term-mark" aria-hidden="true"></span><span><strong>Red / paused:</strong> an owner directive or hard-stop forbids action until resumed.</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="workstreams" class="band" aria-labelledby="workstreams-title">
+        <div class="band-grid">
+          <p class="section-label"><span class="numeral">02</span>Workstream state</p>
+          <div>
+            <h2 id="workstreams-title">The portfolio is not one queue.</h2>
+            <p class="lead">States below represent the exact deployment or evidence condition recorded for each workstream. They are not ratings, forecasts, certifications, or public success claims.</p>
+            <div class="legend" aria-label="Workstream state legend">
+              <span class="legend-item is-executing"><span class="legend-dot" aria-hidden="true"></span>Executing / verified work in progress</span>
+              <span class="legend-item is-blocked"><span class="legend-dot" aria-hidden="true"></span>Blocked / named precondition</span>
+              <span class="legend-item is-paused"><span class="legend-dot" aria-hidden="true"></span>Paused / no action permitted</span>
+              <span class="legend-item is-held"><span class="legend-dot" aria-hidden="true"></span>Held / no execution authorization</span>
+            </div>
+            <div class="workstream-list" role="list">
+              <article class="workstream" role="listitem">
+                <div><h3 class="workstream-name">AURE autonomous operator</h3><p class="workstream-scope">Flagship deployment surface and policy-control record.</p></div>
+                <div><span class="state is-executing"><span class="state-dot" aria-hidden="true"></span>Executing</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">The isolated Hostinger subdomain resolves with TLS and serves the published evidence-first operator control record. The public page remains intentionally non-mutating.</p></div>
+                <div><span class="workstream-label">Next proof required</span><p class="workstream-unblock"><strong>Git-backed deploy evidence</strong> for the isolated AURE path, followed by verification that a source-controlled update does not alter the flagship root.</p></div>
+              </article>
+              <article class="workstream" role="listitem">
+                <div><h3 class="workstream-name">AURE audit application</h3><p class="workstream-scope">Evidence-first assessment, AUR-AM, VaaS, and execution-ledger product.</p></div>
+                <div><span class="state is-held"><span class="state-dot" aria-hidden="true"></span>Held</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">The existing product is the planned durable execution and monitoring layer. Its previously recorded baseline is TypeScript-clean with test coverage; this static surface does not claim to replace it.</p></div>
+                <div><span class="workstream-label">Next proof required</span><p class="workstream-unblock"><strong>Validate recurring-job guards</strong>, including idempotency, pause preservation, and a verified notification destination.</p></div>
+              </article>
+              <article class="workstream" role="listitem">
+                <div><h3 class="workstream-name">Mason Nguyen GEO</h3><p class="workstream-scope">Evidence-bound research editorial property.</p></div>
+                <div><span class="state is-held"><span class="state-dot" aria-hidden="true"></span>Held</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">The page-by-page visual migration and editorial-image catalog have recorded production verification. The release-control layer keeps editorial status distinct from operational release state.</p></div>
+                <div><span class="workstream-label">Next proof required</span><p class="workstream-unblock"><strong>Release-package preflight</strong> for any candidate route; no bulk publishing and no automated release from an observation alone.</p></div>
+              </article>
+              <article class="workstream" role="listitem">
+                <div><h3 class="workstream-name">Core-Nu-Ten Foundry</h3><p class="workstream-scope">Asset-host migration and Foundry handoff.</p></div>
+                <div><span class="state is-blocked"><span class="state-dot" aria-hidden="true"></span>Blocked</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">The Foundry asset-host discovery request returned an unauthenticated response. No hosting inventory or migration target was exposed.</p></div>
+                <div><span class="workstream-label">Unblock condition</span><p class="workstream-unblock"><strong>Authorized Foundry credential</strong> or an explicit Foundry-owned asset-host URL and migration authorization.</p></div>
+              </article>
+              <article class="workstream" role="listitem">
+                <div><h3 class="workstream-name">FIELD relay and agency handoff</h3><p class="workstream-scope">Task-event delivery and durable agency queue.</p></div>
+                <div><span class="state is-paused"><span class="state-dot" aria-hidden="true"></span>Paused</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">Owner pause is active. The currently known endpoint is a generic HTML response, not a verified task-event receiver.</p></div>
+                <div><span class="workstream-label">Unblock condition</span><p class="workstream-unblock"><strong>Explicit owner resume</strong>, a writable board or durable queue, and a verified authenticated endpoint contract.</p></div>
+              </article>
+              <article class="workstream" role="listitem">
+                <div><h3 class="workstream-name">Arctura Network</h3><p class="workstream-scope">Paused Webflow redesign and delivery packet.</p></div>
+                <div><span class="state is-paused"><span class="state-dot" aria-hidden="true"></span>Paused</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">A scoped rebuild brief exists, but owner-directed pause prevents implementation, publication, or external task submission.</p></div>
+                <div><span class="workstream-label">Unblock condition</span><p class="workstream-unblock"><strong>Explicit owner resume</strong> plus source-ready staging and a writable delivery surface.</p></div>
+              </article>
+              <article class="workstream" role="listitem">
+                <div><h3 class="workstream-name">Arctura Family Foundation</h3><p class="workstream-scope">Evidence-first launch surface.</p></div>
+                <div><span class="state is-blocked"><span class="state-dot" aria-hidden="true"></span>Blocked</span></div>
+                <div><span class="workstream-label">Current condition</span><p class="workstream-note">No source package establishes the legal, financial, governance, or charitable claims required for a launch surface.</p></div>
+                <div><span class="workstream-label">Unblock condition</span><p class="workstream-unblock"><strong>Source-controlled materials</strong> and a scoped authorization that defines which claims may be made publicly.</p></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ledger" class="band" aria-labelledby="ledger-title">
+        <div class="band-grid">
+          <p class="section-label"><span class="numeral">03</span>Evidence ledger</p>
+          <div>
+            <h2 id="ledger-title">A record of actions—not a narrative of success.</h2>
+            <p class="lead">The ledger records the narrow evidence that supports a state. Failed or incomplete conditions remain visible rather than being reclassified as completion. Dates below reflect the associated source record, not an implied real-time operational feed.</p>
+            <div class="ledger-wrap">
+              <table>
+                <thead><tr><th>Recorded</th><th>Event</th><th>Result</th><th>Evidence boundary</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="ledger-time">2026-08-22 / verified</span></td><td><span class="ledger-event">AURE Hostinger publication check</span></td><td><span class="state is-executing"><span class="state-dot" aria-hidden="true"></span>Route active</span></td><td>Authoritative Hostinger ALIAS resolves over HTTPS and serves the published operator control record. The public surface remains intentionally non-mutating.</td></tr>
+                  <tr><td><span class="ledger-time">2026-08-22 / recorded</span></td><td><span class="ledger-event">Core-Nu-Ten host discovery</span></td><td><span class="state is-blocked"><span class="state-dot" aria-hidden="true"></span>Blocked</span></td><td>A read-only inventory request returned an unauthenticated result. No asset-host target or migration was inferred.</td></tr>
+                  <tr><td><span class="ledger-time">2026-08-22 / recorded</span></td><td><span class="ledger-event">Mason GEO writing-image catalog</span></td><td><span class="state is-held"><span class="state-dot" aria-hidden="true"></span>Verified release record</span></td><td>Five eligible writing routes received source-safe visual treatment with route-specific validation; no performance outcome is claimed.</td></tr>
+                  <tr><td><span class="ledger-time">2026-08-21 / directive</span></td><td><span class="ledger-event">FIELD and Arctura pause</span></td><td><span class="state is-paused"><span class="state-dot" aria-hidden="true"></span>Hard stop</span></td><td>Owner pause remains in force. No external execution, submission, or publication is permitted for either workstream.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="controls" class="band" aria-labelledby="controls-title">
+        <div class="band-grid">
+          <p class="section-label"><span class="numeral">04</span>Fail-safe controls</p>
+          <div>
+            <h2 id="controls-title">Fail closed when authority is uncertain.</h2>
+            <p class="lead">A working control is not a button graphic. The authoritative pause control belongs to the authenticated AURE execution layer and must be durable, logged, and checked before every action. This static publication surface intentionally cannot mutate any workstream.</p>
+            <div class="kill-panel">
+              <div class="kill-copy">
+                <p class="policy-id">Global hard-stop / required invariant</p>
+                <h3>Execution pause is held outside this page.</h3>
+                <p>External calls are disallowed whenever a workstream is paused, authorization is absent, source evidence is incomplete, credentials are invalid, the action is irreversible, a duplicate key is present, or a stated claim lacks verification. Resume must be recorded by the authenticated policy owner.</p>
+              </div>
+              <div class="kill-state">
+                <div><strong>PUBLIC CONTROL STATUS: DISPLAY-ONLY</strong><small>No policy mutation endpoint is exposed by this static Hostinger page. The visible boundary is intentionally non-operational until the authenticated execution layer is deployed and validated.</small></div>
+                <button class="static-control" type="button" disabled aria-disabled="true">Pause command unavailable on public surface</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sources" class="band" aria-labelledby="sources-title">
+        <div class="band-grid">
+          <p class="section-label"><span class="numeral">05</span>Source set</p>
+          <div>
+            <h2 id="sources-title">A bounded public record.</h2>
+            <p class="lead">The operator inherits the flagship’s distinction between technical reference material and active execution evidence. Links below identify the public surfaces that anchor this deployment record; they do not certify third-party systems or establish operational performance.</p>
+            <div class="proof-grid">
+              <article class="proof-card"><p class="card-kicker">Reference</p><h3>ARM flagship</h3><p>The root domain remains a non-commercial technical reference. This control surface is isolated under the AURE subdomain and does not replace the reference.</p></article>
+              <article class="proof-card"><p class="card-kicker">Application</p><h3>AURE audit</h3><p>The evidence-first audit application remains the planned durable location for authenticated policy, state, action, and verification persistence.</p></article>
+              <article class="proof-card"><p class="card-kicker">Disclosure</p><h3>No performance claim</h3><p>This record reports deployment and evidence conditions only. It does not claim certification, rankings, revenue, traffic, model capability, or business outcome.</p></article>
+            </div>
+            <div class="source-list">
+              <div class="source-row"><span>ARM reference</span><a href="https://autonomousresourcemanagement.com/">autonomousresourcemanagement.com</a></div>
+              <div class="source-row"><span>AURE audit surface</span><a href="https://aureaudit-76sftcco.manus.space/">aureaudit-76sftcco.manus.space</a></div>
+              <div class="source-row"><span>Policy note</span><p>Public interface states are constrained to recorded deployment conditions, explicit blockers, and owner pause directives. They are not a substitute for the authenticated action ledger.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner"><p>AURE Portfolio Operator / Evidence Control Record / v0.1</p><a href="https://autonomousresourcemanagement.com/">Return to ARM technical reference</a></div>
+    </footer>
+    <script>
+      (() => {
+        const toggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('.mobile-nav');
+        if (!toggle || !nav) return;
+        toggle.addEventListener('click', () => {
+          const open = nav.dataset.open !== 'true';
+          nav.dataset.open = String(open);
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.setAttribute('aria-label', open ? 'Close section navigation' : 'Open section navigation');
+        });
+        nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+          nav.dataset.open = 'false';
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open section navigation');
+        }));
+      })();
+    </script>
+  </body>
+</html>
