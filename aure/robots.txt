@@ -1,0 +1,22 @@
+User-agent: *
+Disallow: /
+Allow: /claim-architecture/
+Allow: /reviews/aure/
+Allow: /authority.css
+
+User-agent: OAI-SearchBot
+Disallow: /
+Allow: /claim-architecture/
+Allow: /reviews/aure/
+
+User-agent: ChatGPT-User
+Disallow: /
+Allow: /claim-architecture/
+Allow: /reviews/aure/
+
+User-agent: PerplexityBot
+Disallow: /
+Allow: /claim-architecture/
+Allow: /reviews/aure/
+
+Sitemap: https://aure.autonomousresourcemanagement.com/sitemap.xml
