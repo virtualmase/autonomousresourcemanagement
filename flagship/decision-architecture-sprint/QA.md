@@ -1,8 +1,8 @@
 # Decision Architecture Sprint route — QA record
 
-**Route:** `/decision-architecture-sprint/`  
-**Property:** Executive flagship source package  
-**Status:** Source-only; not deployed or bound to an external domain by this change.  
+**Route:** `/decision-architecture-sprint/`
+**Property:** Executive flagship source package
+**Status:** Source-only; not deployed or bound to an external domain by this change.
 **Reviewed:** 2026-08-27
 
 ## Checks performed
