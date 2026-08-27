@@ -4,6 +4,7 @@ entity:
   description: A coordinated ecosystem for accountable resource decision practice.
   registry_version: 1
   last_reviewed: 2026-08-27
+  capability_registry: docs/capability-registry.yml
 
 properties:
   - id: arm-reference
@@ -52,3 +53,4 @@ rules:
   - Cross-property links must state the destination relationship and reader benefit.
   - Substantially duplicative pages are prohibited across properties.
   - A property role change requires a recorded governance decision.
+  - Operating capabilities support named accountable roles; they do not confer property or publication authority.

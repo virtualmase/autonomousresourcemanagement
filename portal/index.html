@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="The Autonomous Resource Management participation interface for accountable contribution, proposal records, implementation work, and stewardship." />
+    <meta name="theme-color" content="#1736c7" />
+    <title>ARM Participation Interface — Work With Evidence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Hedvig+Letters+Serif:opsz,wght@12..24,400..900&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to working surface</a>
+    <div class="site-frame">
+      <header class="site-header">
+        <a class="mark" href="#top" aria-label="ARM Participation Interface home">
+          <span class="mark-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="mark-name">ARM<br /><b>FIELDWORK</b></span>
+        </a>
+        <p class="status-line"><span aria-hidden="true"></span> public contribution surface <b>01</b></p>
+        <nav aria-label="Primary navigation">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#pathway">Pathway</a>
+          <a href="#records">Records</a>
+          <a class="nav-action" href="https://github.com/virtualmase/autonomousresourcemanagement/discussions" rel="external">Open discussion <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero" id="top" aria-labelledby="hero-title">
+          <p class="eyebrow">Contribution is an operating discipline</p>
+          <div class="hero-grid">
+            <div>
+              <h1 id="hero-title">Make the work<br /><em>legible.</em></h1>
+              <p class="hero-copy">A public participation interface for people who want to improve how resources are researched, explained, built, stewarded, and kept accurate.</p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new/choose" rel="external">Start a work record <span aria-hidden="true">→</span></a>
+                <a class="button button-plain" href="#capabilities">Choose a capability <span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+            <aside class="hero-record" aria-label="Participation principles">
+              <p class="record-label">WORKING PRINCIPLE / 0001</p>
+              <blockquote>“Useful work names its evidence, its owner, its limits, and its next handoff.”</blockquote>
+              <p>Public contributions become durable records through GitHub Discussions, Issues, and pull requests. A capability helps structure work; it does not grant publication, deployment, security, or governance authority.</p>
+            </aside>
+          </div>
+          <div class="hero-index" aria-label="Quick links">
+            <a href="https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/capability-registry.yml" rel="external"><span>01</span> Read the capability registry <b aria-hidden="true">↗</b></a>
+            <a href="https://github.com/virtualmase/autonomousresourcemanagement/blob/main/GOVERNANCE.md" rel="external"><span>02</span> Read decision rights <b aria-hidden="true">↗</b></a>
+            <a href="https://github.com/virtualmase/autonomousresourcemanagement/blob/main/SECURITY.md" rel="external"><span>03</span> Report a security concern <b aria-hidden="true">↗</b></a>
+          </div>
+        </section>
+
+        <section class="capabilities section-rule" id="capabilities" aria-labelledby="capability-title">
+          <div class="section-heading">
+            <p class="section-number">01 / CAPABILITY INDEX</p>
+            <h2 id="capability-title">Pick the work, not a performative title.</h2>
+            <p>Every capability moves a concrete artifact forward. Select a lens to see where you can contribute; open the record to see the inputs, boundaries, and required handoff.</p>
+          </div>
+          <div class="filter-bar" aria-label="Filter capabilities">
+            <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All work</button>
+            <button class="filter-button" type="button" data-filter="evidence" aria-pressed="false">Evidence</button>
+            <button class="filter-button" type="button" data-filter="publication" aria-pressed="false">Publication</button>
+            <button class="filter-button" type="button" data-filter="implementation" aria-pressed="false">Implementation</button>
+            <button class="filter-button" type="button" data-filter="stewardship" aria-pressed="false">Stewardship</button>
+          </div>
+          <div class="capability-list">
+            <article class="capability-card" data-categories="evidence">
+              <p class="card-index">C / 01</p>
+              <h3>Researcher</h3>
+              <p>Turns a question into a cited evidence base, claims matrix, and an honest account of what remains unknown.</p>
+              <div class="card-meta"><span>HANDOFF</span><b>Content Developer / Prototype</b></div>
+              <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new?template=capability-work.yml&title=%5BResearcher%5D%3A+" rel="external">Open a research record <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="capability-card offset-card" data-categories="evidence publication">
+              <p class="card-index">C / 02</p>
+              <h3>Content<br />Developer</h3>
+              <p>Makes source-led material that serves one property’s distinct reader task without copying another property.</p>
+              <div class="card-meta"><span>HANDOFF</span><b>Maintainer</b></div>
+              <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new?template=capability-work.yml&title=%5BContent+Developer%5D%3A+" rel="external">Open a content record <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="capability-card dark-card" data-categories="evidence implementation">
+              <p class="card-index">C / 03</p>
+              <h3>Prototype</h3>
+              <p>Tests the smallest safe, reversible demonstration before a bigger decision, commitment, or implementation.</p>
+              <div class="card-meta"><span>HANDOFF</span><b>Builder / Researcher</b></div>
+              <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new?template=capability-work.yml&title=%5BPrototype%5D%3A+" rel="external">Open a prototype record <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="capability-card" data-categories="implementation">
+              <p class="card-index">C / 04</p>
+              <h3>Builder</h3>
+              <p>Turns a reviewed specification into portable, accessible, source-controlled implementation with a rollback path.</p>
+              <div class="card-meta"><span>HANDOFF</span><b>Maintainer</b></div>
+              <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new?template=capability-work.yml&title=%5BBuilder%5D%3A+" rel="external">Open a build record <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="capability-card accent-card" data-categories="publication">
+              <p class="card-index">C / 05</p>
+              <h3>Grower</h3>
+              <p>Builds qualified discovery and participation through transparent distribution, cited usefulness, and measured learning.</p>
+              <div class="card-meta"><span>HANDOFF</span><b>Researcher / Content Developer</b></div>
+              <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new?template=capability-work.yml&title=%5BGrower%5D%3A+" rel="external">Open a growth record <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="capability-card" data-categories="stewardship implementation">
+              <p class="card-index">C / 06</p>
+              <h3>Maintainer</h3>
+              <p>Preserves correctness, contributor clarity, availability, and visible release discipline after work ships.</p>
+              <div class="card-meta"><span>HANDOFF</span><b>Builder / Security Reviewer</b></div>
+              <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new?template=capability-work.yml&title=%5BMaintainer%5D%3A+" rel="external">Open a maintenance record <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="capability-card wide-card" data-categories="stewardship">
+              <p class="card-index">C / 07</p>
+              <h3>Sweeper</h3>
+              <p>Finds and reduces stale content, broken references, unsafe configuration, and unowned debt—without erasing provenance or acting before an approved dry run.</p>
+              <div class="card-meta"><span>HANDOFF</span><b>Maintainer / Entity Steward</b></div>
+              <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new?template=capability-work.yml&title=%5BSweeper%5D%3A+" rel="external">Open a sweep record <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+          <p class="filter-empty" hidden>No capability matches this lens. Choose “All work” to restore the full index.</p>
+        </section>
+
+        <section class="pathway section-rule" id="pathway" aria-labelledby="pathway-title">
+          <div class="section-heading path-heading">
+            <p class="section-number">02 / CONTRIBUTION PATHWAY</p>
+            <h2 id="pathway-title">Work travels by record, not by rumor.</h2>
+          </div>
+          <ol class="path-list">
+            <li>
+              <span>01</span>
+              <div><h3>Frame the work</h3><p>Name the property, reader or participant benefit, evidence/input, owner, risk, and completion condition. If the work is still open-ended, start in a Discussion.</p></div>
+            </li>
+            <li>
+              <span>02</span>
+              <div><h3>Choose a capability</h3><p>Use the capability to establish the expected artifact, quality gates, authority boundary, and receiving handoff. It organizes responsibility; it does not create permission.</p></div>
+            </li>
+            <li>
+              <span>03</span>
+              <div><h3>Open the durable record</h3><p>When the work is bounded, submit a Capability work record. Link supporting research, a prior discussion, or an accepted specification.</p></div>
+            </li>
+            <li>
+              <span>04</span>
+              <div><h3>Review, release, or return</h3><p>Submit reviewable artifacts through a pull request. Material claims, security, domain, data-retention, and property-role changes follow the published governance path.</p></div>
+            </li>
+          </ol>
+          <div class="path-cta">
+            <p><span>READY FOR A BOUNDED TASK?</span> Start with the work record and give the next contributor enough context to act.</p>
+            <a class="button button-primary" href="https://github.com/virtualmase/autonomousresourcemanagement/issues/new/choose" rel="external">Start a record <span aria-hidden="true">→</span></a>
+          </div>
+        </section>
+
+        <section class="records section-rule" id="records" aria-labelledby="records-title">
+          <div class="records-layout">
+            <div class="section-heading">
+              <p class="section-number">03 / SYSTEM RECORDS</p>
+              <h2 id="records-title">Three properties. One accountable practice.</h2>
+              <p>Every property keeps its own role, content, measurement, sitemap, and self-referencing canonical once a hostname is assigned. The relationships are explicit because the reader benefit is explicit.</p>
+            </div>
+            <div class="property-records">
+              <a class="property-row" href="https://autonomousresourcemanagement.com" rel="external"><span>R / 01</span><div><b>Reference layer</b><p>Definitions, sources, and evolving distinctions.</p></div><em>Definition and sources ↗</em></a>
+              <a class="property-row" href="https://autonomousresourcemanagement.xyz" rel="external"><span>F / 02</span><div><b>Executive flagship</b><p>Operating guidance for accountable decision practice.</p></div><em>Executive operating guide ↗</em></a>
+              <div class="property-row active-row"><span>P / 03</span><div><b>Participation interface</b><p>Proposals, contribution pathways, integration records, and accountable interaction.</p></div><em>Hostname assignment pending</em></div>
+            </div>
+          </div>
+          <div class="record-footer">
+            <p><span>OPEN RECORDS</span> The source-controlled registry and governance documents are the current system of record. This package is deliberately not indexed until the portal has its own assigned hostname and deployment owner.</p>
+            <a href="https://github.com/virtualmase/autonomousresourcemanagement" rel="external">Inspect the public repository <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p class="footer-mark">ARM / PARTICIPATION INTERFACE</p>
+        <p>Built as a portable static package. No framework runtime, application backend, account system, or property consolidation is assumed.</p>
+        <div><a href="https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/entity-registry.yml" rel="external">Entity registry</a><a href="https://github.com/virtualmase/autonomousresourcemanagement/blob/main/CONTRIBUTING.md" rel="external">Contributing</a><a href="https://github.com/virtualmase/autonomousresourcemanagement/blob/main/SUPPORT.md" rel="external">Support</a></div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+registry:
+  id: arm-capability-registry-v1
+  entity_id: arm-entity-v1
+  last_reviewed: 2026-08-27
+  purpose: A source-controlled record of the operating capabilities that move accountable work between independent ARM properties.
+
+capabilities:
+  - id: researcher
+    name: Researcher
+    purpose: Establish cited evidence, claim limits, and open questions for a defined decision.
+    property_scope: [arm-reference, arm-flagship, arm-portal, evidence-ledger-product]
+    primary_outputs: [research-brief, claims-matrix, source-log, open-questions]
+    quality_gates: [primary-sources-preferred, claims-bounded-by-evidence, provenance-recorded]
+    escalation: property-steward or security-reviewer
+    primary_handoff: content-developer or prototype
+
+  - id: content-developer
+    name: Content Developer
+    purpose: Produce original, accessible, property-specific material from approved evidence.
+    property_scope: [arm-reference, arm-flagship, arm-portal, evidence-ledger-product]
+    primary_outputs: [page-draft, faq, field-note, glossary-entry, metadata-record]
+    quality_gates: [source-review, original-content-check, accessibility-review, property-boundary-check]
+    escalation: property-steward
+    primary_handoff: maintainer
+
+  - id: prototype
+    name: Prototype
+    purpose: Test a defined hypothesis with the smallest safe and reversible demonstration.
+    property_scope: [arm-flagship, arm-portal, evidence-ledger-product]
+    primary_outputs: [experiment-brief, prototype, observation-log, decision-recommendation]
+    quality_gates: [hypothesis-defined, reversible-scope, approved-data-boundary, exit-decision-recorded]
+    escalation: property-steward or security-reviewer
+    primary_handoff: builder or researcher
+
+  - id: builder
+    name: Builder
+    purpose: Implement reviewed specifications as portable, accessible, source-controlled work.
+    property_scope: [arm-reference, arm-flagship, arm-portal, evidence-ledger-product]
+    primary_outputs: [implementation, validation-results, dependency-inventory, rollback-plan]
+    quality_gates: [acceptance-criteria-tested, source-control, security-review-as-needed, rollback-documented]
+    escalation: maintainer or security-reviewer
+    primary_handoff: maintainer
+
+  - id: grower
+    name: Grower
+    purpose: Expand qualified discovery and participation through useful, transparent distribution.
+    property_scope: [arm-reference, arm-flagship, arm-portal, evidence-ledger-product]
+    primary_outputs: [channel-plan, outreach-draft, reference-inventory, measurement-snapshot]
+    quality_gates: [audience-benefit-stated, relationship-disclosed, no-deceptive-growth, learning-loop-recorded]
+    escalation: property-steward
+    primary_handoff: researcher or content-developer
+
+  - id: maintainer
+    name: Maintainer
+    purpose: Preserve correctness, availability, contributor clarity, and accountable release discipline.
+    property_scope: [arm-reference, arm-flagship, arm-portal, evidence-ledger-product]
+    primary_outputs: [release-record, triage-outcome, changelog, incident-or-decision-record]
+    quality_gates: [review-complete, validation-evidence, public-change-record, residual-risk-owner]
+    escalation: entity-steward or security-reviewer
+    primary_handoff: builder, content-developer, or security-reviewer
+
+  - id: sweeper
+    name: Sweeper
+    purpose: Reduce stale, broken, unsafe, and unowned material while retaining provenance and rollback ability.
+    property_scope: [arm-reference, arm-flagship, arm-portal, evidence-ledger-product]
+    primary_outputs: [inventory, dry-run-plan, approved-removal-list, post-change-verification]
+    quality_gates: [dependency-map, retention-check, named-approval-for-destruction, archive-or-rollback-record]
+    escalation: maintainer and entity-steward
+    primary_handoff: maintainer
+
+rules:
+  - Operating capabilities describe work scopes; they do not grant publication, security, deployment, or governance authority.
+  - Every capability record must identify its property, accountable owner, input provenance, risk level, completion condition, and next handoff.
+  - Material property, security, domain, data-retention, or outward-claim changes require the review path defined in GOVERNANCE.md.
+  - Capability work may begin in a public GitHub Discussion and becomes an Issue or pull request when it is bounded and actionable.

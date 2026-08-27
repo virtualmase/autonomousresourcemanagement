@@ -1,0 +1,72 @@
+name: Capability work record
+description: Start a bounded Researcher, Content Developer, Prototype, Builder, Grower, Maintainer, or Sweeper work record.
+title: "[Capability]: "
+labels: ["capability-work"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form after a discussion has become specific enough to be owned and reviewed. This record does not grant publication, deployment, governance, or security authority.
+  - type: dropdown
+    id: capability
+    attributes:
+      label: Capability
+      options:
+        - Researcher
+        - Content Developer
+        - Prototype
+        - Builder
+        - Grower
+        - Maintainer
+        - Sweeper
+    validations:
+      required: true
+  - type: dropdown
+    id: property
+    attributes:
+      label: Affected property
+      options:
+        - Reference layer — autonomousresourcemanagement.com
+        - Executive flagship — autonomousresourcemanagement.xyz
+        - Participation portal — hostname pending
+        - Evidence-Ledger product surface
+        - Cross-property record only
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective and reader/participant benefit
+      description: State the bounded task, the person it serves, and the completion condition.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Input provenance
+      description: Link the source record, discussion, existing issue, or approved specification. State “none” if no source is required and explain why.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Expected deliverable and acceptance checks
+      description: Describe the artifact, how it will be reviewed, and how a reviewer can verify it.
+    validations:
+      required: true
+  - type: textarea
+    id: handoff
+    attributes:
+      label: Risk, escalation, and next handoff
+      description: Name the owner, relevant risk, required review, rollback/archive path if applicable, and the next role.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I have not included private credentials, personal data, or a security vulnerability.
+          required: true
+        - label: I understand that material property, domain, data, security, or public-claim changes require the published governance path.
+          required: true

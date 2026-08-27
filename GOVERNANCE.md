@@ -10,6 +10,10 @@ The Autonomous Resource Management entity system is governed through named roles
 | Security reviewer | Handles vulnerability reporting and security-sensitive changes. | Does not disclose report details without a coordinated decision. |
 | Contributor | Proposes corrections, sources, documentation, and code. | Does not receive publication authority by participation alone. |
 
+## Operating capabilities
+
+The **Researcher, Content Developer, Prototype, Builder, Grower, Maintainer, and Sweeper** are reusable work scopes, not additional governance offices. Their public inputs, outputs, quality gates, and handoffs are recorded in [`docs/capability-registry.yml`](docs/capability-registry.yml) and [`docs/portfolio-operation-skills.md`](docs/portfolio-operation-skills.md). A person may perform a capability, but accountable authority remains with the named role above.
+
 Material decisions—property-role changes, domain changes, entity-registry edits, source-policy changes, security posture changes, and product-boundary claims—require a public decision record in GitHub Discussions or the repository changelog. Security incidents may use the private disclosure route described in `SECURITY.md` until a coordinated disclosure is safe.
 
 Consensus is preferred for editorial changes. When consensus is unavailable, the relevant property steward makes a time-bounded decision with a written rationale. The entity steward resolves genuine cross-property disputes. Decisions can be revisited through a new, evidence-backed proposal.
