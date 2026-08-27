@@ -1,0 +1,54 @@
+entity:
+  id: arm-entity-v1
+  name: Autonomous Resource Management
+  description: A coordinated ecosystem for accountable resource decision practice.
+  registry_version: 1
+  last_reviewed: 2026-08-27
+
+properties:
+  - id: arm-reference
+    hostname: autonomousresourcemanagement.com
+    role: cited definition and research reference
+    canonical_policy: self
+    primary_audiences: [researchers, analysts, technical readers, retrieval systems]
+    content_boundary: definitions, source notes, glossary, editorial changelog
+    steward_role: editorial-maintainer
+    publication_status: active
+
+  - id: arm-flagship
+    hostname: www.autonomousresourcemanagement.xyz
+    role: executive operating guidance and decision practice
+    canonical_policy: self
+    primary_audiences: [senior operators, institutional decision makers, prospective clients]
+    content_boundary: operating model, executive field notes, decision guides, relevant case material
+    steward_role: flagship-editor
+    publication_status: active
+
+  - id: arm-portal
+    hostname: null
+    role: real contributor and operator participation interface
+    canonical_policy: self
+    primary_audiences: [builders, contributors, partner teams, operators]
+    content_boundary: contribution paths, proposals, integration documentation, accountable interaction
+    steward_role: portal-maintainer
+    publication_status: planned
+
+relationships:
+  - from: arm-flagship
+    to: arm-reference
+    type: cites-definition
+    link_label: Definition and sources
+  - from: arm-reference
+    to: arm-flagship
+    type: practical-application
+    link_label: Executive operating guide
+  - from: arm-portal
+    to: arm-flagship
+    type: participation-context
+    link_label: Operating context
+
+rules:
+  - Each indexable property page uses a self-referencing canonical URL.
+  - Cross-property links must state the destination relationship and reader benefit.
+  - Substantially duplicative pages are prohibited across properties.
+  - A property role change requires a recorded governance decision.

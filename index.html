@@ -50,7 +50,7 @@
       "@id": "https://autonomousresourcemanagement.com/#arm-term",
       "name": "Autonomous Resource Management",
       "alternateName": ["ARM", "Autonomous Resource Management Framework"],
-      "description": "The discipline of designing AI-native systems that self-allocate computational, financial, and operational resources using autonomous decision loops — without requiring continuous human intervention. ARM systems operate through mandate chains, signal architectures, and agentic workflows that make resource decisions verifiable and auditable.",
+      "description": "The discipline of designing systems that coordinate computational, financial, and operational resources through declared decision rights, observable signals, and accountable review. ARM systems make resource decisions inspectable, governable, and traceable to named human escalation paths.",
       "inDefinedTermSet": {
         "@type": "DefinedTermSet",
         "@id": "https://autonomousresourcemanagement.com/#glossary",
@@ -87,7 +87,7 @@
         "autonomic computing",
         "generative engine optimization",
         "signal architecture",
-        "mandate chain",
+        "decision rights",
         "AI risk management"
       ],
       "citation": [
@@ -803,7 +803,7 @@
     <div class="hero-right">
       <div class="definition-block">
         <span class="term-abbr">ARM / abbr.</span>
-        <p>The discipline of designing AI-native systems that self-allocate computational, financial, and operational resources using autonomous decision loops — without requiring continuous human intervention. ARM systems operate through mandate chains, signal architectures, and agentic workflows that make resource decisions verifiable and auditable.</p>
+        <p>The discipline of designing systems that coordinate computational, financial, and operational resources through declared decision rights, observable signals, and accountable review. ARM systems make resource decisions inspectable, governable, and traceable to named human escalation paths.</p>
       </div>
       <div class="attribution">
         <span>Editorially maintained</span>
@@ -834,13 +834,13 @@
       <section id="definition">
         <p class="section-label">01 — Definition</p>
         <h2>What is Autonomous Resource Management?</h2>
-        <p>Autonomous Resource Management (ARM) is a systems design discipline and operational framework for deploying AI agents that allocate resources — compute, capital, personnel, infrastructure — without moment-to-moment human direction. The defining characteristic of ARM is not automation, but <em>sovereignty</em>: the system carries its own decision logic, mandate constraints, and audit trail.</p>
+        <p>Autonomous Resource Management (ARM) is a systems design discipline and operational framework for coordinating resources—compute, capital, personnel, and infrastructure—through observable conditions and clearly declared decision rights. The defining characteristic of ARM is not automation, but <em>accountability</em>: each action carries its operating boundaries, decision context, and audit trail.</p>
         <p>ARM is distinguished from conventional resource scheduling by its requirement for machine-readable signal architecture. For a system to qualify as ARM-compliant, its decisions must be legible to both human auditors and AI retrieval systems. This is not an implementation detail — it is the foundational condition that makes autonomous operation safe at scale.</p>
         <p>The discipline extends a lineage that begins with <a href="https://dl.acm.org/doi/10.1109/MC.2003.1160055" target="_blank" rel="noopener">IBM's autonomic computing manifesto</a>, which framed self-managing systems as regulating themselves against high-level objectives rather than step-by-step operator instructions. ARM narrows that idea to the specific case of AI agents allocating compute, capital, and infrastructure, and adds two requirements that autonomic computing did not need to solve: continuous alignment with an <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener">AI risk-management framework</a>, and cost discipline consistent with practices such as the <a href="https://www.finops.org/framework/" target="_blank" rel="noopener">FinOps Framework</a>.</p>
-        <p>Related, narrower forms of autonomous allocation are already in production use — for example <a href="https://kubernetes.io/docs/concepts/workloads/autoscaling/" target="_blank" rel="noopener">Kubernetes autoscaling</a>, which adjusts compute capacity to demand without an operator in the loop. ARM generalizes this pattern across resource types and adds the mandate, audit, and escalation guarantees described below.</p>
+        <p>Related, narrower forms of automated allocation are already in production use—for example <a href="https://kubernetes.io/docs/concepts/workloads/autoscaling/" target="_blank" rel="noopener">Kubernetes autoscaling</a>, which adjusts compute capacity to demand. ARM generalizes this pattern across resource types and adds the decision-rights, audit, and escalation controls described below.</p>
 
         <div class="callout">
-          <p><strong>Core principle:</strong> An ARM system is not merely automated — it is legible. Every resource decision carries a traceable mandate, a verifiable signal, and a defined escalation path back to human authority.</p>
+          <p><strong>Core principle:</strong> An ARM system is not merely automated—it is legible. Every resource decision carries declared decision rights, a verifiable signal, and a defined escalation path back to human authority.</p>
         </div>
       </section>
 
@@ -852,8 +852,8 @@
         <div class="primitives-grid">
           <div class="primitive-card">
             <span class="primitive-num">P1</span>
-            <div class="primitive-name">Mandate Chain</div>
-            <p class="primitive-desc">Every autonomous decision is scoped within a cryptographically verifiable mandate issued by a human principal, typically anchored to a <a href="https://www.w3.org/TR/did-1.0/" target="_blank" rel="noopener">decentralized identifier</a>. Agents cannot act beyond their delegated authority.</p>
+            <div class="primitive-name">Decision-Rights Chain</div>
+            <p class="primitive-desc">Every automated action is scoped within declared decision rights set by an accountable human principal, with identity and provenance appropriate to the operating context. Systems cannot act beyond those documented boundaries.</p>
           </div>
           <div class="primitive-card">
             <span class="primitive-num">P2</span>
@@ -873,7 +873,7 @@
           <div class="primitive-card">
             <span class="primitive-num">P5</span>
             <div class="primitive-name">Immutable Audit Log</div>
-            <p class="primitive-desc">A complete, tamper-evident record of every allocation decision, mandate invocation, and escalation event. Required for regulatory compliance and post-hoc analysis.</p>
+            <p class="primitive-desc">A complete, tamper-evident record of every allocation decision, decision-right invocation, and escalation event. It supports review and post-hoc analysis; it does not by itself establish regulatory compliance.</p>
           </div>
         </div>
       </section>
@@ -881,7 +881,7 @@
       <section id="contrast">
         <p class="section-label">03 — Contrast</p>
         <h2>ARM vs. traditional resource management</h2>
-        <p>Traditional resource management assumes human-in-the-loop at every significant decision boundary. ARM inverts this assumption: humans define the mandate constraints upfront; agents operate within them continuously.</p>
+        <p>Traditional resource management assumes human-in-the-loop at every significant decision boundary. ARM makes the decision boundary explicit: humans establish decision rights and operating limits, while automation assists within those documented boundaries.</p>
 
         <table class="compare-table">
           <thead>
@@ -900,7 +900,7 @@
             <tr>
               <td>Human role</td>
               <td>Operator at each decision</td>
-              <td class="col-arm">Principal who sets mandate constraints</td>
+              <td class="col-arm">Accountable principal who establishes decision rights</td>
             </tr>
             <tr>
               <td>Auditability</td>
@@ -941,7 +941,7 @@
             <span class="layer-id">L0</span>
             <div class="layer-content">
               <div class="layer-name">Human intent layer</div>
-              <p class="layer-desc"><a href="https://www.w3.org/TR/did-1.0/" target="_blank" rel="noopener">W3C DID-based</a> identity roots, root mandates, HITL escalation paths, and revocable sub-mandate chains. The source of all delegated authority in the system.</p>
+              <p class="layer-desc">Identity roots, declared decision rights, human-in-the-loop escalation paths, and revocable operational scopes. This is the source of accountable authority in the system.</p>
             </div>
           </div>
           <div class="signal-layer">
@@ -955,7 +955,7 @@
             <span class="layer-id">L2</span>
             <div class="layer-content">
               <div class="layer-name">Safety &amp; sandbox layer</div>
-              <p class="layer-desc">Wasm-sandboxed tool execution, <a href="https://www.usenix.org/conference/osdi-99/practical-byzantine-fault-tolerance" target="_blank" rel="noopener">Byzantine fault-tolerant consensus</a>, hallucination detection, and mandate scope verification at every boundary.</p>
+              <p class="layer-desc">Sandboxed tool execution, appropriate fault-tolerance mechanisms, uncertainty detection, and decision-boundary verification at every material step.</p>
             </div>
           </div>
           <div class="signal-layer">
