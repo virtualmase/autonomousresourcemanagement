@@ -54,6 +54,10 @@ const flagship = read(resolve(root, "flagship/index.html"));
 expect(flagship.includes('https://autonomousresourcemanagement.com/practice/'), "flagship: missing source practice route.");
 const learning = read(resolve(root, "../ai-mastery/learning/autonomous-resource-management/index.html"));
 expect(learning.includes('https://autonomousresourcemanagement.com/practice/'), "AI Mastery ARM lesson: missing source practice route.");
+for (const [name, source] of [["practice index", practicePage], ["portal", portal], ["flagship", flagship], ["AI Mastery ARM lesson", learning]]) {
+  expect(source.includes('https://virtualmase.github.io/action-boundary-brief/'), `${name}: missing pre-action Action Boundary Brief route.`);
+  expect(source.includes('https://virtualmase.github.io/ai-change-record/'), `${name}: missing post-change AI Change Record route.`);
+}
 
 if (failures.length) {
   console.error("Public-practice validation failed:\n" + failures.map((message) => ` - ${message}`).join("\n"));
