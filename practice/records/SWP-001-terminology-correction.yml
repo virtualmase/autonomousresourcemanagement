@@ -1,0 +1,23 @@
+id: SWP-001
+title: Retired-language correction and provenance preservation
+capability: Sweeper
+status: completed
+completed_on: 2026-08-27
+property: multi-property
+scope:
+  - ARM reference copy
+  - AI Mastery ARM pathway copy
+  - public operating-language guidance
+purpose: Remove retired authority wording from active public materials and replace it with operating model, decision rights, governance, observability, traceable records, and accountable human escalation language.
+decision_rights:
+  within_scope: Identify and correct stale public terminology, preserve meaningful release history, and document the intended vocabulary.
+  not_authorized: Rewrite past commits, erase provenance, claim universal terminology cleanup, or change a property’s independent purpose.
+evidence:
+  architecture: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/multi-property-entity-architecture.md
+  contribution_rules: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/CONTRIBUTING.md
+  public_learning_release: https://github.com/virtualmase/ai-mastery/commit/a06f75d
+outcome: Active public ARM materials use the current operating-language pivot while source history remains available for review.
+open_questions:
+  - Future contributions need ongoing terminology review; a single cleanup does not prevent drift.
+correction_route: https://github.com/virtualmase/autonomousresourcemanagement/issues
+retention: retain; use supersession notes for future vocabulary updates rather than deleting the correction record.

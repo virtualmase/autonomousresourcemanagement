@@ -1,0 +1,23 @@
+id: CON-001
+title: AI Mastery ARM learning pathway
+capability: Content Developer
+status: completed
+completed_on: 2026-08-27
+property: ai-mastery-learning
+scope:
+  - learning/autonomous-resource-management/index.html
+  - index.html
+  - sitemap.xml
+purpose: Teach a bounded ARM foundation through original resource, decision-rights, trace-record, capability-relay, and practice material.
+decision_rights:
+  within_scope: Publish original learning content, contextual internal navigation, self-canonical metadata, and an accurately labelled conceptual SVG.
+  not_authorized: Claim a visitor mastered ARM, certify a system, redirect any property, or change external domain/hosting configuration.
+evidence:
+  source_release: https://github.com/virtualmase/ai-mastery/commit/a06f75d
+  live_pathway: https://virtualmase.github.io/ai-mastery/learning/autonomous-resource-management/
+  qa_record: https://github.com/virtualmase/ai-mastery/blob/main/docs/arm-pathway-visual-qa.md
+outcome: Published an original GitHub Pages learning pathway with a distinct self-canonical URL, a contextual third learning path, and an explicit non-certification boundary.
+open_questions:
+  - Reader comprehension should be assessed only through privacy-reviewed, voluntary research—not inferred from opaque behavioral tracking.
+correction_route: https://github.com/virtualmase/ai-mastery/issues
+retention: retain; keep release history and add dated revisions when content or sources change.
