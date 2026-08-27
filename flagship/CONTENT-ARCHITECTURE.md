@@ -27,10 +27,11 @@ The flagship helps an executive, operating owner, or systems leader identify the
 | `/governed-autonomy/` | **Operating model** | Coordinate bounded autonomy across people, policies, systems, and review cycles. | Compare operating responsibilities. |
 | `/accountable-escalation/` | **Exception design** | Define stop conditions, decision owners, and restart criteria before a workflow runs. | Map an escalation trigger. |
 | `/capability-system/` | **Delivery capability** | Researcher through Sweeper form accountable production handoffs. | View public capability charters. |
+| `/decision-architecture-sprint/` | **Evaluator / buyer** | A bounded four-week working engagement makes one consequential AI or cloud resource decision inspectable before implementation authority expands. | Inspect the scope, entry conditions, and decision records that remain. |
 | `/faq/` | **Due diligence** | Answer high-frequency operating, security, and participation questions in direct language. | Follow a properly labelled next route. |
 | `/404.html` | **Recovery** | Reorient a visitor toward the nearest known intent, with no generic dead end. | Return to a relevant silo. |
 
-Every route must have original content, a self-referencing canonical URL when a hostname is configured, an explicit title/description, JSON-LD appropriate to the page’s function, and meaningful internal links. The route tree must never turn the `.xyz` property into a cross-domain duplicate or a redirect wrapper.
+Every route must have original content, a self-referencing canonical URL when a hostname is configured, an explicit title/description, JSON-LD appropriate to the page’s function, and meaningful internal links. The route tree must never turn the `.xyz` property into a cross-domain duplicate or a redirect wrapper. The Sprint route is a source-only executive commercial companion: it describes scope and fit but must not collect operating data, promise access, claim a customer outcome, or imply a deployment/contact channel not explicitly approved by the property owner.
 
 ## 3. Cross-silo navigation
 

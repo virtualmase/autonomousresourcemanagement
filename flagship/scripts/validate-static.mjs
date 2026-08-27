@@ -13,6 +13,7 @@ const routes = [
   ["governed-autonomy/index.html", "/governed-autonomy/"],
   ["accountable-escalation/index.html", "/accountable-escalation/"],
   ["capability-system/index.html", "/capability-system/"],
+  ["decision-architecture-sprint/index.html", "/decision-architecture-sprint/"],
   ["faq/index.html", "/faq/"]
 ];
 const failures = [];
