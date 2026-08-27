@@ -39,3 +39,7 @@ At the compact 375px simulator boundary, the hero resolved to 67px and the decis
 ## Markup-injection block verification
 
 The markup scenario supplied `<img src=x onerror=alert('unsafe')>` to an otherwise valid change record. The executor returned `MARKUP_REJECTED` before the DOM write, emitted a local `builder.dom_update.blocked` record with the reason code, and retained the preview principle text. The demonstration never uses `innerHTML`; allowed updates use `textContent` only after all governance checks pass.
+
+## Hosted workflow verification
+
+The public **Builder Governance** workflow ran successfully for commit `6ce58e66cf2d7d05d231ec0613daa38d54e74e70` on 2026-08-27. The static governance gate and protected release-candidate handoff both completed successfully. The release-candidate job produced an attestation artifact but intentionally performed no provider deployment because the portal has no selected hostname or hosting owner. The run is available at <https://github.com/virtualmase/autonomousresourcemanagement/actions/runs/33095943216>.
