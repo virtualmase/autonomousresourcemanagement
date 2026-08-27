@@ -1,0 +1,10 @@
+{
+  "name": "Autonomous Resource Management",
+  "short_name": "ARM",
+  "description": "Executive operating guidance for resource-aware autonomy, decision rights, traceable records, observability, and accountable escalation.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f6f2e9",
+  "theme_color": "#18398f",
+  "icons": [{"src": "assets/arm-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}
