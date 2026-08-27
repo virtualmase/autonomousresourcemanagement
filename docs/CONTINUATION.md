@@ -15,6 +15,9 @@ Build an open-source, portable **Autonomous Resource Management** ecosystem in w
 | **Reference** | `virtualmase/autonomousresourcemanagement` (this repository) | Public, source active. | Definition, sources, entity records, governance, corrections. | Do not make it a sales landing page or duplicate the flagship. |
 | **Executive flagship** | `flagship/` package in this repository | Source complete and validated at `a0f0c1f`; **not deployed**. Existing Vite `.xyz` source is legacy only. | High-stakes operating guidance and executive diligence. | Must remain static/no-build and self-canonical when deployed. |
 | **AI Mastery learning path** | `virtualmase/ai-mastery` | Public and live at `https://virtualmase.github.io/ai-mastery/learning/autonomous-resource-management/`. | Foundation lesson and bounded practice. | Do not duplicate reference definitions or market it as an executive flagship. |
+| **Virtualmase directory** | `virtualmase/virtualmase.github.io` | Public and live at `https://virtualmase.github.io/`; verified Search Console URL-prefix property. | Account-level orientation across independent public reader tasks. | It is a route map, not a canonical or content-consolidation layer. |
+| **Action Boundary Brief** | `virtualmase/action-boundary-brief` | Public and live at `https://virtualmase.github.io/action-boundary-brief/`. | Pre-action boundary preparation. | It never grants authority, approves an action, or becomes a post-change record. |
+| **AI Change Record** | `virtualmase/ai-change-record` | Public and live at `https://virtualmase.github.io/ai-change-record/`. | Post-change review trail for a material AI-enabled workflow change. | It never classifies risk, approves release, or replaces qualified review. |
 | **Participation portal** | `portal/` package in this repository | Source package completed; needs a separate hostname and deployment decision. | Governed contribution, proposals, capability routes, Discussions/Issues. | It is not a testnet, not a cosmetic clone, and not an autonomous authority. |
 | **Legacy Vite property** | Private `virtualmase/autonomous-resource-management` | Existing Vercel-linked `.xyz` source; do not add features. | Historical/current live source only. | Do not alter without a separate owner-approved cutover plan. |
 
@@ -29,6 +32,10 @@ Build an open-source, portable **Autonomous Resource Management** ecosystem in w
 | Participation portal | Completed source package; local validated. | `portal/`, [`docs/portal-preview-qa.md`](portal-preview-qa.md) |
 | Buyer/attention/trust research | Completed and published with claim boundaries and references. | [`docs/engagement-research-sources.md`](engagement-research-sources.md), [`docs/engagement-design-system.md`](engagement-design-system.md) |
 | AI Mastery ARM lesson | Completed and live. | `virtualmase/ai-mastery` commit `a06f75d`; page includes Resource Observatory, Decision Rights Atlas, Trace Record, Capability Relay, bounded practice, and original Decision Threshold SVG. |
+| Virtualmase root directory | Completed and live. | `virtualmase/virtualmase.github.io`; a self-canonical, static public route map with original identity assets, property/utility routes, sitemap, robots, manifest, social image, `llms.txt`, and custom 404. |
+| Action Boundary Brief | Completed and live. | `virtualmase/action-boundary-brief`; model-neutral pre-action record template, validator, source notes, public walkthrough, and static project site. |
+| AI Change Record | Completed and live. | `virtualmase/ai-change-record`; model-neutral material-change record template, validator, source notes, public walkthrough, and field note at `/field-notes/when-the-tool-stays-the-same/`. |
+| Blue-ocean reader-task spine | Completed and published where properties are live; flagship and portal continuations are source-only. | [`docs/blue-ocean-content-research.md`](blue-ocean-content-research.md), [`docs/reader-task-silo-architecture.md`](reader-task-silo-architecture.md), commits `19d930c`, `32ff2cc`, `c19bc29`, `df5798f`, and `d06abe8`. |
 | Executive flagship | Source complete, static/interaction validated, and published; deployment is intentionally pending owner confirmation. | [`flagship/README.md`](../flagship/README.md), [`flagship/QA.md`](../flagship/QA.md), [`flagship/CONTENT-ARCHITECTURE.md`](../flagship/CONTENT-ARCHITECTURE.md), commit `a0f0c1f` |
 
 ## 4. Never violate these decisions
@@ -48,7 +55,15 @@ The complete flagship route tree, page responsibilities, and release gates are d
 
 Run `node flagship/scripts/validate-static.mjs` and `node flagship/scripts/test-site-js.mjs` before changing a flagship route. The next collaborator should only choose one of these bounded paths: improve a named route with original source-backed content; add self-hosted, openly licensed type assets with provenance and fallback testing; prepare a separate portal property; or document an owner-approved deployment/cutover plan. Do not change any external domain, DNS, analytics, or hosting setup without explicit owner approval.
 
-## 6. Acceptance checks
+## 6. Reader-task spine and public utility handoff
+
+The live connective path is: **learn the operating model** (AI Mastery) → **bound an intended action** (Action Boundary Brief) → **document a material change** (AI Change Record) → **inspect completed factual work** (public practice) → **correct or contribute through the source that owns the record**. Each link names the reader benefit; it does not confer authority or consolidate properties.
+
+The first blue-ocean field note asks: “What changed in the workflow when the tool label stayed the same?” It distinguishes model/version, instruction, source, permission, monitor, and return-path changes. It is an explanatory, source-linked reader aid—not a materiality test, system inventory, or assurance claim. Consult [`docs/reader-task-silo-architecture.md`](reader-task-silo-architecture.md) before extending the spine.
+
+The `https://virtualmase.github.io/` URL-prefix property is verified in Search Console through the retained root HTML verification file. It covers the root and GitHub Pages project-site paths. **No sitemap was submitted and no indexing request was made** in the verification task; do not make either external change without the owner’s explicit instruction. There is no analytics instrumentation on the root, Action Boundary Brief, or AI Change Record sites.
+
+## 7. Acceptance checks
 
 | Category | Required outcome |
 |---|---|
@@ -60,7 +75,7 @@ Run `node flagship/scripts/validate-static.mjs` and `node flagship/scripts/test-
 | **Claims/provenance** | Conceptual examples and diagrams are labelled; sourced claims link to evidence; no fabricated social proof or performance data exists. |
 | **Release safety** | Static checks pass; cross-domain canonical/redirect/deployment changes are absent unless explicitly owner-approved. |
 
-## 7. High-value prompts for another collaborator
+## 8. High-value prompts for another collaborator
 
 Use these as starting contexts, then ask the collaborator to read `AGENTS.md` and the named files.
 
@@ -76,7 +91,7 @@ Use these as starting contexts, then ask the collaborator to read `AGENTS.md` an
 
 > Review the current diff against `AGENTS.md`, `docs/CONTINUATION.md`, and `flagship/CONTENT-ARCHITECTURE.md`. Report only concrete violations: external dependency, property duplication, cross-domain canonical, unsupported claim, inaccessible contrast/focus, broken static path, misleading CTA, secret exposure, or lack of a safe failure path. Do not rewrite working sections for stylistic preference alone.
 
-## 8. What must still be decided by the owner
+## 9. What must still be decided by the owner
 
 | Decision | Why an owner decision is needed |
 |---|---|
@@ -85,7 +100,8 @@ Use these as starting contexts, then ask the collaborator to read `AGENTS.md` an
 | License selection | Public visibility is not itself a reuse grant. A license choice should be deliberate. |
 | Analytics provider and privacy posture | Any visitor measurement requires a privacy and data-minimization decision before implementation. |
 | Protected branch and environment approval rules | Repository owner/organization policy controls these hosted settings. |
+| Search Console sitemap submission / indexing request | The Virtualmase URL-prefix property is verified, but submissions and inspection requests are separate external actions. |
 
-## 9. Known repository hygiene state
+## 10. Known repository hygiene state
 
-The `flagship/` directory includes copied WebP assets and the current content architecture. It remains intentionally uncommitted until the static package has coherent source files and validation. Do not add it to unrelated documentation commits. The reference repository currently contains the public engagement-system documentation at `55775d5`; the AI Mastery page visual release is `a06f75d`.
+The `flagship/` directory includes copied WebP assets and the current content architecture. It is source-complete and continues to be **not deployed**; do not bind it to `.xyz` or add it to unrelated work. The new reader-task architecture is documented in this repository; public utility sources remain in their own repositories and should not be copied into the ARM reference package.

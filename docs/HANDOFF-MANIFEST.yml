@@ -7,6 +7,8 @@ entry_points:
   entity_architecture: multi-property-entity-architecture.md
   entity_registry: entity-registry.yml
   engagement_system: engagement-design-system.md
+  blue_ocean_research: blue-ocean-content-research.md
+  reader_task_architecture: reader-task-silo-architecture.md
   flagship_contract: ../flagship/CONTENT-ARCHITECTURE.md
 invariants:
   - New public property code is portable static HTML, CSS, SVG, and minimal browser JavaScript.
@@ -30,6 +32,21 @@ properties:
     live_url: https://virtualmase.github.io/ai-mastery/learning/autonomous-resource-management/
     role: foundation lesson and bounded practice
     status: public_live
+  directory:
+    source: virtualmase/virtualmase.github.io
+    live_url: https://virtualmase.github.io/
+    role: independent reader-task orientation
+    status: public_live_search_console_url_prefix_verified
+  action_boundary_brief:
+    source: virtualmase/action-boundary-brief
+    live_url: https://virtualmase.github.io/action-boundary-brief/
+    role: pre-action boundary preparation
+    status: public_live
+  ai_change_record:
+    source: virtualmase/ai-change-record
+    live_url: https://virtualmase.github.io/ai-change-record/
+    role: post-change review trail for material AI-enabled workflow changes
+    status: public_live
   portal:
     source: portal/
     role: governed contribution and capability routing
@@ -39,9 +56,11 @@ next_build:
   - Add provenance-reviewed self-hosted type assets and compact/wide fallback validation.
   - Prepare the separate portal hostname/deployment package without collapsing property identities.
   - Document, but do not execute, any proposed flagship deployment/cutover plan until owner confirmation.
+  - Extend one named reader-task silo only with original, source-backed material and a documented contextual-link benefit.
 owner_decisions_pending:
   - Flagship domain/deployment cutover
   - Portal hostname/deployment
   - Open-source license
   - Analytics/privacy model
+  - Search Console sitemap submission or indexing request for the verified virtualmase.github.io URL-prefix property
   - Hosted branch/environment protection rules
