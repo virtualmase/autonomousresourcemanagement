@@ -1,0 +1,47 @@
+version: 1
+updated: 2026-08-27
+project: Autonomous Resource Management
+entry_points:
+  contributor_instructions: ../AGENTS.md
+  continuation_packet: CONTINUATION.md
+  entity_architecture: multi-property-entity-architecture.md
+  entity_registry: entity-registry.yml
+  engagement_system: engagement-design-system.md
+  flagship_contract: ../flagship/CONTENT-ARCHITECTURE.md
+invariants:
+  - New public property code is portable static HTML, CSS, SVG, and minimal browser JavaScript.
+  - No new Vite code or proprietary backend runtime is permitted.
+  - Each property keeps original content and a self-referencing canonical URL only.
+  - Cross-property links must disclose reader benefit and relationship.
+  - Do not add deceptive engagement patterns, fabricated social proof, unsupported claims, or unapproved external changes.
+  - Treat autonomy as bounded delegation with decision rights, trace records, observability, and accountable human escalation.
+properties:
+  reference:
+    source: virtualmase/autonomousresourcemanagement
+    role: cited definition, governance, correction, entity record
+    status: public
+  flagship:
+    source: flagship/
+    intended_origin: https://autonomousresourcemanagement.xyz/
+    role: executive operating guidance
+    status: scaffolded_not_deployed
+  learning:
+    source: virtualmase/ai-mastery
+    live_url: https://virtualmase.github.io/ai-mastery/learning/autonomous-resource-management/
+    role: foundation lesson and bounded practice
+    status: public_live
+  portal:
+    source: portal/
+    role: governed contribution and capability routing
+    status: source_ready_host_pending
+next_build:
+  - Build the flagship root landing page from the content architecture.
+  - Build the decision-rights and resource-observability silos.
+  - Add shared static page shell, original SVGs, and local trace-record verifier.
+  - Add route-aware metadata, sitemap, robots, 404, and static validation.
+owner_decisions_pending:
+  - Flagship domain/deployment cutover
+  - Portal hostname/deployment
+  - Open-source license
+  - Analytics/privacy model
+  - Hosted branch/environment protection rules
