@@ -39,7 +39,9 @@ This repository is an **open-source, portable, multi-property Autonomous Resourc
 
 ## Current build priorities
 
-The current highest-value work is the actual static executive flagship package under `flagship/`: original landing page, five content silos, FAQ, trace-record verifier, static discovery files, and validation scripts. Use the route tree and release gates in [`flagship/CONTENT-ARCHITECTURE.md`](flagship/CONTENT-ARCHITECTURE.md). Do not bind it to `autonomousresourcemanagement.xyz` or deploy it until the owner explicitly approves the cutover.
+The portable executive flagship package under `flagship/` is complete as source at commit `a0f0c1f`: an original landing page, seven executive routes, FAQ, trace-record verifier, explanatory SVGs, static discovery files, QA record, and validation scripts. Use the route tree and release gates in [`flagship/CONTENT-ARCHITECTURE.md`](flagship/CONTENT-ARCHITECTURE.md). Do not bind it to `autonomousresourcemanagement.xyz` or deploy it until the owner explicitly approves the cutover.
+
+The next valuable work is either: (a) an owner-approved deployment/cutover plan, or (b) source-only refinements that improve one named silo, add a provenance-reviewed type-asset package, or prepare the separate portal hostname. Do not rebuild the existing route tree without a specific gap.
 
 ## Completion standard
 

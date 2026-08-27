@@ -24,7 +24,7 @@ properties:
     source: flagship/
     intended_origin: https://autonomousresourcemanagement.xyz/
     role: executive operating guidance
-    status: scaffolded_not_deployed
+    status: source_complete_validated_not_deployed
   learning:
     source: virtualmase/ai-mastery
     live_url: https://virtualmase.github.io/ai-mastery/learning/autonomous-resource-management/
@@ -35,10 +35,10 @@ properties:
     role: governed contribution and capability routing
     status: source_ready_host_pending
 next_build:
-  - Build the flagship root landing page from the content architecture.
-  - Build the decision-rights and resource-observability silos.
-  - Add shared static page shell, original SVGs, and local trace-record verifier.
-  - Add route-aware metadata, sitemap, robots, 404, and static validation.
+  - Improve one named flagship silo only when its reader question, original contribution, and source boundary are explicit.
+  - Add provenance-reviewed self-hosted type assets and compact/wide fallback validation.
+  - Prepare the separate portal hostname/deployment package without collapsing property identities.
+  - Document, but do not execute, any proposed flagship deployment/cutover plan until owner confirmation.
 owner_decisions_pending:
   - Flagship domain/deployment cutover
   - Portal hostname/deployment

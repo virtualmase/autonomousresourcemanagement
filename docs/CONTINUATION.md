@@ -13,7 +13,7 @@ Build an open-source, portable **Autonomous Resource Management** ecosystem in w
 | Property | Repository / source | Status | Reader job | Hard boundary |
 |---|---|---|---|---|
 | **Reference** | `virtualmase/autonomousresourcemanagement` (this repository) | Public, source active. | Definition, sources, entity records, governance, corrections. | Do not make it a sales landing page or duplicate the flagship. |
-| **Executive flagship** | `flagship/` package in this repository | Scaffolded; **not deployed**. Existing Vite `.xyz` source is legacy only. | High-stakes operating guidance and executive diligence. | Must remain static/no-build and self-canonical when deployed. |
+| **Executive flagship** | `flagship/` package in this repository | Source complete and validated at `a0f0c1f`; **not deployed**. Existing Vite `.xyz` source is legacy only. | High-stakes operating guidance and executive diligence. | Must remain static/no-build and self-canonical when deployed. |
 | **AI Mastery learning path** | `virtualmase/ai-mastery` | Public and live at `https://virtualmase.github.io/ai-mastery/learning/autonomous-resource-management/`. | Foundation lesson and bounded practice. | Do not duplicate reference definitions or market it as an executive flagship. |
 | **Participation portal** | `portal/` package in this repository | Source package completed; needs a separate hostname and deployment decision. | Governed contribution, proposals, capability routes, Discussions/Issues. | It is not a testnet, not a cosmetic clone, and not an autonomous authority. |
 | **Legacy Vite property** | Private `virtualmase/autonomous-resource-management` | Existing Vercel-linked `.xyz` source; do not add features. | Historical/current live source only. | Do not alter without a separate owner-approved cutover plan. |
@@ -29,7 +29,7 @@ Build an open-source, portable **Autonomous Resource Management** ecosystem in w
 | Participation portal | Completed source package; local validated. | `portal/`, [`docs/portal-preview-qa.md`](portal-preview-qa.md) |
 | Buyer/attention/trust research | Completed and published with claim boundaries and references. | [`docs/engagement-research-sources.md`](engagement-research-sources.md), [`docs/engagement-design-system.md`](engagement-design-system.md) |
 | AI Mastery ARM lesson | Completed and live. | `virtualmase/ai-mastery` commit `a06f75d`; page includes Resource Observatory, Decision Rights Atlas, Trace Record, Capability Relay, bounded practice, and original Decision Threshold SVG. |
-| Executive flagship | Architecture completed; image assets copied. Full static implementation pending. | [`flagship/CONTENT-ARCHITECTURE.md`](../flagship/CONTENT-ARCHITECTURE.md), `flagship/assets/` |
+| Executive flagship | Source complete, static/interaction validated, and published; deployment is intentionally pending owner confirmation. | [`flagship/README.md`](../flagship/README.md), [`flagship/QA.md`](../flagship/QA.md), [`flagship/CONTENT-ARCHITECTURE.md`](../flagship/CONTENT-ARCHITECTURE.md), commit `a0f0c1f` |
 
 ## 4. Never violate these decisions
 
@@ -42,16 +42,11 @@ Build an open-source, portable **Autonomous Resource Management** ecosystem in w
 | **No engagement capture** | Optimize for qualified reader progress and transparent next steps. | Attention is a reader resource; dark patterns undermine credibility and consumer autonomy. |
 | **No external change without approval** | Separate source completion from DNS, domain, hosting, Search Console, analytics, or social actions. | Those decisions are external, potentially irreversible, and property-specific. |
 
-## 5. Executive flagship: next implementation sequence
+## 5. Executive flagship: completed source and next safe work
 
-The flagship route tree and page responsibilities are defined in [`flagship/CONTENT-ARCHITECTURE.md`](../flagship/CONTENT-ARCHITECTURE.md). A collaborator should deliver source-only work in this order.
+The complete flagship route tree, page responsibilities, and release gates are defined in [`flagship/CONTENT-ARCHITECTURE.md`](../flagship/CONTENT-ARCHITECTURE.md). The package now includes the landing page, `/decision-rights/`, `/resource-observability/`, `/traceable-records/`, `/governed-autonomy/`, `/accountable-escalation/`, `/capability-system/`, `/faq/`, static 404, `robots.txt`, `sitemap.xml`, metadata/JSON-LD, original explanatory SVGs, a local-only trace-record verifier, and static plus interaction test scripts.
 
-1. Create `flagship/site-config.js`, `flagship/site.css`, `flagship/site.js`, shared page fragments or a clear static-page convention, and a local HTTP-server guide. Use a local origin in development; do not hard-code an unapproved production origin.
-2. Build `/` with a light executive decision environment: original opening proposition, resource cartography visual, decision threshold, five-part readiness route, local trace-record verifier, capability relay, and properly labelled property links.
-3. Build each original silo: `/decision-rights/`, `/resource-observability/`, `/traceable-records/`, `/governed-autonomy/`, `/accountable-escalation/`, `/capability-system/`, and `/faq/`.
-4. Create three original explanatory SVGs: resource field, decision threshold, and record/handoff chain. The SVG’s actual meaning must also exist in surrounding semantic HTML.
-5. Add portable `robots.txt`, `sitemap.xml`, `404.html`, per-page metadata/JSON-LD, and `scripts/validate-static.mjs`. Generate production-origin sitemap/canonical content only after the owner confirms the target deployment origin.
-6. Validate wide, compact, keyboard, reduced-motion, incomplete/complete verifier, link, asset, metadata, property-boundary, and source-provenance paths before committing.
+Run `node flagship/scripts/validate-static.mjs` and `node flagship/scripts/test-site-js.mjs` before changing a flagship route. The next collaborator should only choose one of these bounded paths: improve a named route with original source-backed content; add self-hosted, openly licensed type assets with provenance and fallback testing; prepare a separate portal property; or document an owner-approved deployment/cutover plan. Do not change any external domain, DNS, analytics, or hosting setup without explicit owner approval.
 
 ## 6. Acceptance checks
 
