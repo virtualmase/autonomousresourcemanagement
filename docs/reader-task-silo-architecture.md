@@ -1,6 +1,6 @@
 # Reader-Task Silo and Interlinking Architecture
 
-**Status:** Source specification for staged implementation  
+**Status:** Staged implementation; published routes verified on 2026-08-27, with source-only flagship and portal continuations retained pending their existing property decisions.
 **Purpose:** Make the Virtualmase public work legible as a set of independent reader tasks. This is not a link-exchange scheme, a canonical-consolidation plan, or a claim of institutional endorsement.
 
 ## The content spine
@@ -54,6 +54,12 @@ The first original additions should be short **field notes**, each answering one
 4. Every source-only flagship or portal update retains its clearly stated non-deployed/non-hostname status.
 5. Each changed static package passes its local validator and relevant interaction checks before a focused source commit.
 6. Public release remains owner-gated when it affects a new external project site, hosting connection, DNS, analytics, or Search Console mutation.
+
+## Implementation record — 2026-08-27
+
+The Virtualmase directory, Action Boundary Brief, AI Change Record, AI Mastery ARM lesson, and reference-property practice index now carry the published reader-task routes defined above. The new AI Change Record field note is published at `/ai-change-record/field-notes/when-the-tool-stays-the-same/` and is included in that property’s self-canonical sitemap. GitHub Pages reported successful `main`-branch builds for the directory, both utilities, and AI Mastery; cache-bypassing production checks confirmed the utility bridge, the field note, the Action Boundary Brief → AI Change Record route, the AI Mastery → utility routes, and the reference practice → utility routes.
+
+The executive flagship update remains a source-only static package and has not been deployed or cut over. The participation portal remains a `noindex, nofollow` source package with no approved hostname. No DNS, custom-domain binding, analytics activation, Search Console sitemap submission, or cross-domain canonical change was made in this work.
 
 ## Source basis
 

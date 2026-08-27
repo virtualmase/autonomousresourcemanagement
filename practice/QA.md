@@ -9,3 +9,7 @@ The primary **Practice records** navigation control changed the fragment to `#re
 ## Live property verification — 2026-08-27
 
 The published reference-domain route `https://autonomousresourcemanagement.com/practice/` rendered the same bounded practice index, seven records, independent-property routes, and no-score/no-certification framing observed in the local preview. The AI Mastery GitHub Pages workflow for commit `5d1e022` completed successfully, and the live ARM learning lesson exposes the footer’s **Public practice** route. The reference property remains the source-record location; the AI Mastery property remains a distinct learning experience.
+
+## Reader-task route verification — 2026-08-27
+
+The practice index now offers task-labelled transitions to the distinct Action Boundary Brief and AI Change Record utilities in addition to its reference, learning, and participation routes. Cache-bypassing public checks confirmed that the reference-domain practice page renders both `Bound an intended action` and `Document a material change` after the source release. The routes do not alter the self-canonical practice URL or imply that a pre-action brief, change record, or public practice entry approves an action.
