@@ -47,6 +47,15 @@ properties:
     live_url: https://virtualmase.github.io/ai-change-record/
     role: post-change review trail for material AI-enabled workflow changes
     status: public_live
+  earthward_foundry:
+    source: virtualmase/earthward-foundry
+    public_source: main/public-site/
+    live_url: https://virtualmase.github.io/earthward-foundry/
+    role: proposed human-governed quality and traceability evidence loop for one high-mix low-volume manufacturing part family
+    status: public_live_independent_physical_work_field_guide
+    boundary: no public product, API, certification, customer result, metrological-traceability claim, or protected-pilot exposure
+    release_source_commit: cd5a2a6
+    release_static_commit: 854ff65
   portal:
     source: portal/
     role: governed contribution and capability routing
@@ -57,6 +66,7 @@ next_build:
   - Prepare the separate portal hostname/deployment package without collapsing property identities.
   - Document, but do not execute, any proposed flagship deployment/cutover plan until owner confirmation.
   - Extend one named reader-task silo only with original, source-backed material and a documented contextual-link benefit.
+  - Triage the separate Earthward service-container CI teardown failure without changing the static public property or exposing protected pilot services.
 owner_decisions_pending:
   - Flagship domain/deployment cutover
   - Portal hostname/deployment
