@@ -18,7 +18,10 @@ This repository is content and structured data, not an application. There is no 
 | `docs/multi-property-entity-architecture.md` | Entity-system, authority-flow, and collaboration operating model. |
 | `docs/capability-registry.yml` | Governed roles for evidence, content, prototypes, implementation, growth, maintenance, and cleanup. |
 | `docs/portfolio-operation-skills.md` | Inputs, outputs, quality gates, authority limits, and handoffs for the seven operating capabilities. |
+| `docs/builder-release-governance.md` | Builder pre-release gates, trusted telemetry threshold policy, authority-separated rollback procedure, and required provider settings. |
+| `.github/workflows/` | Read-minimized GitHub Actions workflows for static governance checks, release-candidate attestations, trusted telemetry release holds, and independently approved rollback validation. |
 | `portal/` | Portable, no-build participation-interface package; deployment hostname is intentionally pending. |
+| `demos/builder-governance/` | Local-only interactive lab for fluid type tokens, safe DOM-update validation, and in-memory audit records; it has no GitHub, deployment, or telemetry write capability. |
 | `CONTRIBUTING.md` | Contribution, sourcing, and review guidance. |
 
 ## Purpose

@@ -1,0 +1,53 @@
+name: Portal Rollback Gate
+
+on:
+  workflow_dispatch:
+    inputs:
+      property_id:
+        description: "Property to roll back"
+        required: true
+        type: choice
+        options: [arm-portal]
+      incident_reference:
+        description: "Release-hold or incident Issue number, for example #123"
+        required: true
+        type: string
+      known_good_sha:
+        description: "Full 40-character SHA of the previously attested known-good release"
+        required: true
+        type: string
+
+# The rollback workflow cannot change source history. It validates a target and waits for protected-environment approval.
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  approved-known-good-rollback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: portal-production-rollback
+      url: ${{ vars.PORTAL_PRODUCTION_URL }}
+    steps:
+      - name: Check out complete source history
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate rollback scope and immutable target
+        run: node ci/governance/validate-rollback.mjs "${{ inputs.property_id }}" "${{ inputs.incident_reference }}" "${{ inputs.known_good_sha }}"
+
+      - name: Upload rollback gate record
+        uses: actions/upload-artifact@v4
+        with:
+          name: rollback-gate-${{ github.run_id }}
+          path: ci-artifacts/rollback-gate.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Controlled provider handoff
+        run: |
+          echo "Rollback target validated: ${{ inputs.known_good_sha }}"
+          echo "No provider deploy command is configured. Connect only a provider-specific immutable-artifact rollback action after environment approvals and hosting ownership are configured."

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Local ARM Builder demo for fluid typography, safe DOM updates, and governance audit events." />
+    <meta name="theme-color" content="#1736c7" />
+    <title>Builder Governance Lab — ARM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Hedvig+Letters+Serif:opsz,wght@12..24,400..900&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#lab">Skip to Builder governance lab</a>
+    <header class="topbar">
+      <a href="#top" class="mark" aria-label="ARM Builder Governance Lab home"><span class="mark-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span>ARM<br /><b>BUILDER LAB</b></span></a>
+      <p><span class="dot" aria-hidden="true"></span>LOCAL SANDBOX <b>NO DATA LEAVES THIS PAGE</b></p>
+      <a href="../../portal/index.html">Return to portal <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="lab">
+      <section class="intro" id="top" aria-labelledby="lab-title">
+        <p class="trace">GOVERNED UPDATE SIMULATION / 01</p>
+        <div class="intro-grid">
+          <div>
+            <h1 id="lab-title">Make the<br /><em>change</em> legible.</h1>
+            <p class="intro-copy">Test the same three-layer type system used in the portal, then attempt a bounded DOM update. The execution path permits only an allow-listed target, a matching property, a compatible semantic type preset, non-markup text, a current independent review, and resolved governance gates.</p>
+          </div>
+          <aside class="boundary-note">
+            <p class="trace">AUTHORITY BOUNDARY</p>
+            <p>A Builder may apply a reviewed presentation update. This lab cannot publish content, deploy a release, write to GitHub, alter a domain, access a secret, or approve its own change.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Builder simulation workspace">
+        <section class="control-panel" aria-labelledby="control-title">
+          <div class="panel-heading">
+            <p class="trace">01 / CHANGE RECORD</p>
+            <h2 id="control-title">Set a bounded update.</h2>
+          </div>
+          <div class="scenario-buttons" aria-label="Load scenario">
+            <button class="scenario is-active" type="button" data-scenario="approved">Approved update</button>
+            <button class="scenario" type="button" data-scenario="self-review">Block self-review</button>
+            <button class="scenario" type="button" data-scenario="wrong-property">Block property mismatch</button>
+            <button class="scenario" type="button" data-scenario="markup">Block markup injection</button>
+          </div>
+          <form id="change-form" novalidate>
+            <div class="form-grid">
+              <label>Work record
+                <input id="work-record" name="workRecordId" value="#123" autocomplete="off" />
+              </label>
+              <label>Reviewed source SHA
+                <input id="commit-sha" name="commitSha" value="2d8c2c89e11fc304852b594722bb1ae689a99644" autocomplete="off" spellcheck="false" />
+              </label>
+            </div>
+            <div class="form-grid">
+              <label>Property
+                <select id="property-id" name="propertyId"><option value="arm-portal">ARM participation portal</option><option value="arm-flagship">Executive flagship</option></select>
+              </label>
+              <label>Allow-listed target
+                <select id="target-id" name="targetId"><option value="portal-principle">Portal principle statement</option><option value="portal-status">Portal trace status</option></select>
+              </label>
+            </div>
+            <div class="form-grid">
+              <label>Semantic type preset
+                <select id="type-preset" name="typePreset"><option value="decision">Decision statement</option><option value="working">Working copy</option><option value="trace">Trace label</option></select>
+              </label>
+              <label>Reviewer
+                <input id="reviewer" name="reviewer" value="independent-maintainer" autocomplete="off" />
+              </label>
+            </div>
+            <label>Proposed text
+              <textarea id="proposed-text" name="text" maxlength="280" rows="3">Work becomes trustworthy when its limits are legible.</textarea>
+              <small id="character-count">0 / 280 characters</small>
+            </label>
+            <fieldset>
+              <legend>Resolved governance gates</legend>
+              <label class="check"><input id="property-boundary" type="checkbox" checked /> Property boundary passed</label>
+              <label class="check"><input id="claim-review" type="checkbox" checked /> Public-claim review passed</label>
+              <label class="check"><input id="security-review" type="checkbox" checked /> Security review resolved or not required</label>
+              <label class="check"><input id="independent-review" type="checkbox" checked /> Independent review is current</label>
+            </fieldset>
+            <button class="execute" type="submit">Evaluate and apply safe update <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="run-result" id="run-result" role="status" aria-live="polite">Waiting for a reviewed change record.</p>
+        </section>
+
+        <section class="preview-panel" aria-labelledby="preview-title">
+          <div class="panel-heading preview-heading">
+            <p class="trace">02 / TYPE + UPDATE PREVIEW</p>
+            <h2 id="preview-title">Inspect the rendered result.</h2>
+          </div>
+          <div class="viewport-control">
+            <label for="viewport-slider"><span>SIMULATED INLINE WIDTH</span><output id="viewport-output" for="viewport-slider">960px</output></label>
+            <input id="viewport-slider" type="range" min="375" max="1440" value="960" step="1" />
+            <p>The production portal uses viewport units (`vw`). This lab calculates the preferred token value from the slider, then lets the same `clamp()` minimum and maximum bounds apply inside a stable browser page.</p>
+          </div>
+          <div class="preview-surface" id="preview-surface">
+            <p id="portal-status" class="type-trace" aria-live="polite">AUDIT AWAITING REVIEW</p>
+            <h3 class="type-decision type-decision--hero">Make the<br /><em>work</em> legible.</h3>
+            <p id="portal-principle" class="type-decision">Useful work names its evidence, its owner, its limits, and its next handoff.</p>
+            <div class="type-specimen-grid" aria-label="Typography token values">
+              <div><span class="trace">HERO TOKEN</span><b id="hero-size-value">—</b><p>clamp(4.2rem, preferred slider value, 10.6rem)</p></div>
+              <div><span class="trace">DECISION TOKEN</span><b id="decision-size-value">—</b><p>clamp(2.8rem, preferred slider value, 5.6rem)</p></div>
+              <div><span class="trace">TRACE TOKEN</span><b id="trace-size-value">—</b><p>0.64rem fixed annotation</p></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="audit-section" aria-labelledby="audit-title">
+        <div class="panel-heading audit-heading">
+          <p class="trace">03 / LOCAL AUDIT TRACE</p>
+          <h2 id="audit-title">See why an update passed—or stopped.</h2>
+          <p>The browser retains the last five events in memory only. In production, an independently authenticated monitor or CI job should write a minimal event to an access-controlled, append-only collector.</p>
+        </div>
+        <div class="audit-layout">
+          <ol id="audit-list" class="audit-list" aria-label="Audit events"></ol>
+          <pre id="event-output" aria-label="Latest audit event">{ "status": "no execution yet" }</pre>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>ARM / Builder Governance Lab</p>
+      <p><a href="../../docs/builder-release-governance.md">Release governance</a><a href="../../ci/governance/telemetry-thresholds.json">Threshold policy</a><a href="../../portal/README.md">Portal boundary</a></p>
+    </footer>
+  </body>
+</html>
