@@ -3,8 +3,10 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve, dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const origin = "https://autonomousresourcemanagement.xyz";
+const sourceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const root = resolve(process.env.ARM_STATIC_ROOT || sourceRoot);
+const origin = (process.env.ARM_SITE_ORIGIN || "https://autonomousresourcemanagement.xyz").replace(/\/$/, "");
+const indexing = process.env.ARM_ALLOW_INDEXING !== "false";
 const routes = [
   ["index.html", "/"],
   ["decision-rights/index.html", "/decision-rights/"],
@@ -13,6 +15,7 @@ const routes = [
   ["governed-autonomy/index.html", "/governed-autonomy/"],
   ["accountable-escalation/index.html", "/accountable-escalation/"],
   ["capability-system/index.html", "/capability-system/"],
+  ["decision-architecture-sprint/index.html", "/decision-architecture-sprint/"],
   ["faq/index.html", "/faq/"]
 ];
 const failures = [];
@@ -28,12 +31,14 @@ for (const [routeFile, urlPath] of routes) {
   const expectedCanonical = `${origin}${urlPath}`;
   requireText(html, /<title>[^<]{12,}<[\/]{1}title>/i, `${routeFile}: missing meaningful title`);
   requireText(html, /<meta\s+name="description"\s+content="[^"]{40,}"/i, `${routeFile}: missing meaningful description`);
+  requireText(html, indexing ? /<meta\s+name="robots"\s+content="index,follow"/i : /<meta\s+name="robots"\s+content="noindex,nofollow"/i, `${routeFile}: robots policy does not match the configured indexing state`);
   requireText(html, new RegExp(`<link\\s+rel="canonical"\\s+href="${expectedCanonical.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`, "i"), `${routeFile}: canonical must self-reference ${expectedCanonical}`);
   requireText(html, /<a\s+class="skip-link"\s+href="#main">/i, `${routeFile}: missing skip link`);
   requireText(html, /<main\s+id="main"/i, `${routeFile}: missing main landmark`);
   requireText(html, /<script\s+type="application\/ld\+json">/i, `${routeFile}: missing JSON-LD`);
   if (/(?:vite|react|webpack|next\.js|node_modules)/i.test(html)) fail(`${routeFile}: prohibited build/runtime marker found`);
-  if (/rel="canonical"[^>]+https?:\/\/(?!autonomousresourcemanagement\.xyz)/i.test(html)) fail(`${routeFile}: cross-domain canonical found`);
+  const canonicalHrefs = Array.from(html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi), (match) => match[1]);
+  if (canonicalHrefs.some((href) => !href.startsWith(origin))) fail(`${routeFile}: cross-domain canonical found`);
 
   for (const match of html.matchAll(/<(?:img|script|link)\b[^>]+?(?:src|href)="([^"]+)"/gi)) {
     const assetPath = match[1];
@@ -49,7 +54,8 @@ for (const [routeFile, urlPath] of routes) {
 }
 
 const robots = readFileSync(resolve(root, "robots.txt"), "utf8");
-if (!robots.includes(`Sitemap: ${origin}/sitemap.xml`)) fail("robots.txt: missing flagship sitemap declaration");
+if (indexing && !robots.includes(`Sitemap: ${origin}/sitemap.xml`)) fail("robots.txt: missing flagship sitemap declaration");
+if (!indexing && !/Disallow:\s*\//i.test(robots)) fail("robots.txt: preview must disallow crawling");
 const sitemap = readFileSync(resolve(root, "sitemap.xml"), "utf8");
 for (const [, urlPath] of routes) if (!sitemap.includes(`${origin}${urlPath}`)) fail(`sitemap.xml: missing ${urlPath}`);
 const notFound = readFileSync(resolve(root, "404.html"), "utf8");
