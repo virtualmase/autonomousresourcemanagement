@@ -79,3 +79,12 @@ The existing Earthward repository service-container CI teardown failure remains 
 [2] [GOV.UK, *Understand content design*](https://guidance.publishing.service.gov.uk/writing-to-gov-uk-standards/plan-manage-content/understand-content-design/)
 
 [3] [W3C, *Web Content Accessibility Guidelines (WCAG) 2.2*](https://www.w3.org/TR/WCAG22/)
+
+
+## 9. Wave-one release evidence — 2026-09-02
+
+The approved focused release was published as two separate source commits. AI Mastery released `0776e44ef8f0cccc118b7287ad4e155d5b9379f0`; the ARM reference released `ddead5568d0767253613b48cbc2e9b6f75aaba82`. Both public routes returned `200` after release, and the fetched HTML exposed the intended self-canonical URL and new source/correction routes.
+
+The AI Mastery release preserved the newer remote main-branch directory navigation during a non-destructive rebase before publication. The ARM reference release includes the claim-language guard and reader-task architecture update. A combined fetched-HTML scan found no browser fetch/XHR/beacon, storage, or common analytics runtime signal. No DNS, hosting configuration, Search Console, analytics, runtime service, or Earthward change was included.
+
+Rollback remains property-local: revert the corresponding source commit, rerun the property guard, and verify the existing public route. The two releases must not be reverted together merely for convenience because each property owns a separate authority surface.
