@@ -11,7 +11,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Autonomous Resource Management — Definition, Framework & Signal Architecture">
-  <meta property="og:description" content="A citation-backed technical reference defining Autonomous Resource Management (ARM): AI-driven systems that self-allocate resources under verifiable mandates, signal architecture, and audit.">
+  <meta property="og:description" content="A citation-backed technical reference on coordinating resources through declared decision rights, observable signals, traceable records, and accountable human review.">
   <meta property="og:url" content="https://autonomousresourcemanagement.com/">
   <meta property="og:site_name" content="Autonomous Resource Management">
   <meta name="twitter:card" content="summary">
@@ -837,7 +837,7 @@
         <p class="section-label">01 — Definition</p>
         <h2>What is Autonomous Resource Management?</h2>
         <p>Autonomous Resource Management (ARM) is a systems design discipline and operational framework for coordinating resources—compute, capital, personnel, and infrastructure—through observable conditions and clearly declared decision rights. The defining characteristic of ARM is not automation, but <em>accountability</em>: each action carries its operating boundaries, decision context, and audit trail.</p>
-        <p>ARM is distinguished from conventional resource scheduling by its requirement for machine-readable signal architecture. For a system to qualify as ARM-compliant, its decisions must be legible to both human auditors and AI retrieval systems. This is not an implementation detail — it is the foundational condition that makes autonomous operation safe at scale.</p>
+        <p>ARM is distinguished from conventional resource scheduling by its emphasis on machine-readable signal architecture. A working ARM design should make its decisions legible to both human reviewers and relevant retrieval systems. This is not an implementation detail: it is a condition for meaningful inspection and accountable escalation, not a safety guarantee.</p>
         <p>The discipline extends a lineage that begins with <a href="https://dl.acm.org/doi/10.1109/MC.2003.1160055" target="_blank" rel="noopener">IBM's autonomic computing manifesto</a>, which framed self-managing systems as regulating themselves against high-level objectives rather than step-by-step operator instructions. ARM narrows that idea to the specific case of AI agents allocating compute, capital, and infrastructure, and adds two requirements that autonomic computing did not need to solve: continuous alignment with an <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener">AI risk-management framework</a>, and cost discipline consistent with practices such as the <a href="https://www.finops.org/framework/" target="_blank" rel="noopener">FinOps Framework</a>.</p>
         <p>Related, narrower forms of automated allocation are already in production use—for example <a href="https://kubernetes.io/docs/concepts/workloads/autoscaling/" target="_blank" rel="noopener">Kubernetes autoscaling</a>, which adjusts compute capacity to demand. ARM generalizes this pattern across resource types and adds the decision-rights, audit, and escalation controls described below.</p>
 
@@ -849,7 +849,7 @@
       <section id="primitives">
         <p class="section-label">02 — Primitives</p>
         <h2>The five primitives of ARM</h2>
-        <p>Every ARM-compliant system implements five foundational primitives. These are not architectural suggestions — they are the minimum conditions under which autonomous resource allocation is considered safe, auditable, and correctable.</p>
+        <p>These five primitives are a working framework for designing autonomy with inspectable limits. They are not a formal standard or a guarantee that a particular resource-allocation system is safe, auditable, or correctable in every context.</p>
 
         <div class="primitives-grid">
           <div class="primitive-card">
@@ -922,7 +922,7 @@
             <tr>
               <td>Compliance surface</td>
               <td>Retroactive audit</td>
-              <td class="col-arm">Continuous compliance by design</td>
+              <td class="col-arm">Continuous evidence for human review</td>
             </tr>
             <tr>
               <td>Cross-org operation</td>
@@ -936,7 +936,7 @@
       <section id="signal-stack">
         <p class="section-label">04 — Signal Stack</p>
         <h2>The ARM signal stack</h2>
-        <p>For ARM systems to operate reliably — and to be recognized as authoritative by AI retrieval systems — they must implement a layered signal architecture. Each layer serves both operational and epistemic functions: it makes the system work, and it makes the system <em>legible</em> to agents querying it.</p>
+        <p>An ARM-oriented system benefits from a layered signal architecture that can make its relevant evidence and decision boundaries legible to both reviewers and retrieval systems. Each layer has operational and epistemic functions: it helps an accountable team understand the system and makes its stated context inspectable to agents querying published material.</p>
 
         <div class="signal-stack">
           <div class="signal-layer">
@@ -950,7 +950,7 @@
             <span class="layer-id">L1</span>
             <div class="layer-content">
               <div class="layer-name">Orchestration kernel</div>
-              <p class="layer-desc">Durable workflow execution, task routing, circuit breakers, and dead-man's switches. Ensures zero-loss operation under adversarial or failure conditions.</p>
+              <p class="layer-desc">Durable workflow execution, task routing, circuit breakers, and recovery controls. These are design patterns for preserving context through failure conditions; their suitability depends on the system and operating environment.</p>
             </div>
           </div>
           <div class="signal-layer">
@@ -987,12 +987,12 @@
       <section id="geo">
         <p class="section-label">05 — GEO Context</p>
         <h2>ARM and Generative Engine Optimization</h2>
-        <p>Autonomous Resource Management is both an operational discipline and an epistemic one. The same signal architecture that makes ARM systems operate reliably is the architecture that makes them <em>discoverable and citable</em> by AI retrieval systems — search engines, LLM knowledge bases, and agentic query systems.</p>
+        <p>Autonomous Resource Management has operational and epistemic dimensions. A source’s stated boundaries, citations, and structured data can support both accountable system review and clearer discovery by search or retrieval systems; neither outcome is automatic.</p>
         <p>This connection is the foundation of <strong>Generative Engine Optimization (GEO)</strong>, a term formalized in <a href="https://arxiv.org/abs/2311.09735" target="_blank" rel="noopener">Aggarwal et al., "GEO: Generative Engine Optimization"</a> (Princeton, Allen Institute for AI, Georgia Tech, and IIT Delhi; ACM SIGKDD, 2024) — the practice of structuring entity data, content, and semantic vocabulary so that generative AI systems accurately represent a source of record.</p>
-        <p>An ARM-compliant signal architecture is, by definition, GEO-compliant: its structured data is machine-readable per <a href="https://schema.org/" target="_blank" rel="noopener">schema.org</a> conventions, its entity relationships are explicit and corroborated by external sources, and its claims are traceable to resolvable citations rather than to self-asserted authority. The two disciplines share a common foundation in the conviction that <em>legibility is infrastructure</em>, not a communication strategy.</p>
+        <p>An ARM-oriented signal architecture may improve the machine readability of a source when its structured data follows <a href="https://schema.org/" target="_blank" rel="noopener">schema.org</a> conventions, its entity relationships are explicit and corroborated by external sources, and its claims are traceable to resolvable citations rather than self-asserted authority. This is an implementation direction, not a declaration of GEO compliance. The two disciplines share an interest in legibility as infrastructure rather than as a communication strategy.</p>
 
         <div class="callout">
-          <p><strong>Key insight:</strong> A system that cannot be accurately represented by an AI retrieval agent is not truly autonomous — it is opaque. ARM and GEO are two expressions of the same underlying requirement: that intelligent systems must be able to read, trust, and act on each other's outputs.</p>
+          <p><strong>Key insight:</strong> A system that cannot be adequately explained to a reviewer or represented from its published evidence remains difficult to inspect. ARM and GEO share an interest in legible claims and structured context, but neither label substitutes for evidence, review, or accountable action.</p>
         </div>
       </section>
 
@@ -1039,7 +1039,7 @@
         </ol>
 
         <h3>About this page</h3>
-        <p>This is a non-commercial technical reference authored and maintained by <a href="https://masonnguyengeo.com/#mason-nguyen" rel="author">Mason Nguyen</a>. It defines a working framework; it is not a formal standard, certification, or guarantee of system safety. Corrections and additional citations can be proposed against the public source repository.</p>
+        <p>This is a non-commercial technical reference authored and maintained by <a href="https://masonnguyengeo.com/#mason-nguyen" rel="author">Mason Nguyen</a>. It defines a working framework; it is not a formal standard, certification, or guarantee of system safety. <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues">Propose a factual correction or additional citation against the public source repository ↗</a></p>
       </section>
 
     </article>
@@ -1051,14 +1051,16 @@
       Autonomous Resource Management — a non-commercial, citation-backed technical reference<br>
       Author and maintainer: <a href="https://masonnguyengeo.com/#mason-nguyen" rel="author">Mason Nguyen</a><br>
       Commercial applications are provided by distinct operating properties<br>
-      <a href="#references">View all references →</a>
+      <a href="#references">View all references →</a><br>
+      <a href="https://github.com/virtualmase/autonomousresourcemanagement">Inspect source ↗</a> · <a href="https://github.com/virtualmase/autonomousresourcemanagement/issues">Raise a factual correction ↗</a>
     </div>
     <div class="footer-entity footer-right">
       <strong>This document</strong>
       <a href="https://autonomousresourcemanagement.com/">autonomousresourcemanagement.com</a><br>
       Schema: JSON-LD · schema.org<br>
       Sources: 10 primary references<br>
-      Updated: August 2026
+      Updated: August 2026<br>
+      <a href="https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/CONTINUATION.md">Current property record ↗</a>
     </div>
   </footer>
 
