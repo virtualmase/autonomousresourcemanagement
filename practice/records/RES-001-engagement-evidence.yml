@@ -1,0 +1,23 @@
+id: RES-001
+title: Evidence-led engagement and visual design system
+capability: Researcher
+status: completed
+completed_on: 2026-08-27
+property: arm-reference
+scope:
+  - docs/engagement-research-sources.md
+  - docs/engagement-design-system.md
+purpose: Bound engagement, typography, color, attention, and visual-asset claims with credible sources and explicit anti-manipulation limits.
+decision_rights:
+  within_scope: Compile public evidence, state claim boundaries, define proposed design constraints, and publish source-linked documentation.
+  not_authorized: Claim conversion gains, enable behavioral analytics, collect visitor data, or make a commercial/deployment decision.
+evidence:
+  source_release: https://github.com/virtualmase/autonomousresourcemanagement/commit/55775d5
+  design_system: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/engagement-design-system.md
+  source_notes: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/engagement-research-sources.md
+outcome: Published a cited engagement system that treats attention as a reader resource, uses semantic color/type roles, and rejects dark patterns and unsupported conversion claims.
+open_questions:
+  - Any future privacy/analytics model requires owner approval and a separate data-minimization review.
+  - Typeface files require provenance-reviewed self-hosting before the documented primary families become a runtime dependency.
+correction_route: https://github.com/virtualmase/autonomousresourcemanagement/issues
+retention: retain; supersede with dated source corrections rather than silently rewriting claim history.

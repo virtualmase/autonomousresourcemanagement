@@ -1,0 +1,22 @@
+id: PRO-001
+title: Builder Governance Lab
+capability: Prototype
+status: completed
+completed_on: 2026-08-27
+property: arm-portal-foundation
+scope:
+  - demos/builder-governance/
+  - docs/builder-governance-lab-qa.md
+purpose: Demonstrate a reversible browser-only model of approved versus blocked Builder DOM changes and fluid typography tokens.
+decision_rights:
+  within_scope: Simulate bounded safe-update behavior, explain governance gates, and record local QA results.
+  not_authorized: Authorize a production DOM update, modify hosted properties, collect telemetry, or claim that browser simulation enforces provider-side controls.
+evidence:
+  source_release: https://github.com/virtualmase/autonomousresourcemanagement/commit/c727932
+  demo_source: https://github.com/virtualmase/autonomousresourcemanagement/tree/main/demos/builder-governance
+  qa_record: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/builder-governance-lab-qa.md
+outcome: Published a local-only demonstration of approved update, self-review block, markup-rejection block, and responsive token behavior.
+open_questions:
+  - A production enforcement path needs protected branches, hosted environment approval, and a trusted audit collector; this prototype does not supply those controls.
+correction_route: https://github.com/virtualmase/autonomousresourcemanagement/issues
+retention: retain as a prototype; mark superseded if a production-grade interaction model replaces it.

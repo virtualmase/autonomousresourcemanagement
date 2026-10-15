@@ -1,0 +1,33 @@
+name: Content or source correction
+description: Report a factual, sourcing, accessibility, or broken-link issue in the reference layer.
+title: "[Correction]: "
+labels: ["content-review"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: URL, section, or source-file path.
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What needs correction?
+      description: State the current text or behavior and the proposed correction.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or source
+      description: Link primary or authoritative sources. Explain any uncertainty.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have not included private information, credentials, or an unverified performance claim.
+          required: true

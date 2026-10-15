@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and open discussion
+    url: https://github.com/virtualmase/autonomousresourcemanagement/discussions
+    about: Use Discussions for questions, proposals, and open-ended conversation.
+  - name: Security report
+    url: mailto:security@autonomousresourcemanagement.xyz
+    about: Do not disclose vulnerabilities in a public issue.

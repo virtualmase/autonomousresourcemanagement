@@ -1,0 +1,25 @@
+id: GRW-001
+title: Intent-led discovery readiness for the flagship package
+capability: Grower
+status: completed
+completed_on: 2026-08-27
+property: arm-flagship
+scope:
+  - flagship/CONTENT-ARCHITECTURE.md
+  - flagship/robots.txt
+  - flagship/sitemap.xml
+  - flagship/index.html
+purpose: Make the flagship discoverable through original intent-led routes and transparent cross-property navigation, without ranking claims, deceptive optimization, or behavioral capture.
+decision_rights:
+  within_scope: Design original content silos, descriptive link labels, self-canonical metadata, sitemap/robots source, and reader-benefit cross-property routes.
+  not_authorized: Claim traffic/rankings/conversion, submit a sitemap for an un-deployed property, enable analytics, buy links, or manipulate search behavior.
+evidence:
+  source_release: https://github.com/virtualmase/autonomousresourcemanagement/commit/a0f0c1f
+  content_architecture: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/flagship/CONTENT-ARCHITECTURE.md
+  discovery_sources: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/flagship/sitemap.xml
+outcome: Prepared an original intent-led route system and static discovery records. No audience, ranking, traffic, conversion, or distribution result is asserted.
+open_questions:
+  - Deployment and any sitemap submission remain owner-gated.
+  - Measurement needs a public privacy policy and data-minimization design before implementation.
+correction_route: https://github.com/virtualmase/autonomousresourcemanagement/issues
+retention: retain; append future deployment or measurement records rather than editing this source-preparation outcome.

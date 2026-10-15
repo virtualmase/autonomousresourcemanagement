@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">ARM decision threshold topology</title>
+  <desc id="desc">A conceptual diagram showing four resource signals flowing into a bounded decision gate, a trace record, and a separate escalation route.</desc>
+  <defs>
+    <linearGradient id="field" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0d1e4c"/><stop offset="1" stop-color="#1b3e94"/></linearGradient>
+    <linearGradient id="gate" x1="0" x2="1"><stop stop-color="#dc5a38"/><stop offset="1" stop-color="#f8d9cf"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#557be2" stop-opacity=".4"/><stop offset="1" stop-color="#18398f" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#b7c9f2" stroke-opacity=".17"/></pattern>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+  <rect width="1200" height="560" fill="url(#field)"/><rect width="1200" height="560" fill="url(#grid)"/><circle cx="590" cy="280" r="280" fill="url(#glow)"/>
+  <path d="M0 280H1200M590 0V560" stroke="#93aad8" stroke-opacity=".26"/>
+  <path d="M104 115H430M104 215H430M104 345H430M104 445H430" fill="none" stroke="#b9caed" stroke-opacity=".65" stroke-width="2"/>
+  <g fill="#c7e5df"><circle cx="104" cy="115" r="10"/><circle cx="104" cy="345" r="10"/><circle cx="430" cy="115" r="10"/><circle cx="430" cy="345" r="10"/></g>
+  <g fill="#dc5a38"><circle cx="104" cy="215" r="10"/><circle cx="104" cy="445" r="10"/><circle cx="430" cy="215" r="10"/><circle cx="430" cy="445" r="10"/></g>
+  <path d="M430 115L580 236M430 215L580 257M430 345L580 303M430 445L580 324" fill="none" stroke="#d1ddf4" stroke-opacity=".62" stroke-width="2"/>
+  <path d="M473 115L580 236M473 215L580 257M473 345L580 303M473 445L580 324" fill="none" stroke="#557be2" stroke-opacity=".34" stroke-width="14" filter="url(#blur)"/>
+  <path d="M580 156L756 280L580 404Z" fill="#10295f" stroke="url(#gate)" stroke-width="3"/><circle cx="628" cy="280" r="52" fill="none" stroke="#dc5a38" stroke-width="2"/><circle cx="628" cy="280" r="13" fill="#dc5a38"/>
+  <path d="M756 280H911" stroke="#dc5a38" stroke-width="3"/><path d="M911 280L872 257V303Z" fill="#dc5a38"/>
+  <rect x="911" y="194" width="177" height="170" fill="#102452" stroke="#b3c5eb" stroke-width="2"/><path d="M945 241H1052M945 280H1038M945 319H1014" stroke="#c0cfec" stroke-width="6"/>
+  <circle cx="1060" cy="241" r="7" fill="#c7e5df"/><circle cx="1046" cy="280" r="7" fill="#dc5a38"/><circle cx="1022" cy="319" r="7" fill="#c7e5df"/>
+  <path d="M999 364V452H1089" fill="none" stroke="#dc5a38" stroke-width="3" stroke-dasharray="8 9"/><path d="M1089 452L1067 434V470Z" fill="#dc5a38"/>
+  <path d="M67 72H201M999 72H1133M67 488H201M999 488H1133" stroke="#dc5a38" stroke-width="3"/>
+</svg>

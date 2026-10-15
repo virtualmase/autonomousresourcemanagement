@@ -1,0 +1,102 @@
+name: Builder Governance
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "portal/**"
+      - "ci/governance/**"
+      - "scripts/validate-static.mjs"
+      - "docs/entity-registry.yml"
+      - "docs/capability-registry.yml"
+      - "docs/builder-release-governance.md"
+      - ".github/workflows/builder-governance.yml"
+  push:
+    branches: [main]
+    paths:
+      - "portal/**"
+      - "ci/governance/**"
+      - "scripts/validate-static.mjs"
+      - "docs/entity-registry.yml"
+      - "docs/capability-registry.yml"
+      - "docs/builder-release-governance.md"
+      - ".github/workflows/builder-governance.yml"
+
+# Read-only by default. The release-candidate job does not deploy and cannot access secrets.
+permissions:
+  contents: read
+
+jobs:
+  static-governance-gate:
+    name: Static governance gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out reviewed source
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Validate static portal policy
+        run: node scripts/validate-static.mjs
+
+      - name: Evaluate Builder governance gates
+        run: node ci/governance/check-release-gates.mjs
+
+      - name: Upload non-sensitive gate record
+        uses: actions/upload-artifact@v4
+        with:
+          name: builder-governance-gate-${{ github.sha }}
+          path: ci-artifacts/governance-gate.json
+          if-no-files-found: error
+          retention-days: 90
+
+  release-candidate:
+    name: Protected production release candidate
+    needs: static-governance-gate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: portal-production
+      url: ${{ vars.PORTAL_PRODUCTION_URL }}
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Check out attested source
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Create release-candidate attestation
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          PROPERTY_ID: arm-portal
+          GOVERNANCE_WORKFLOW: ${{ github.workflow }}
+          GOVERNANCE_RUN_ID: ${{ github.run_id }}
+        run: |
+          mkdir -p ci-artifacts
+          printf '%s\n' \
+            '{' \
+            '  "schemaVersion": 1,' \
+            '  "eventType": "builder.release_candidate.attested",' \
+            "  \"sourceSha\": \"${SOURCE_SHA}\"," \
+            "  \"propertyId\": \"${PROPERTY_ID}\"," \
+            "  \"workflow\": \"${GOVERNANCE_WORKFLOW}\"," \
+            "  \"runId\": \"${GOVERNANCE_RUN_ID}\"" \
+            '}' > ci-artifacts/release-candidate.json
+
+      - name: Upload release-candidate attestation
+        uses: actions/upload-artifact@v4
+        with:
+          name: builder-release-candidate-${{ github.sha }}
+          path: ci-artifacts/release-candidate.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Deployment handoff
+        run: |
+          echo "Governance gates and protected-environment approval passed."
+          echo "No provider deployment is configured: portal hosting is intentionally not selected."
+          echo "Connect a provider-specific deploy action only after a portal hostname, deployment owner, environment protection, and rollback target are approved."

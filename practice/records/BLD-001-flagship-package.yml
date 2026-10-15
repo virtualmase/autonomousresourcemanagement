@@ -1,0 +1,23 @@
+id: BLD-001
+title: Portable ARM executive flagship package
+capability: Builder
+status: completed
+completed_on: 2026-08-27
+property: arm-flagship
+scope:
+  - flagship/
+purpose: Build an original executive ARM content property using portable static HTML, CSS, SVG, and minimal browser JavaScript.
+decision_rights:
+  within_scope: Create source files, content silos, conceptual SVGs, local-only verifier, metadata, sitemap, robots, static 404, and static/interaction tests.
+  not_authorized: Deploy the package, alter the .xyz domain or DNS, modify the legacy Vite property, enable analytics, or make an external hosting decision.
+evidence:
+  source_release: https://github.com/virtualmase/autonomousresourcemanagement/commit/a0f0c1f
+  package_readme: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/flagship/README.md
+  validation_script: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/flagship/scripts/validate-static.mjs
+  interaction_test: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/flagship/scripts/test-site-js.mjs
+outcome: Published a source-complete flagship package with seven original routes, original explanatory SVGs, a local-only trace-record verifier, static discovery files, and passing local validation.
+open_questions:
+  - The package is not deployed. Any .xyz cutover requires explicit owner approval after provider-specific review.
+  - Self-hosted type assets remain a provenance-reviewed follow-up rather than an implicit runtime dependency.
+correction_route: https://github.com/virtualmase/autonomousresourcemanagement/issues
+retention: retain; replace only through a versioned migration or owner-approved property cutover record.

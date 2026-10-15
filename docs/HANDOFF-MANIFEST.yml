@@ -1,0 +1,76 @@
+version: 1
+updated: 2026-08-27
+project: Autonomous Resource Management
+entry_points:
+  contributor_instructions: ../AGENTS.md
+  continuation_packet: CONTINUATION.md
+  entity_architecture: multi-property-entity-architecture.md
+  entity_registry: entity-registry.yml
+  engagement_system: engagement-design-system.md
+  blue_ocean_research: blue-ocean-content-research.md
+  reader_task_architecture: reader-task-silo-architecture.md
+  flagship_contract: ../flagship/CONTENT-ARCHITECTURE.md
+invariants:
+  - New public property code is portable static HTML, CSS, SVG, and minimal browser JavaScript.
+  - No new Vite code or proprietary backend runtime is permitted.
+  - Each property keeps original content and a self-referencing canonical URL only.
+  - Cross-property links must disclose reader benefit and relationship.
+  - Do not add deceptive engagement patterns, fabricated social proof, unsupported claims, or unapproved external changes.
+  - Treat autonomy as bounded delegation with decision rights, trace records, observability, and accountable human escalation.
+properties:
+  reference:
+    source: virtualmase/autonomousresourcemanagement
+    role: cited definition, governance, correction, entity record
+    status: public
+  flagship:
+    source: flagship/
+    intended_origin: https://autonomousresourcemanagement.xyz/
+    role: executive operating guidance
+    status: source_complete_validated_not_deployed
+  learning:
+    source: virtualmase/ai-mastery
+    live_url: https://virtualmase.github.io/ai-mastery/learning/autonomous-resource-management/
+    role: foundation lesson and bounded practice
+    status: public_live
+  directory:
+    source: virtualmase/virtualmase.github.io
+    live_url: https://virtualmase.github.io/
+    role: independent reader-task orientation
+    status: public_live_search_console_url_prefix_verified
+  action_boundary_brief:
+    source: virtualmase/action-boundary-brief
+    live_url: https://virtualmase.github.io/action-boundary-brief/
+    role: pre-action boundary preparation
+    status: public_live
+  ai_change_record:
+    source: virtualmase/ai-change-record
+    live_url: https://virtualmase.github.io/ai-change-record/
+    role: post-change review trail for material AI-enabled workflow changes
+    status: public_live
+  earthward_foundry:
+    source: virtualmase/earthward-foundry
+    public_source: main/public-site/
+    live_url: https://virtualmase.github.io/earthward-foundry/
+    role: proposed human-governed quality and traceability evidence loop for one high-mix low-volume manufacturing part family
+    status: public_live_independent_physical_work_field_guide
+    boundary: no public product, API, certification, customer result, metrological-traceability claim, or protected-pilot exposure
+    release_source_commit: cd5a2a6
+    release_static_commit: 854ff65
+  portal:
+    source: portal/
+    role: governed contribution and capability routing
+    status: source_ready_host_pending
+next_build:
+  - Improve one named flagship silo only when its reader question, original contribution, and source boundary are explicit.
+  - Add provenance-reviewed self-hosted type assets and compact/wide fallback validation.
+  - Prepare the separate portal hostname/deployment package without collapsing property identities.
+  - Document, but do not execute, any proposed flagship deployment/cutover plan until owner confirmation.
+  - Extend one named reader-task silo only with original, source-backed material and a documented contextual-link benefit.
+  - Triage the separate Earthward service-container CI teardown failure without changing the static public property or exposing protected pilot services.
+owner_decisions_pending:
+  - Flagship domain/deployment cutover
+  - Portal hostname/deployment
+  - Open-source license
+  - Analytics/privacy model
+  - Search Console sitemap submission or indexing request for the verified virtualmase.github.io URL-prefix property
+  - Hosted branch/environment protection rules

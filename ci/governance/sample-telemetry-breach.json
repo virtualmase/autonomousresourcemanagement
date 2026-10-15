@@ -1,0 +1,13 @@
+{
+  "event_type": "portal.telemetry.threshold_breached",
+  "property_id": "arm-portal",
+  "release_sha": "2d8c2c89e11fc304852b594722bb1ae689a99644",
+  "threshold_id": "synthetic_availability",
+  "measurement_window": {
+    "started_at": "2026-08-27T18:00:00Z",
+    "ended_at": "2026-08-27T18:10:00Z"
+  },
+  "observed_value": 2,
+  "correlation_id": "e39338dc-55a8-4a31-bc0b-e608bc4f87e5",
+  "source_attestation_reference": "example-monitor-incident-12345"
+}

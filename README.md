@@ -50,3 +50,7 @@ CODEOWNERS requests review but does not enforce it alone. Configure branch prote
 This reference has no commercial provider referrals. The former homepage's proposal is revised at `/framework/`; original files remain in Git history. Separate AURE content and unpublished CoreWeaver research are outside this release. Never publish unsupported archive claims or include source files, dependencies, `.git`, or queue artifacts in a deployment.
 
 Public source availability does not grant rights to cited third-party material. No blanket open-content license or independent editorial-board status is claimed.
+
+## Existing packages preserved
+
+The repository also retains `flagship/`, `portal/`, `practice/`, `demos/`, and `ci/governance/`. They have separate roles and deployment boundaries; this revision does not publish or rewrite them. Consult `AGENTS.md`, `CONTRIBUTING.md`, and `docs/CONTINUATION.md` for existing governance. Changes to public claims and property roles retain the two-maintainer review requirement.

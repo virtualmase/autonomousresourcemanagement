@@ -1,0 +1,24 @@
+id: MNT-001
+title: Builder release-governance pipeline
+capability: Maintainer
+status: completed
+completed_on: 2026-08-27
+property: arm-portal-foundation
+scope:
+  - .github/workflows/builder-governance.yml
+  - .github/workflows/portal-telemetry-gate.yml
+  - .github/workflows/portal-rollback.yml
+  - ci/governance/
+purpose: Encode deterministic static gates, trusted telemetry release holds, and approval-separated rollback checks for the Builder capability.
+decision_rights:
+  within_scope: Publish source workflow checks, policy thresholds, deterministic local verification, and a reviewable incident-hold design.
+  not_authorized: Force-push main, roll back an external deployment automatically, configure hosted branch/environment protections, or treat a release hold as an unreviewed production command.
+evidence:
+  source_release: https://github.com/virtualmase/autonomousresourcemanagement/commit/c727932
+  governance_policy: https://github.com/virtualmase/autonomousresourcemanagement/blob/main/docs/builder-release-governance.md
+  workflow_run: https://github.com/virtualmase/autonomousresourcemanagement/actions/runs/33095943216
+outcome: Published GitHub-native source controls that fail closed on unsafe source, require a trusted telemetry dispatcher for a hold, and require an independently approved immutable target for rollback.
+open_questions:
+  - Repository-level protected branches, environment protection, provider rollback action, and trusted telemetry collector must be configured by the owner before the model becomes externally enforced end to end.
+correction_route: https://github.com/virtualmase/autonomousresourcemanagement/issues
+retention: retain; record future control changes as versioned maintenance updates.

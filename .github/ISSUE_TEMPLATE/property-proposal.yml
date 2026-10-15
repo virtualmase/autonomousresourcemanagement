@@ -1,0 +1,26 @@
+name: Property or participation proposal
+description: Propose a new public property, portal capability, or cross-property relationship.
+title: "[Property proposal]: "
+labels: ["property-architecture"]
+body:
+  - type: input
+    id: proposed_role
+    attributes:
+      label: Proposed property or capability role
+      description: What independent reader or participant need will this serve?
+    validations:
+      required: true
+  - type: textarea
+    id: original_contribution
+    attributes:
+      label: Original contribution
+      description: Explain how this differs materially from existing properties and avoids duplicate content.
+    validations:
+      required: true
+  - type: textarea
+    id: governance
+    attributes:
+      label: Stewardship and risk
+      description: Name the proposed steward role, decision process, security boundary, and expected maintenance burden.
+    validations:
+      required: true

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "scope": "arm-portal static release",
+  "status": "policy-template—not-a-live-monitor",
+  "source_of_truth": "A trusted monitor or deployment provider must deliver authenticated evidence. Browser-side telemetry never authorizes a release or rollback.",
+  "thresholds": {
+    "synthetic_availability": {
+      "window_minutes": 10,
+      "minimum_independent_probes": 2,
+      "breach_when": "two or more independent probes fail within the window",
+      "severity": "critical",
+      "required_action": "hold release and request rollback review"
+    },
+    "content_security_policy": {
+      "window_minutes": 10,
+      "breach_when": "one confirmed CSP enforcement violation from the deployed portal",
+      "severity": "high",
+      "required_action": "hold release and require Security Reviewer triage"
+    },
+    "uncaught_client_error": {
+      "window_minutes": 15,
+      "minimum_unique_sessions": 3,
+      "breach_when": "five or more uncaught errors across at least three privacy-preserving session identifiers",
+      "severity": "high",
+      "required_action": "hold release and require Maintainer triage"
+    },
+    "governance_integrity": {
+      "breach_when": "release SHA, property ID, required approval, or rollback reference does not match the attested release record",
+      "severity": "critical",
+      "required_action": "block further promotion and require Entity Steward review"
+    }
+  },
+  "privacy": {
+    "prohibited_fields": [
+      "access tokens",
+      "cookies",
+      "full IP addresses",
+      "raw user-agent strings",
+      "private security-report content",
+      "unbounded user-entered text"
+    ],
+    "required_fields": [
+      "correlation_id",
+      "release_sha",
+      "property_id",
+      "measurement_window",
+      "threshold_id",
+      "source_attestation_reference"
+    ]
+  }
+}

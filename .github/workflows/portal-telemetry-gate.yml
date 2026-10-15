@@ -1,0 +1,71 @@
+name: Portal Telemetry Gate
+
+on:
+  repository_dispatch:
+    types: [portal-telemetry-breach]
+  workflow_dispatch:
+    inputs:
+      telemetry_file:
+        description: "Repository-relative trusted telemetry evidence file for a controlled test"
+        required: true
+        default: "ci/governance/sample-telemetry-breach.json"
+        type: string
+
+# This workflow can create a release-hold Issue only after validating its narrow input contract.
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  evaluate-threshold-breach:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out policy and evaluation code
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Verify telemetry dispatcher identity
+        if: github.event_name == 'repository_dispatch'
+        env:
+          EXPECTED_DISPATCHER: ${{ vars.PORTAL_TELEMETRY_DISPATCHER }}
+          ACTUAL_DISPATCHER: ${{ github.event.sender.login }}
+        run: |
+          test -n "$EXPECTED_DISPATCHER"
+          test "$ACTUAL_DISPATCHER" = "$EXPECTED_DISPATCHER"
+
+      - name: Materialize authenticated monitor payload
+        if: github.event_name == 'repository_dispatch'
+        env:
+          PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: |
+          mkdir -p ci-artifacts
+          printf '%s' "$PAYLOAD" > ci-artifacts/telemetry-event.json
+
+      - name: Evaluate telemetry threshold against policy
+        id: threshold
+        run: node ci/governance/evaluate-telemetry.mjs ${{ github.event_name == 'repository_dispatch' && 'ci-artifacts/telemetry-event.json' || inputs.telemetry_file }}
+
+      - name: Create release-hold record
+        if: steps.threshold.outputs.decision == 'release_hold_and_human_rollback_review'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RELEASE_SHA: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.release_sha || 'controlled-test' }}
+          THRESHOLD_ID: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.threshold_id || 'controlled-test' }}
+        run: |
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer ${GITHUB_TOKEN}" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues" \
+            --data "$(printf '{\"title\":\"[Release hold] %s on %s\",\"labels\":[\"release-hold\"],\"body\":\"A trusted telemetry threshold signal passed validation. Promotion is held pending Maintainer triage and any required Security Reviewer, property-steward, or Entity-steward decision. See the workflow artifact for the non-sensitive correlation and attestation references. Do not force-push, rewrite history, or deploy a rollback without the protected rollback environment.\"}' "$THRESHOLD_ID" "$RELEASE_SHA")"
+
+      - name: Upload telemetry decision
+        uses: actions/upload-artifact@v4
+        with:
+          name: telemetry-gate-${{ github.run_id }}
+          path: ci-artifacts/telemetry-decision.json
+          if-no-files-found: error
+          retention-days: 90

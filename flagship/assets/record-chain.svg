@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">ARM trace record chain</title><desc id="desc">A conceptual five-step sequence for source, scope, decision right, action, and outcome review.</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#0d1e4c"/><stop offset="1" stop-color="#18398f"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#c3d1ef" stroke-opacity=".14"/></pattern></defs>
+  <rect width="1200" height="500" fill="url(#bg)"/><rect width="1200" height="500" fill="url(#grid)"/><path d="M112 250H1088" stroke="#9db3df" stroke-opacity=".7" stroke-width="3"/>
+  <g fill="#10295f" stroke="#c4d2ee" stroke-width="2"><circle cx="150" cy="250" r="58"/><circle cx="375" cy="250" r="58"/><circle cx="600" cy="250" r="58"/><circle cx="825" cy="250" r="58"/><circle cx="1050" cy="250" r="58"/></g>
+  <g fill="#dc5a38"><circle cx="150" cy="250" r="14"/><circle cx="375" cy="250" r="14"/><circle cx="600" cy="250" r="14"/><circle cx="825" cy="250" r="14"/><circle cx="1050" cy="250" r="14"/></g>
+  <g fill="#f6f2e9" font-family="monospace" font-size="18" text-anchor="middle" letter-spacing="2"><text x="150" y="146">01 / SOURCE</text><text x="375" y="146">02 / SCOPE</text><text x="600" y="146">03 / RIGHT</text><text x="825" y="146">04 / ACTION</text><text x="1050" y="146">05 / OUTCOME</text><text x="150" y="373">EVIDENCE</text><text x="375" y="373">BOUNDARY</text><text x="600" y="373">OWNER</text><text x="825" y="373">EVENT</text><text x="1050" y="373">REVIEW</text></g>
+  <path d="M209 250H316M434 250H541M659 250H766M884 250H991" stroke="#dc5a38" stroke-width="5"/><path d="M316 250L294 233V267ZM541 250L519 233V267ZM766 250L744 233V267ZM991 250L969 233V267Z" fill="#dc5a38"/>
+</svg>
