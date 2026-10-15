@@ -1,0 +1,42 @@
+[
+  {
+    "id": "foundations",
+    "title": "Foundations and scope",
+    "question": "What does autonomous resource management mean?",
+    "description": "Start with the working definition and distinguish resource decisions from general automation.",
+    "articles": [
+      "autonomous-resource-management"
+    ]
+  },
+  {
+    "id": "capacity-and-placement",
+    "title": "Capacity and workload placement",
+    "question": "Do I need more capacity, or a different allocation?",
+    "description": "Compare scaling with scheduling before investigating workload constraints and capacity limits.",
+    "articles": [
+      "autoscaling",
+      "resource-scheduling"
+    ]
+  },
+  {
+    "id": "cost-and-evidence",
+    "title": "Cost and operational evidence",
+    "question": "What did the system consume, and what evidence explains it?",
+    "description": "Connect budgets and cost controls to measurements, observed outcomes, and decision records.",
+    "articles": [
+      "finops-and-cost-controls",
+      "observability",
+      "audit-trails"
+    ]
+  },
+  {
+    "id": "orchestration-and-oversight",
+    "title": "Orchestration and human oversight",
+    "question": "Which actions can a workflow take, and who can intervene?",
+    "description": "Follow task coordination into delegated permissions, escalation, and accountable review.",
+    "articles": [
+      "agent-orchestration",
+      "human-oversight"
+    ]
+  }
+]

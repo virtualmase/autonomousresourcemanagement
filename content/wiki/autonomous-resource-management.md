@@ -28,7 +28,7 @@ Autonomous resource management describes systems that observe resource condition
 A useful example is a service that adds capacity when demand rises, subject to an upper limit and a response-time objective. The word “autonomous” describes the delegated decision scope; it does not establish that the system uses an AI model or can safely operate without supervision.
 
 ## How the pieces fit together
-A resource-management design needs a target, measurements, a decision mechanism, and a way to act. Kubernetes documents a concrete form of this pattern: [controllers reconcile observed state with desired state](https://kubernetes.io/docs/concepts/architecture/controller/). The broader connection to ARM is our editorial synthesis.
+A resource-management design needs a target, [measurements](/wiki/observability/), a decision mechanism, and a way to act. Use [audit trails](/wiki/audit-trails/) to examine the resulting decisions. Kubernetes documents a concrete form of this pattern: [controllers reconcile observed state with desired state](https://kubernetes.io/docs/concepts/architecture/controller/). The broader connection to ARM is our editorial synthesis.
 
 Consider a queue of image-processing jobs. A controller may observe queue age, request more workers, and stop increasing capacity at a configured limit. A complete operational design must also decide what happens when metrics disappear, capacity is unavailable, or the next action exceeds the approved budget. Those are design questions, not benefits automatically conferred by automation.
 

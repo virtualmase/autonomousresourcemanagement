@@ -19,6 +19,10 @@
       "url": "https://www.finops.org/insights/2026-finops-framework/",
       "scope": "Official publisher announcement; supports attributed changes, not independent outcome claims."
     }
+  ],
+  "concepts": [
+    "/wiki/finops-and-cost-controls/",
+    "/wiki/human-oversight/"
   ]
 }
 ---

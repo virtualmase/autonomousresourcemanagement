@@ -25,7 +25,7 @@
 ## What a scheduler decides
 A scheduler matches work to eligible resources. It has to respect constraints before considering preferences. [Kubernetes describes filtering candidate nodes and scoring the feasible ones](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/).
 
-Scheduling is distinct from scaling. A placement decision can rearrange work within existing capacity; a scaling decision changes available capacity. They interact, but neither alone guarantees that a workload meets its objective.
+Scheduling is distinct from [autoscaling](/wiki/autoscaling/). A placement decision can rearrange work within existing capacity; a scaling decision changes available capacity. They interact, but neither alone guarantees that a workload meets its objective.
 
 ## Constraints before preferences
 In a hypothetical accelerator queue, eligibility might depend on memory, device compatibility, and data location. Preferences might favor shorter completion time or lower estimated cost. An inexpensive resource that cannot run the task is not a valid choice.
