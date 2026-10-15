@@ -44,7 +44,7 @@ add('/','Autonomous resource management: wiki and industry context','Explore sou
 for(const a of articles){
   const {html,headings}=renderMarkdown(a.body);
   const schema=[{'@type':a.kind==='news'?'NewsArticle':a.kind==='page'?'WebPage':'TechArticle','@id':origin+a.path+'#article',url:origin+a.path,headline:a.title,description:a.description,dateModified:a.updated,...(a.published?{datePublished:a.published}:{}),author:a.author.startsWith('Mason')?{'@id':origin+'/about/#maintainer'}:{'@id':origin+'/#publisher'},publisher:{'@id':origin+'/#publisher'},isPartOf:{'@id':origin+'/#website'},citation:(a.sources||[]).map(s=>({'@type':'CreativeWork',name:s.title,url:s.url}))}];
-  const byline=a.author.startsWith('Mason')?`By <a href="${maintainerProfile}">${e(a.author)}</a>`:`By <a href="/about/#maintainer-and-authorship">${e(a.author)}</a> · Maintained by <a href="${maintainerProfile}">Mason Nguyen</a>`;
+  const byline=a.author.startsWith('Mason')?`By <a href="${maintainerProfile}">Mason Nguyen</a>${e(a.author.slice("Mason Nguyen".length))}`:`By <a href="/about/#maintainer-and-authorship">${e(a.author)}</a> · Maintained by <a href="${maintainerProfile}">Mason Nguyen</a>`;
   const topic=topicFor(a);
   const parent=a.kind==='wiki'?['/wiki/','Wiki']:a.kind==='news'?['/news/','News']:null;
   const breadcrumb=`<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a>${parent?`<span aria-hidden="true">/</span><a href="${parent[0]}">${parent[1]}</a>`:''}${topic?`<span aria-hidden="true">/</span><a href="/wiki/#${topic.id}">${e(topic.title)}</a>`:''}<span aria-hidden="true">/</span><span aria-current="page">${e(a.title)}</span></nav>`;

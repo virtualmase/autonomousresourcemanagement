@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentDigest": "180d0070424aa1355149c67a1c6030b7de616ed5ecbd6841309b545eb9800ce1",
+  "contentDigest": "ca06ce7a29f2d96f14849115298c88b15fd7b1e778f8a5914f3319ffe11c0a85",
   "contentRevision": "2026-10-15",
   "pages": 22,
   "files": {
@@ -13,7 +13,7 @@
     "editorial-policy/index.html": "6fcb95e0d00a30730bfef32d0fa80ba82401852bf3522697f3c9f4faa6d04000",
     "favicon.svg": "3766c9e6c1326cb25b003f88369e29907a8660883228c13ab470e306ed4df91e",
     "feed.xml": "979325d4616849c8c5bd7d386e98414fdf7d07bfc8aca49e566d945503d14419",
-    "framework/index.html": "c546ca99d7f55895deeec76c7d9e952be8824ec963ae189f7b2c02a769228004",
+    "framework/index.html": "1bb352f7550c2c76ce94ad2533cb65deb3fc0f71bad24befd2c3270e8085208d",
     "googlef40b1c9053cf9205.html": "a2afae8978371b939c5ac9e680468c14f119e38a6478ee92d867d510e39f54d4",
     "index.html": "7576d19dd333d3bd3206cb22574ab28150bab90f29cf7879fbc21165351f3fb3",
     "llms.txt": "3954c4e791dff83fbce9e7d596a7513f886547477605f3b28c66022e53975309",
