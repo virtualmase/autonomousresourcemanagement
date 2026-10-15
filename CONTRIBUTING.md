@@ -16,7 +16,7 @@ Do not include private customer material, credentials, personal information, unv
 
 ## Local preview
 
-This is a no-build static site. Preview with any standards-compliant static file server or open the HTML directly in a browser. Before proposing a change, check the rendered headings, links, structured data, mobile behavior, and HTML semantics.
+The committed static snapshot renders with any standards-compliant static file server and needs no production runtime. Edit reference Markdown/templates, then run `npm ci`, `npm test`, `npm run export`, `npm run check`, and browser checks. Commit the synchronized static output; CI verifies it. The flagship and portal remain separate no-build packages. Before proposing a change, check the rendered headings, links, structured data, mobile behavior, and HTML semantics.
 
 ## Contribution lifecycle
 

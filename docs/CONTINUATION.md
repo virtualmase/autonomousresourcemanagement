@@ -4,6 +4,10 @@
 **Last updated:** 2026-08-27  
 **Project rule:** Use this repository and the linked AI Mastery repository as the durable source of current context. Do not rely on prior chat history.
 
+## Reference revision in progress — 15 October 2026
+
+The owner requested a standalone `.com` wiki and neutral industry news. See `docs/standalone-reference-decision.md` for scope, `README.md` for content generation and static export, and `docs/deployment.md` for the active Hostinger webhook and pending live verification. This supersedes the reference homepage’s commercial referral role. Other properties and their deployment boundaries remain unchanged. Do not infer that source completion means publication.
+
 ## 1. Operating objective
 
 Build an open-source, portable **Autonomous Resource Management** ecosystem in which multiple web properties have distinct reader jobs, original content, and independent authority. The goal is durable entity and reputation architecture through useful work, accurate references, provenance, citations, accountable collaboration, and technical quality—not search manipulation or domain consolidation.

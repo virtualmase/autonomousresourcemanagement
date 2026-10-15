@@ -1,0 +1,17 @@
+name: Source or coverage suggestion
+description: Suggest relevant research, documentation, or an industry development.
+title: 'Source suggestion: '
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Original source URL
+    validations:
+      required: true
+  - type: textarea
+    id: relevance
+    attributes:
+      label: Date, relevance, and evidence limits
+      description: Explain the resource-management question this source addresses and disclose relevant affiliations.
+    validations:
+      required: true

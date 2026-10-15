@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /coreweaver-labs/
+Disallow: /aure/
 
 Sitemap: https://autonomousresourcemanagement.com/sitemap.xml

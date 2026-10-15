@@ -1,39 +1,60 @@
-# Autonomous Resource Management (ARM) Reference Layer
+# Autonomous Resource Management
 
-Portable, static HTML and machine-readable reference material for **Autonomous Resource Management (ARM)** at [autonomousresourcemanagement.com](https://autonomousresourcemanagement.com). This property is the cited definition and research layer in a wider, coordinated entity system.
+Source for the standalone reference at **https://autonomousresourcemanagement.com**. Covers resource allocation, orchestration, infrastructure, cost controls, and human oversight through cited explanations and dated briefs. The ARM working framework is an attributed editorial proposal, not a formal standard.
 
-This repository is content and structured data, not an application. There is no framework runtime, proprietary backend, or required build step.
+## Build and verify
 
-## Contents
+Requires Node 22+ and Python 3.12+. No production application server or database is needed.
 
-| File | Purpose |
-|---|---|
-| `index.html` | The definitional page for "Autonomous Resource Management" — includes inline JSON-LD (`WebPage`, `DefinedTerm`) for LLM/search citation. |
-| `coreweaver-labs/index.html` | Unpublished, noindex research archive; do not publish its performance claims without evidence. |
-| `schema.json` | Standalone schema.org graph for this reference, its term, and its author. |
-| `llms.txt` | Machine-readable summary and bounded routes to distinct implementation providers. |
-| `sitemap.xml` | Standard XML sitemap. |
-| `CNAME` | GitHub Pages custom domain pointer — `autonomousresourcemanagement.com`. |
-| `docs/entity-registry.yml` | Public record of property roles, self-canonical policy, and cross-property relationships. |
-| `docs/multi-property-entity-architecture.md` | Entity-system, authority-flow, and collaboration operating model. |
-| `docs/capability-registry.yml` | Governed roles for evidence, content, prototypes, implementation, growth, maintenance, and cleanup. |
-| `docs/portfolio-operation-skills.md` | Inputs, outputs, quality gates, authority limits, and handoffs for the seven operating capabilities. |
-| `docs/builder-release-governance.md` | Builder pre-release gates, trusted telemetry threshold policy, authority-separated rollback procedure, and required provider settings. |
-| `.github/workflows/` | Read-minimized GitHub Actions workflows for static governance checks, release-candidate attestations, trusted telemetry release holds, and independently approved rollback validation. |
-| `docs/public-practice-model.md` and `practice/` | Public-practice method plus source-linked, bounded work records demonstrating how Virtualmase applies ARM to its own work. |
-| `portal/` | Portable, no-build participation-interface package; deployment hostname is intentionally pending. |
-| `demos/builder-governance/` | Local-only interactive lab for fluid type tokens, safe DOM-update validation, and in-memory audit records; it has no GitHub, deployment, or telemetry write capability. |
-| `CONTRIBUTING.md` | Contribution, sourcing, and review guidance. |
+```sh
+npm ci
+npm test
+npm run check
+npm run export
+npm run check:export
+npx playwright install chromium
+npm run test:browser
+npm run preview
+```
 
-## Purpose
+Preview: `http://127.0.0.1:4173`. The build renders only the publishable site into `dist/`. The quality workflow uploads it as `arm-reference-static`, including `.htaccess`.
 
-This site is the non-commercial reference layer for the term "Autonomous Resource Management." It supports the wider entity system through cited definitions and clear application paths without conflating identities, duplicating content, or placing checkout on this reference domain. Each property is independently useful and self-canonical.
+The repository also commits a ready-to-serve root snapshot for compatibility with the existing Hostinger webhook. Run `npm run export` after source edits; CI rejects snapshot drift. Do not edit generated pages directly.
 
-## Maintaining this repo
+**For a clean archive deployment, deploy `dist/` contents, never an archive of the entire repository.** The archive root must contain `index.html`. See [deployment instructions](docs/deployment.md). A repository update does not establish production parity.
 
-- Keep `schema.json`, `llms.txt`, and the inline JSON-LD in `index.html` in sync — entity name, leadership, and `sameAs` links should match across all three.
-- Any factual/statistical claim on any page (e.g. deployment counts, dataset sizes) must be sourced or removed before publishing — unsubstantiated metrics undermine the citation-authority goal this site exists to build.
-- Deploy by uploading the static files to Hostinger's document root. No Node runtime, framework, database, or rewrite rules are required.
-- Read `CONTRIBUTING.md` before opening an issue or pull request. Use GitHub Discussions for questions and architecture conversations; use Issues for bounded, actionable work.
-- Use the **Capability work record** issue form when an idea has an owner, a property, a stated output, acceptance checks, and a next handoff.
-- The public license is intentionally pending a maintainer decision. Do not assume that the absence of a license grants reuse rights.
+## Repository map
+
+| Path | Purpose |
+| --- | --- |
+| `content/wiki/` | Source-backed concept articles |
+| `content/news/` | Dated briefs with source checks and limitations |
+| `content/pages/` | Policies, about, corrections, revision log, and framework |
+| `public/` | CSS, search behavior, and favicon |
+| `scripts/build.mjs` | Static HTML, JSON-LD, RSS, sitemap, search index, release manifest |
+| `scripts/check.mjs` | Links, metadata, review records, deployment boundaries |
+| `scripts/collect-news.py` | Approved-feed discovery; never publishes |
+| `editorial/` | Source registry, workflow, decisions, review records |
+| `tests/` | Content, feed parser, and browser checks |
+| `aure/` | Separate subdomain implementation, excluded from build |
+| `coreweaver-labs/` | Unpublished research archive, excluded from build |
+
+## Editorial workflow
+
+Articles use JSON front matter between `---` lines followed by Markdown. See [editorial operations](editorial/README.md). Drafts are excluded from pages, search, RSS, and sitemap. Raw HTML is escaped; unsupported link protocols and remote Markdown images fail the build.
+
+Published reference articles require attribution, inline citations, source descriptions, and review disclosure. News also requires event/publication/check dates, a real source-check record, and sections for what changed, relevance, and evidence limits. Never invent a human reviewer or independent testing.
+
+News discovery runs Monday, Wednesday, and Friday at 13:23 UTC and supports manual dispatch. It uploads an unreviewed queue. An editor reads original sources and proposes a content PR. The collector has read-only repository permissions and cannot publish or send messages.
+
+CODEOWNERS requests review but does not enforce it alone. Configure branch protection to require the `validate` check and code-owner review when account capabilities allow it. A green build is not factual peer review.
+
+## Scope and rights
+
+This reference has no commercial provider referrals. The former homepage's proposal is revised at `/framework/`; original files remain in Git history. Separate AURE content and unpublished CoreWeaver research are outside this release. Never publish unsupported archive claims or include source files, dependencies, `.git`, or queue artifacts in a deployment.
+
+Public source availability does not grant rights to cited third-party material. No blanket open-content license or independent editorial-board status is claimed.
+
+## Existing packages preserved
+
+The repository also retains `flagship/`, `portal/`, `practice/`, `demos/`, and `ci/governance/`. They have separate roles and deployment boundaries; this revision does not publish or rewrite them. Consult `AGENTS.md`, `CONTRIBUTING.md`, and `docs/CONTINUATION.md` for existing governance. Changes to public claims and property roles retain the two-maintainer review requirement.
