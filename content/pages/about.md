@@ -17,7 +17,7 @@ This site helps readers understand how automated systems allocate resources and 
 The project aims to earn trust through useful explanations, primary citations, clear limitations, and visible corrections. It does not claim to be the definitive authority or a standards body.
 
 ## Maintainer and authorship
-Mason Nguyen maintains the site and its public source repository. “ARM Editorial” identifies this site's editorial voice; it is not a claim that an independent editorial board exists. The initial reference articles were prepared with AI assistance, as disclosed on each article.
+[Mason Nguyen on LinkedIn](https://www.linkedin.com/in/mason-nguyen) maintains the site and its public source repository. “ARM Editorial” identifies this site's editorial voice; it is not a claim that an independent editorial board exists. The initial reference articles were prepared with AI assistance, as disclosed on each article.
 
 The proposed [ARM working framework](/framework/) is attributed separately. Its existence does not establish consensus around that framework or the site's terminology.
 
