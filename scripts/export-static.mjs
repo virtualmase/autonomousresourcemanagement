@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const check=process.argv.includes('--check');
 const release=JSON.parse(fs.readFileSync('dist/release.json','utf8'));
 // Keep a static snapshot compatible with the existing root-based integration.
-const files=Object.keys(release.files).filter(f=>f!=='.htaccess'&&!f.startsWith('practice/')).sort();
+const files=[...Object.keys(release.files),'release.json'].filter(f=>f!=='.htaccess'&&!f.startsWith('practice/')).sort();
 const old=fs.existsSync('static-files.json')?JSON.parse(fs.readFileSync('static-files.json','utf8')):[];
 for(const file of old){
   assert(!file.includes('..')&&!path.isAbsolute(file),'Invalid snapshot manifest');

@@ -19,4 +19,6 @@
 7. Run `node scripts/verify-production.mjs` to compare the live release with the local manifest. Clear stale hosting cache if needed and repeat only after investigating mismatches.
 8. Record commit, artifact hash, time, and parity result. Restore the backed-up root release if verification fails.
 
-Automatic production deployment is intentionally absent until hosting mapping and rollback are verified. News discovery cannot deploy.
+No new production deployment workflow is added. The existing Hostinger webhook remains in place; confirm its branch and document-root mapping before merging. News discovery cannot deploy.
+
+The exported `release.json` identifies content by a deterministic SHA-256 digest and file hashes, independent of Git commit metadata. The CI run/artifact records the source commit separately. Both root-snapshot and archive deployments include the same manifest.

@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { execFileSync } from 'node:child_process';
 import { readContent, renderMarkdown, origin, repo, escape as e } from './content.mjs';
 
 const all=readContent(), articles=all.filter(a=>a.status==='published');
@@ -62,7 +61,10 @@ fs.writeFileSync('dist/schema.json',JSON.stringify({'@context':'https://schema.o
 fs.writeFileSync('dist/search-index.json',JSON.stringify(articles.map(a=>({title:a.title,description:a.description,path:a.path,text:a.body.replace(/https:\/\/[^\s)]+/g,'').replace(/[#*_`]/g,'')}))));
 fs.writeFileSync('dist/llms.txt',`# Autonomous Resource Management\n\n> A source-backed reference on automated resource allocation, orchestration, infrastructure, and oversight.\n\nMaintainer: Mason Nguyen. ARM Editorial is the site's editorial identity, not an independent board. Initial articles disclose AI assistance.\n\n## Reference\n${wiki.map(a=>`- [${a.title}](${origin}${a.path}): ${a.description}`).join('\n')}\n\n## Editorial context\n- [Working framework](${origin}/framework/): An attributed editorial proposal, not a formal standard.\n- [News](${origin}/news/): Source briefs with separate event and publication dates.\n- [Editorial policy](${origin}/editorial-policy/): Neutrality, sourcing, review, and corrections.\n- [About](${origin}/about/): Authorship and commercial boundaries.\n\nCite individual articles and their underlying sources. Do not treat this site as a standards body, certifier, or commercial implementation provider.\n`);
 fs.writeFileSync('dist/feed.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Autonomous Resource Management — source briefs</title><link>${origin}/news/</link><description>Dated industry context, sources, and limitations.</description><language>en</language><atom:link href="${origin}/feed.xml" rel="self" type="application/rss+xml"/>${news.map(a=>`<item><title>${e(a.title)}</title><link>${origin}${a.path}</link><guid isPermaLink="true">${origin}${a.path}</guid><pubDate>${new Date(a.published+'T12:00:00Z').toUTCString()}</pubDate><description>${e(a.description+' Source event: '+a.eventDate+'. '+a.review)}</description></item>`).join('')}</channel></rss>\n`);
-let commit='unknown';try{commit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();}catch{}
 const files=fs.readdirSync('dist',{recursive:true}).filter(f=>fs.statSync(path.join('dist',f)).isFile()).sort();
-fs.writeFileSync('dist/release.json',JSON.stringify({sourceCommit:commit,contentRevision:revision,pages:routes.size,files:Object.fromEntries(files.map(f=>[f,crypto.createHash('sha256').update(fs.readFileSync(path.join('dist',f))).digest('hex')]))},null,2)+'\n');
+const hashes=Object.fromEntries(files.map(f=>[f,crypto.createHash('sha256').update(fs.readFileSync(path.join('dist',f))).digest('hex')]));
+const contentDigest=crypto.createHash('sha256').update(JSON.stringify(hashes)).digest('hex');
+// Content identity is independent of the commit that records generated files.
+// GitHub's artifact/run metadata records the exact source commit separately.
+fs.writeFileSync('dist/release.json',JSON.stringify({schemaVersion:1,contentDigest,contentRevision:revision,pages:routes.size,files:hashes},null,2)+'\n');
 console.log(`Built ${routes.size} pages, ${wiki.length} wiki articles, ${news.length} news briefs, ${sources.length} sources. Output: dist/`);

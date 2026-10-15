@@ -4,7 +4,7 @@ Date: 15 October 2026. Property: autonomousresourcemanagement.com.
 
 ## Implemented
 
-22 generated routes, eight wiki articles, three dated source briefs, policy/about/correction pages, source directory, search, RSS, sitemap, synchronized structured data, and an original conceptual resource-loop SVG. Historical public-practice HTML and seven work records are preserved separately in the static artifact. There are 34 exported reference files in the root snapshot.
+22 generated routes, eight wiki articles, three dated source briefs, policy/about/correction pages, source directory, search, RSS, sitemap, synchronized structured data, and an original conceptual resource-loop SVG. Historical public-practice HTML and seven work records are preserved separately in the static artifact. There are 35 exported reference files in the root snapshot.
 
 Commercial referrals to Swell Marketing, ARM Agency, and Arise Reputation are absent from the generated reference. AURE, flagship, portal, demo, and governance implementation files are unchanged from upstream except the reference-specific provenance checks and documented registry scope.
 
@@ -25,3 +25,7 @@ Commercial referrals to Swell Marketing, ARM Agency, and Arise Reputation are ab
 The content is AI-assisted source synthesis. No independent expert review, product testing, accessibility certification, or complete security audit is claimed. Browser coverage is Chromium; no Safari/Firefox verification was performed.
 
 The live site has not been replaced by these checks. Hostinger read-only account discovery timed out twice. GitHub contains an active Hostinger webhook, so merging main may publish. The repository's two-maintainer review requirement applies to the changed public claims and property scope. Confirm hosting mapping and preserve a complete backup before release; then compare the live content with the release artifact.
+
+## Automated review follow-up
+
+Corrected the missing root `release.json` and made its identity deterministic across the export commit. Added an isolated export regression test for manifest inclusion and stale-output detection. Pinned the two new workflows to official Action commit SHAs, disabled checkout credential persistence, and assigned documentation ownership.

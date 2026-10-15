@@ -19,4 +19,4 @@ try{
   if(missing.status!==404)failures.push(`Missing route returned ${missing.status}, expected 404`);
 
 }catch(error){failures.push(error.message);}
-if(failures.length){console.error(failures.join('\n'));process.exitCode=1;}else console.log(`Production matches ${manifest.sourceCommit}: all public release files verified.`);
+if(failures.length){console.error(failures.join('\n'));process.exitCode=1;}else console.log(`Production matches ${manifest.contentDigest}: all public release files verified.`);

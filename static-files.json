@@ -15,6 +15,7 @@
   "news/index.html",
   "news/kubernetes-136-resource-allocation/index.html",
   "news/kueue-admission-headlamp/index.html",
+  "release.json",
   "resource-loop.svg",
   "robots.txt",
   "schema.json",
