@@ -19,6 +19,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run check
+      - run: npm run check:export
+      - run: node scripts/validate-reference-elevation.mjs
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
       - uses: actions/upload-artifact@v4

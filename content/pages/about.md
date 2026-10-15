@@ -30,3 +30,6 @@ Relevant affiliations must be disclosed when they affect a covered subject. See 
 Readers can propose source additions and corrections through [GitHub](https://github.com/virtualmase/autonomousresourcemanagement). Changes are versioned, and material editorial changes are summarized in the [revision log](/changelog/).
 
 The wiki is curated rather than open to immediate anonymous publication. Contributions are welcome; publication depends on evidence, relevance, and editorial review.
+
+## Historical work records
+The earlier [public-practice records](/practice/) remain available as historical, first-party work records. They are not independent validation of this reference, product recommendations, or evidence of industry consensus.

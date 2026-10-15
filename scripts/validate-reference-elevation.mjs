@@ -6,10 +6,10 @@ const root = new URL('../index.html', import.meta.url);
 const architecture = new URL('../docs/reader-task-silo-architecture.md', import.meta.url);
 const [html, silo] = await Promise.all([readFile(root, 'utf8'), readFile(architecture, 'utf8')]);
 const requiredHtml = [
-  'Propose a factual correction or additional citation against the public source repository',
-  'https://github.com/virtualmase/autonomousresourcemanagement/issues',
-  'Inspect source ↗',
-  'Current property record ↗'
+  'href="/contribute/"',
+  'https://github.com/virtualmase/autonomousresourcemanagement',
+  'Source repository',
+  'Property record'
 ];
 const forbiddenHtml = [
   'ARM-compliant',

@@ -10,6 +10,8 @@ Requires Node 22+ and Python 3.12+. No production application server or database
 npm ci
 npm test
 npm run check
+npm run export
+npm run check:export
 npx playwright install chromium
 npm run test:browser
 npm run preview
@@ -17,7 +19,9 @@ npm run preview
 
 Preview: `http://127.0.0.1:4173`. The build renders only the publishable site into `dist/`. The quality workflow uploads it as `arm-reference-static`, including `.htaccess`.
 
-**Deploy `dist/` contents, never the repository root.** The archive root must contain `index.html`. See [deployment instructions](docs/deployment.md). A repository update does not establish production parity.
+The repository also commits a ready-to-serve root snapshot for compatibility with the existing Hostinger webhook. Run `npm run export` after source edits; CI rejects snapshot drift. Do not edit generated pages directly.
+
+**For a clean archive deployment, deploy `dist/` contents, never an archive of the entire repository.** The archive root must contain `index.html`. See [deployment instructions](docs/deployment.md). A repository update does not establish production parity.
 
 ## Repository map
 

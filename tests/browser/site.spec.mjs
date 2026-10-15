@@ -3,13 +3,15 @@ for(const width of [375,768,1440]){
   test(`reference is readable and navigable at ${width}px`,async({page})=>{
     await page.setViewportSize({width,height:900});
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
-    for(const route of ['/','/wiki/','/wiki/autonomous-resource-management/','/framework/','/news/','/news/kubernetes-136-resource-allocation/','/editorial-policy/']){
+    for(const route of ['/','/wiki/','/wiki/autonomous-resource-management/','/framework/','/news/','/news/kubernetes-136-resource-allocation/','/editorial-policy/','/news/kueue-admission-headlamp/']){
       await page.goto(route);
       await expect(page.locator('h1')).toHaveCount(1);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
       await expect(page.getByRole('navigation',{name:'Main navigation'})).toBeVisible();
     }
     expect(errors).toEqual([]);
+    await page.goto('/');
+    await page.screenshot({path:`test-results/home-${width}.png`,fullPage:true});
   });
 }
 test('search supports query links, results, no matches, and safe text',async({page})=>{

@@ -46,8 +46,8 @@ expect(existsSync(resolve(practiceDir, "QA.md")), "practice: missing local visua
 
 const sitemap = read(resolve(root, "sitemap.xml"));
 expect(sitemap.includes("https://autonomousresourcemanagement.com/practice/"), "sitemap.xml: missing public-practice route.");
-const reference = read(resolve(root, "index.html"));
-expect(reference.includes('href="/practice/"'), "reference index: missing public-practice route.");
+const reference = read(resolve(root, "about/index.html"));
+expect(reference.includes('href="/practice/"'), "about page: missing historical public-practice route.");
 const portal = read(resolve(root, "portal/index.html"));
 expect(portal.includes('https://autonomousresourcemanagement.com/practice/'), "portal: missing source practice route.");
 const flagship = read(resolve(root, "flagship/index.html"));

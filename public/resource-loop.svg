@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 156" role="img" aria-labelledby="title desc">
+<title id="title">A bounded resource decision loop</title><desc id="desc">Observe resource conditions, compare them with operating limits, act within those limits, then review the outcome. A return arrow represents feedback.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2944b0"/></marker></defs>
+<g fill="none" stroke="#2944b0" stroke-width="1.5" marker-end="url(#arrow)"><path d="M102 56h20"/><path d="M224 56h20"/><path d="M346 56h20"/><path d="M420 86v40H54V89"/></g>
+<g fill="#f7f4ec" stroke="#121b34"><rect x="4" y="24" width="98" height="62"/><rect x="126" y="24" width="98" height="62"/><rect x="248" y="24" width="98" height="62"/><rect x="370" y="24" width="106" height="62"/></g>
+<rect x="248" y="24" width="98" height="4" fill="#aa4428"/>
+<g font-family="Arial,sans-serif" font-size="15" fill="#121b34" text-anchor="middle"><text x="53" y="60">Observe</text><text x="175" y="60">Compare</text><text x="297" y="60">Act</text><text x="423" y="60">Review</text></g>
+<rect x="175" y="114" width="130" height="23" fill="#f7f4ec"/><text x="240" y="130" text-anchor="middle" font-size="12" font-family="Arial,sans-serif" fill="#505967">Outcome feedback</text>
+</svg>

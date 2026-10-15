@@ -2,17 +2,17 @@ entity:
   id: arm-entity-v1
   name: Autonomous Resource Management
   description: A coordinated ecosystem for accountable resource decision practice.
-  registry_version: 1
-  last_reviewed: 2026-08-27
+  registry_version: 2
+  last_reviewed: 2026-10-15
   capability_registry: docs/capability-registry.yml
 
 properties:
   - id: arm-reference
     hostname: autonomousresourcemanagement.com
-    role: cited definition and research reference
+    role: standalone source-backed wiki and industry reference
     canonical_policy: self
     primary_audiences: [researchers, analysts, technical readers, retrieval systems]
-    content_boundary: definitions, source notes, glossary, editorial changelog
+    content_boundary: cited wiki concepts, attributed framework, dated source briefs, editorial policy, corrections
     steward_role: editorial-maintainer
     publication_status: active
 
@@ -39,10 +39,6 @@ relationships:
     to: arm-reference
     type: cites-definition
     link_label: Definition and sources
-  - from: arm-reference
-    to: arm-flagship
-    type: practical-application
-    link_label: Executive operating guide
   - from: arm-portal
     to: arm-flagship
     type: participation-context

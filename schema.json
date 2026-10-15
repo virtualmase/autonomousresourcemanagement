@@ -6,40 +6,23 @@
       "@id": "https://autonomousresourcemanagement.com/#website",
       "url": "https://autonomousresourcemanagement.com/",
       "name": "Autonomous Resource Management",
-      "description": "A non-commercial technical reference for the Autonomous Resource Management discipline.",
-      "publisher": { "@id": "https://autonomousresourcemanagement.com/#publisher" }
+      "description": "A source-backed reference on automated resource allocation, orchestration, infrastructure, and human oversight.",
+      "publisher": {
+        "@id": "https://autonomousresourcemanagement.com/#publisher"
+      }
     },
     {
       "@type": "Organization",
       "@id": "https://autonomousresourcemanagement.com/#publisher",
       "name": "Autonomous Resource Management Editorial",
-      "url": "https://autonomousresourcemanagement.com/"
+      "url": "https://autonomousresourcemanagement.com/about/",
+      "description": "Editorial identity of this reference, maintained by Mason Nguyen."
     },
     {
       "@type": "Person",
-      "@id": "https://masonnguyengeo.com/#mason-nguyen",
+      "@id": "https://autonomousresourcemanagement.com/about/#maintainer",
       "name": "Mason Nguyen",
-      "url": "https://masonnguyengeo.com/"
-    },
-    {
-      "@type": "DefinedTerm",
-      "@id": "https://autonomousresourcemanagement.com/#arm-term",
-      "name": "Autonomous Resource Management",
-      "alternateName": "ARM",
-      "url": "https://autonomousresourcemanagement.com/",
-      "description": "A systems-design discipline for AI-assisted allocation of resources using explicit mandates, machine-readable state, durable recovery, human escalation, and auditable decisions."
-    },
-    {
-      "@type": "TechArticle",
-      "@id": "https://autonomousresourcemanagement.com/#framework-article",
-      "headline": "Autonomous Resource Management: Definition, Framework, Primitives, and Signal Architecture",
-      "url": "https://autonomousresourcemanagement.com/",
-      "author": { "@id": "https://masonnguyengeo.com/#mason-nguyen" },
-      "publisher": { "@id": "https://autonomousresourcemanagement.com/#publisher" },
-      "about": { "@id": "https://autonomousresourcemanagement.com/#arm-term" },
-      "datePublished": "2025-01-01",
-      "dateModified": "2026-08-18",
-      "inLanguage": "en-US"
+      "url": "https://autonomousresourcemanagement.com/about/"
     }
   ]
 }
