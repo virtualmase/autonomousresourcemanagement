@@ -20,7 +20,7 @@ class Page(HTMLParser):
         if 'id' in a:
             self.ids.add(a['id'])
         if tag == 'main': self.in_main = True
-        if tag == 'article': self.in_article = True
+        if tag == 'article': self.in_article = 'prose' in a.get('class', '').split()
         if tag == 'link' and a.get('rel') == 'canonical': self.canonical = a.get('href')
         if tag == 'meta' and a.get('name') == 'robots':
             self.indexable = 'noindex' not in a.get('content', '')

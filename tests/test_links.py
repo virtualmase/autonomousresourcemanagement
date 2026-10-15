@@ -23,7 +23,7 @@ class LinkAuditTests(unittest.TestCase):
     def test_navigation_does_not_satisfy_contextual_link_requirement(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            self.fixture(root, '/', '<nav><a href="/wiki/example/">Example</a></nav>')
+            self.fixture(root, '/', '<nav><a href="/wiki/example/">Example</a></nav><article class="card"><a href="/wiki/example/">Example card</a></article>')
             self.fixture(root, '/wiki/example/', '<a href="/">Home</a>')
             self.assertIn('/wiki/example/: no contextual article inlink', module.audit(root)['errors'])
 
@@ -39,6 +39,6 @@ class LinkAuditTests(unittest.TestCase):
     def test_valid_contextual_route_passes(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            self.fixture(root, '/', '<article><a href="/wiki/example/#definition">Example definition</a></article>')
+            self.fixture(root, '/', '<article class="prose"><a href="/wiki/example/#definition">Example definition</a></article>')
             self.fixture(root, '/wiki/example/', '<h2 id="definition">Definition</h2><a href="/">Home</a>')
             self.assertEqual(module.audit(root)['errors'], [])
