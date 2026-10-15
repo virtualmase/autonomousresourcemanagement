@@ -1,0 +1,24 @@
+name: Factual correction
+description: Report an error, outdated passage, or unsupported claim.
+title: 'Correction: '
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Passage and proposed correction
+      description: Quote the relevant passage and explain the factual problem.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting sources
+      description: Link to evidence and identify any relevant affiliation.
+    validations:
+      required: true

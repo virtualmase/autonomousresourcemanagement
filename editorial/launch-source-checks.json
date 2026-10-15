@@ -1,0 +1,22 @@
+{
+  "checked": "2026-10-15",
+  "reviewer": "Codex (AI source check)",
+  "method": "Original publisher pages inspected. Dates and the limited factual summaries checked against those pages. Implications labeled editorial interpretation. No independent product testing or human expert review claimed.",
+  "articles": [
+    {
+      "path": "/news/kubernetes-136-resource-allocation/",
+      "source": "https://kubernetes.io/blog/2026/05/07/kubernetes-v1-36-dra-136-updates/",
+      "sourceDate": "2026-05-07"
+    },
+    {
+      "path": "/news/finops-framework-2026/",
+      "source": "https://www.finops.org/insights/2026-finops-framework/",
+      "sourceDate": "2026-03-19"
+    },
+    {
+      "path": "/news/kueue-admission-headlamp/",
+      "source": "https://kubernetes.io/blog/2026/10/14/tracing-kueue-admission-with-headlamp/",
+      "sourceDate": "2026-10-14"
+    }
+  ]
+}

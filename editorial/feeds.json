@@ -1,0 +1,5 @@
+[
+  {"name":"Kubernetes project blog","url":"https://kubernetes.io/feed.xml","hosts":["kubernetes.io"],"type":"Project announcement"},
+  {"name":"FinOps Foundation","url":"https://www.finops.org/feed/","hosts":["www.finops.org","finops.org"],"type":"Foundation announcement"},
+  {"name":"OpenTelemetry project blog","url":"https://opentelemetry.io/blog/index.xml","hosts":["opentelemetry.io"],"type":"Project announcement"}
+]

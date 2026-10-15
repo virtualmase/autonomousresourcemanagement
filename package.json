@@ -1,0 +1,16 @@
+{
+  "name": "autonomous-resource-management-reference",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs && python3 -m unittest discover -s tests -p 'test_*.py'",
+    "check": "npm run build && node scripts/check.mjs",
+    "preview": "python3 -m http.server 4173 --bind 127.0.0.1 --directory dist",
+    "news:collect": "python3 scripts/collect-news.py",
+    "test:browser": "playwright test"
+  },
+  "dependencies": { "marked": "18.1.1" },
+  "devDependencies": { "@playwright/test": "1.64.1" }
+}

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+__pycache__/
+*.zip
+editorial/queue.json
+editorial/queue.md
