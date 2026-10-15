@@ -18,7 +18,7 @@
 }
 ---
 ## What an audit trail can establish
-An audit trail records events so that a decision or action can be examined later. In a resource system, useful events include a request, its authorization context, the attempted action, and the result.
+An audit trail records events so that a decision or action can be examined later. In a resource system, useful events include a request, its [authorization context](/wiki/human-oversight/), the attempted action, and the result.
 
 [Kubernetes auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/) provides a concrete example of configurable records for API activity. What is recorded depends on the audit policy and backend configuration.
 

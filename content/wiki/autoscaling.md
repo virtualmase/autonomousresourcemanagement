@@ -25,10 +25,10 @@
 ## What autoscaling changes
 Autoscaling adjusts capacity in response to observed or anticipated demand. The [Kubernetes documentation distinguishes horizontal scaling, vertical scaling, and infrastructure scaling](https://kubernetes.io/docs/concepts/workloads/autoscaling/). Adding replicas, changing resources assigned to a workload, and adding nodes affect different parts of a system.
 
-Choosing a scaling mechanism starts with the bottleneck. More application replicas may not help a saturated shared database. More node capacity may not help an application that cannot use it.
+Choosing a scaling mechanism starts with the bottleneck. More application replicas may not help a saturated shared database. More node capacity may not help an application that cannot use it. Compare [resource scheduling and allocation](/wiki/resource-scheduling/) when the problem is where work can run.
 
 ## Signals and decisions
-A controller compares measurements with a target and requests a change. Signals might include queue age, request latency, or resource utilization. The useful signal depends on what the service is trying to achieve.
+A controller compares [measurements](/wiki/observability/) with a target and requests a change. Signals might include queue age, request latency, or resource utilization. The useful signal depends on what the service is trying to achieve.
 
 For a hypothetical batch queue, an editor's design example is: add one worker when the oldest job exceeds an agreed wait threshold, cap the worker count, and require a stable period before removing capacity. The example illustrates decision structure; it is not a tested production configuration.
 

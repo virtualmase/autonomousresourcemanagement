@@ -18,7 +18,7 @@
 }
 ---
 ## Coordination and authority
-Agent orchestration coordinates tasks, state, tools, and dependencies. Resource management enters when a workflow consumes execution slots, model calls, compute time, or budget.
+Agent orchestration coordinates tasks, state, tools, and dependencies. Resource management enters when a workflow consumes execution slots, model calls, compute time, or [budget](/wiki/finops-and-cost-controls/).
 
 An orchestration system may use deterministic rules, AI-assisted decisions, or a mixture. A language model's proposed action should be distinguishable from the component authorized to execute it.
 

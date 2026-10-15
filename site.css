@@ -6,3 +6,5 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 .resource-loop{display:block;width:100%;height:auto;margin:20px 0 5px}
+
+.topic-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;list-style:none;padding:0;margin:20px 0}.topic-paths li{border-top:1px solid var(--line);padding-top:16px}.topic-paths a{font-family:var(--serif);font-size:23px}.topic-paths p{font-size:14px;color:var(--muted);margin-top:8px}.breadcrumb{display:flex;flex-wrap:wrap;gap:8px;line-height:1.7}.breadcrumb span[aria-current]{overflow-wrap:anywhere}.source-list p{font-size:13px;margin-top:8px}@media(max-width:500px){.topic-paths{grid-template-columns:1fr}}

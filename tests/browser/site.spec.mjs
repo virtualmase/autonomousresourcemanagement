@@ -38,3 +38,17 @@ test('keyboard users can skip navigation',async({page})=>{
   await expect(page.getByRole('link',{name:'Skip to content'})).toBeFocused();
   await page.keyboard.press('Enter');expect(page.url()).toContain('#main');
 });
+
+test('topic navigation connects concepts with dated news and their sources',async({page})=>{
+  await page.goto('/wiki/');
+  await page.getByRole('navigation',{name:'Wiki topics'}).getByRole('link',{name:'Capacity and workload placement'}).click();
+  await expect(page).toHaveURL(/#capacity-and-placement$/);
+  await page.locator('#capacity-and-placement').getByRole('link',{name:'Resource scheduling and allocation'}).click();
+  await expect(page.getByRole('navigation',{name:'Breadcrumb'})).toContainText('Capacity and workload placement');
+  await page.getByRole('link',{name:'Headlamp guide separates Kueue admission from Pod scheduling'}).click();
+  await page.locator('.prose').getByRole('link',{name:'resource scheduling',exact:true}).click();
+  await expect(page.locator('h1')).toHaveText('Resource scheduling and allocation');
+  await page.goto('/sources/');
+  await page.locator('.source-list').getByRole('link',{name:'Audit trails and decision provenance'}).click();
+  await expect(page.locator('h1')).toHaveText('Audit trails and decision provenance');
+});

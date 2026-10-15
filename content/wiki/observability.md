@@ -28,7 +28,7 @@ As editorial guidance, consider recording the resource identifier, observation t
 Separate an action request from its acknowledgement and eventual outcome. A successful API response is not necessarily evidence that a service met its objective.
 
 ## Evidence quality
-A signal can be delayed, sampled, missing, or incorrectly labeled. Before using a metric to control resources, define how old it may be and how the system should behave when the data is unavailable.
+A signal can be delayed, sampled, missing, or incorrectly labeled. Before using a metric for [autoscaling](/wiki/autoscaling/), define how old it may be and how the system should behave when the data is unavailable.
 
 For example, a hypothetical capacity controller could hold its last safe allocation and notify an operator when its demand signal becomes stale. That is one possible policy, not a universal default.
 

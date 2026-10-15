@@ -19,6 +19,10 @@
       "url": "https://kubernetes.io/blog/2026/10/14/tracing-kueue-admission-with-headlamp/",
       "scope": "Project-authored guide; supports the described troubleshooting distinction and plugin limitations."
     }
+  ],
+  "concepts": [
+    "/wiki/resource-scheduling/",
+    "/wiki/observability/"
   ]
 }
 ---

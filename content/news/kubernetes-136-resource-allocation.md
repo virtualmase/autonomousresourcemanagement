@@ -19,6 +19,9 @@
       "url": "https://kubernetes.io/blog/2026/05/07/kubernetes-v1-36-dra-136-updates/",
       "scope": "Official publisher announcement; supports attributed changes, not independent outcome claims."
     }
+  ],
+  "concepts": [
+    "/wiki/resource-scheduling/"
   ]
 }
 ---
