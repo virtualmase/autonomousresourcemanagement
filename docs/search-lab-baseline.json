@@ -1,0 +1,27 @@
+{
+  "url": "https://autonomousresourcemanagement.com/",
+  "fetchTime": "2026-10-16T14:45:09.239Z",
+  "lighthouseVersion": "13.5.0",
+  "formFactor": "mobile",
+  "scores": {
+    "performance": 1,
+    "accessibility": 1,
+    "best-practices": 1,
+    "seo": 1
+  },
+  "metrics": {
+    "largest-contentful-paint": {
+      "value": 830.3835,
+      "unit": "millisecond"
+    },
+    "cumulative-layout-shift": {
+      "value": 0,
+      "unit": "unitless"
+    },
+    "total-blocking-time": {
+      "value": 5.5,
+      "unit": "millisecond"
+    }
+  },
+  "scope": "One live homepage lab run; screenshot inspected to confirm real content, not a browser challenge. Not field Core Web Vitals, a ranking prediction, or a site-wide certification."
+}

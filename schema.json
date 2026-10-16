@@ -6,6 +6,7 @@
       "@id": "https://autonomousresourcemanagement.com/#website",
       "url": "https://autonomousresourcemanagement.com/",
       "name": "Autonomous Resource Management",
+      "inLanguage": "en",
       "description": "A source-backed reference on automated resource allocation, orchestration, infrastructure, and human oversight.",
       "publisher": {
         "@id": "https://autonomousresourcemanagement.com/#publisher"
@@ -15,14 +16,18 @@
       "@type": "Organization",
       "@id": "https://autonomousresourcemanagement.com/#publisher",
       "name": "Autonomous Resource Management Editorial",
+      "alternateName": "ARM Editorial",
       "url": "https://autonomousresourcemanagement.com/about/",
       "description": "Editorial identity of this reference, maintained by Mason Nguyen."
     },
     {
       "@type": "Person",
-      "@id": "https://autonomousresourcemanagement.com/about/#maintainer",
+      "@id": "https://autonomousresourcemanagement.com/about/#maintainer-and-authorship",
       "name": "Mason Nguyen",
-      "url": "https://autonomousresourcemanagement.com/about/"
+      "url": "https://autonomousresourcemanagement.com/about/#maintainer-and-authorship",
+      "sameAs": [
+        "https://www.linkedin.com/in/mason-nguyen"
+      ]
     }
   ]
 }
