@@ -8,11 +8,12 @@ const urls=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
 if(!urls.length)throw Error('Empty sitemap');
 for(let start=0;start<urls.length;start+=3){
   const batch=await Promise.all(urls.slice(start,start+3).map(async url=>{
-    if(new URL(url).origin!==origin)throw Error('Unexpected sitemap origin');
     try{
+      if(new URL(url).origin!==origin)throw Error('Unexpected sitemap origin');
       const response=await fetch(url,{signal:AbortSignal.timeout(20000),cache:'no-store'});
       const html=await response.text();
-      const canonical=html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/)?.[1];
+      const canonicalTag=[...html.matchAll(/<link\b[^>]*>/gi)].map(m=>m[0]).find(tag=>/\brel=["']canonical["']/i.test(tag));
+      const canonical=canonicalTag?.match(/\bhref=["']([^"']+)["']/i)?.[1];
       const contentType=response.headers.get('content-type')||'';
       const robots=response.headers.get('x-robots-tag')||'';
       const errors=[];

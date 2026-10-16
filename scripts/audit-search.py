@@ -10,6 +10,9 @@ ORIGIN='https://autonomousresourcemanagement.com'
 def text(value):
     return ' '.join(unescape(re.sub(r'<[^>]+>', '', value)).split())
 
+def links(html):
+    return [(unescape(url),text(label)) for url,label in re.findall(r'<a[^>]*href="([^"]+)"[^>]*>(.*?)</a>',html,re.S)]
+
 def audit(root):
     errors=[]
     def require(condition,message):
@@ -62,11 +65,13 @@ def audit(root):
                 if 'datePublished' in node:
                     require('Brief published: '+node['datePublished'] in html,f'{route}: publication date differs from visible date')
                     require(node['datePublished']<=node['dateModified'],f'{route}: publication after modification')
-                for source in node.get('citation',[]):
-                    require(source['url'].replace('&','&amp;') in html.split('</head>',1)[1],f'{route}: hidden citation')
+                source_block=re.search(r'<ol class="source-list">(.*?)</ol>',html,re.S)
+                visible_sources=links(source_block[1]) if source_block else []
+                require([(s['url'],s['name']) for s in node.get('citation',[])]==visible_sources,f'{route}: citations differ from visible source links')
                 author=indexed.get(node.get('author',{}).get('@id'),{})
                 require(author.get('@type') in ['Person','Organization'],f'{route}: invalid author')
-                require(author.get('name')=='Mason Nguyen' or author.get('alternateName')=='ARM Editorial',f'{route}: unsupported attribution')
+                byline=re.search(r'<p class="meta">By <a[^>]*>(.*?)</a>',html,re.S)
+                require(byline is not None and text(byline[1])==author.get('alternateName',author.get('name')),f'{route}: author differs from visible byline')
             if 'BreadcrumbList' in types:
                 block=re.search(r'<nav class="breadcrumb" aria-label="Breadcrumb">(.*?)</nav>',html,re.S)
                 require(block is not None,f'{route}: breadcrumb absent from page')
@@ -80,9 +85,9 @@ def audit(root):
                 require(node.get('numberOfItems')==len(items),f'{route}: collection count')
                 require(len({n['url'] for n in items})==len(items),f'{route}: duplicate collection item')
                 body=html.split('<main',1)[1].split('</main>',1)[0]
-                for item in items:
-                    href=item['url'].removeprefix(ORIGIN).replace('&','&amp;')
-                    require(f'href="{href}"' in body and item['name'] in text(body),f'{route}: collection item not visibly linked')
+                expected=[(item['url'].removeprefix(ORIGIN),item['name']) for item in items]
+                visible=list(dict.fromkeys(pair for pair in links(body) if pair in expected))
+                require(visible==expected,f'{route}: collection URL/name pairs or order differ from visible links')
     historical=root/'practice/index.html'
     if historical.exists():
         raw=historical.read_text()

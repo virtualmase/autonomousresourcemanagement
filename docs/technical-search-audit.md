@@ -27,7 +27,7 @@ No invented publication dates, logos, article images, reviews, ratings, certific
 
 `npm run check` validates 22 generated pages for unique titles/descriptions, canonicals, sitemap eligibility, graph identity/reference integrity, visible article metadata, breadcrumbs, and collection links. Historical practice receives an additional identity check. `npm test` includes negative fixtures for invented author references, invisible breadcrumb labels, and false update dates. `node scripts/audit-production-search.mjs` performs the repeatable public HTTP crawl. Local reports are written under `test-results/`.
 
-These checks establish the repository's explicit contract; they do not replace Google's Rich Results Test or Search Console URL Inspection. Google may choose not to show rich results even for valid markup. Source-only implementation is not evidence of live publication; verify the release manifest after merge.
+These checks establish the repository's explicit contract; they do not replace Google's Rich Results Test or Search Console URL Inspection. Google may choose not to show rich results even for valid markup. An attempted Google Rich Results code test returned “Log in and try again”; no independent Google validation result was obtained. Source-only implementation is not evidence of live publication; verify the release manifest after merge.
 
 ## AI search eligibility and next priorities
 
